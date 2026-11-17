@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>365 Mastery — C &amp; C++ Top 1% Prep</title>
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --glass: rgba(255, 255, 255, 0.85);
+      --border: rgba(0, 0, 0, 0.08);
+      --border-strong: rgba(0, 0, 0, 0.14);
+      --text: #1d1d1f;
+      --text-2: #6e6e73;
+      --text-3: #86868b;
+      --blue: #0071e3;
+      --blue-hover: #0077ed;
+      --green: #28cd41;
+      --green-text: #147422;
+      --orange: #ff9500;
+      --orange-text: #9a5500;
+      --red: #ff3b30;
+      --red-text: #b81d13;
+      --code-bg: #1c1c1e;
+      --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "SF Mono", "Fira Code", Menlo, Monaco, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+
+    html, body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+    }
+
+    /* Frosted Glass Apple Header */
+    header {
+      min-height: 60px;
+      padding: calc(8px + env(safe-area-inset-top)) 20px 8px;
+      background: var(--glass);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-shrink: 0;
+      z-index: 30;
+    }
+
+    .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .brand-icon {
+      width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
+      background: linear-gradient(135deg, #1d1d1f 0%, #434347 100%);
+      color: #fff; font-weight: 700; font-size: 0.76rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+    }
+    .brand-text { min-width: 0; }
+    .brand-title { font-weight: 600; font-size: 1rem; letter-spacing: -0.02em; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .brand-sub { font-size: 0.74rem; color: var(--text-2); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .header-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+    .stat-pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 980px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      color: var(--text-2);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .stat-pill strong { color: var(--text); }
+    .dot-live { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+
+    button {
+      font-family: var(--font-sans);
+      cursor: pointer;
+      border: none;
+      font-size: 0.83rem;
+      font-weight: 500;
+      transition: all 0.16s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 36px;
+      touch-action: manipulation;
+    }
+
+    .btn-blue { background: var(--blue); color: #fff; padding: 7px 15px; border-radius: 980px; }
+    .btn-blue:hover { background: var(--blue-hover); }
+    .btn-dark { background: var(--text); color: #fff; padding: 7px 15px; border-radius: 980px; }
+    .btn-dark:hover { background: #333337; }
+    .btn-green { background: var(--green); color: #07290e; font-weight: 600; padding: 7px 15px; border-radius: 980px; }
+    .btn-ghost {
+      background: var(--surface); color: var(--text);
+      border: 1px solid var(--border-strong); padding: 6px 12px; border-radius: 980px;
+    }
+    .btn-ghost:hover { background: #ececf0; }
+
+    .mobile-menu-btn { display: none; }
+
+    /* Spatial Workspace */
+    .layout {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 310px minmax(0, 1fr);
+      gap: 16px;
+      padding: 16px 20px;
+      overflow: hidden;
+      max-width: 1580px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    /* Sidebar */
+    .sidebar-controls {
+      padding: 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .progress-bar-wrap { height: 6px; background: var(--bg); border-radius: 999px; overflow: hidden; }
+    .progress-bar-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--blue), var(--green));
+      border-radius: 999px; transition: width 0.3s ease;
+    }
+
+    .search-row { display: flex; gap: 6px; }
+    input[type="text"], input[type="number"], select {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      padding: 8px 11px;
+      border-radius: 10px;
+      border: 1px solid var(--border-strong);
+      background: var(--bg);
+      color: var(--text);
+      outline: none;
+      min-height: 38px;
+      min-width: 0;
+    }
+    input:focus, select:focus { border-color: var(--blue); background: #fff; }
+
+    .seg-ctrl {
+      display: flex; background: var(--bg); padding: 3px;
+      border-radius: 10px; border: 1px solid var(--border);
+    }
+    .seg-btn {
+      flex: 1; background: transparent; color: var(--text-2);
+      padding: 5px 8px; border-radius: 7px; font-size: 0.77rem; font-weight: 500; min-height: 30px;
+    }
+    .seg-btn.active {
+      background: var(--surface); color: var(--text);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08); font-weight: 600;
+    }
+
+    .day-list {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 8px 10px;
+    }
+
+    .day-item {
+      padding: 11px 12px; border-radius: 12px; margin-bottom: 4px;
+      cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      min-height: 48px;
+    }
+    .day-item:hover { background: var(--bg); }
+    .day-item.active { background: rgba(0, 113, 227, 0.09); }
+    .day-item.active .day-title { color: var(--blue); font-weight: 600; }
+
+    .day-meta { display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+    .day-sub { font-size: 0.7rem; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .day-title { font-size: 0.86rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .day-right { display: flex; align-items: center; gap: 7px; flex-shrink: 0; }
+
+    .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-easy { background: var(--green); }
+    .dot-medium { background: var(--orange); }
+    .dot-hard { background: var(--red); }
+    .chk { color: var(--green-text); font-weight: 700; font-size: 0.88rem; }
+
+    /* Main Reader */
+    .reader-topbar {
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .reader-scroll {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 26px 32px 44px;
+    }
+
+    .reader-inner { max-width: 980px; margin: 0 auto; min-width: 0; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .tag { font-size: 0.73rem; font-weight: 600; padding: 4px 10px; border-radius: 980px; }
+    .tag-day { background: #e8f2fc; color: var(--blue); }
+    .tag-track { background: var(--bg); color: var(--text-2); }
+    .tag-easy { background: rgba(40, 205, 65, 0.13); color: var(--green-text); }
+    .tag-medium { background: rgba(255, 149, 0, 0.15); color: var(--orange-text); }
+    .tag-hard { background: rgba(255, 59, 48, 0.13); color: var(--red-text); }
+
+    h1.prob-title { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1.22; margin-bottom: 14px; }
+    .prob-desc { font-size: 0.99rem; line-height: 1.65; color: #2c2c2e; margin-bottom: 20px; }
+    .prob-desc code {
+      font-family: var(--font-mono); font-size: 0.86em; background: var(--bg);
+      padding: 2px 6px; border-radius: 6px; border: 1px solid var(--border);
+    }
+
+    .sec-title {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; color: var(--text-3); margin: 22px 0 9px;
+    }
+
+    .examples-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+    .ex-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 12px 15px; font-family: var(--font-mono); font-size: 0.81rem; line-height: 1.5;
+      overflow-x: auto; min-width: 0;
+    }
+    .ex-lbl { color: var(--text-2); }
+    .constraints-list { padding-left: 20px; color: var(--text-2); font-size: 0.9rem; line-height: 1.65; }
+
+    /* Theory & Tip Cards */
+    .insight-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; margin-top: 22px; }
+    .insight-card { border-radius: 16px; padding: 17px 19px; border: 1px solid var(--border); min-width: 0; }
+    .insight-theory { background: linear-gradient(145deg, #f3faf5 0%, #fafdfb 100%); border-color: rgba(40, 205, 65, 0.25); }
+    .insight-tip { background: linear-gradient(145deg, #f0f6ff 0%, #f9fbff 100%); border-color: rgba(0, 113, 227, 0.2); }
+    .insight-head { font-size: 0.84rem; font-weight: 700; margin-bottom: 7px; }
+    .insight-theory .insight-head { color: var(--green-text); }
+    .insight-tip .insight-head { color: var(--blue); }
+    .insight-card p { font-size: 0.9rem; line-height: 1.58; color: #2c2c2e; }
+
+    /* Scratchpad */
+    .scratchpad-wrap { margin-top: 20px; background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
+    .scratchpad-wrap textarea {
+      width: 100%; min-height: 76px; margin-top: 8px; border: 1px solid var(--border-strong);
+      border-radius: 10px; padding: 10px 12px; font-family: var(--font-mono); font-size: 0.85rem;
+      background: #fff; color: var(--text); resize: vertical; outline: none;
+    }
+    .scratchpad-wrap textarea:focus { border-color: var(--blue); }
+
+    /* Dual C + C++ Solutions Card */
+    .solution-section { margin-top: 22px; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; background: #fff; }
+    .solution-bar {
+      padding: 13px 18px; background: var(--bg); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    }
+    .solution-body { padding: 18px; display: none; }
+    .solution-body.open { display: block; }
+
+    .dual-code-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 14px;
+    }
+    .dual-code-grid.single-col { grid-template-columns: minmax(0, 1fr); }
+
+    .code-shell {
+      background: var(--code-bg);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .code-shell-top {
+      padding: 9px 14px;
+      background: #262629;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #d1d1d6;
+      font-family: var(--font-mono);
+      font-size: 0.77rem;
+      font-weight: 600;
+    }
+    .lang-pill-c { background: #3a3a3c; color: #70d7ff; padding: 2px 8px; border-radius: 6px; font-size: 0.71rem; }
+    .lang-pill-cpp { background: #3a3a3c; color: #82e0aa; padding: 2px 8px; border-radius: 6px; font-size: 0.71rem; }
+
+    .code-shell pre {
+      padding: 14px 16px;
+      color: #f5f5f7;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      line-height: 1.54;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: pre;
+      flex: 1;
+    }
+
+    .btn-copy {
+      background: rgba(255, 255, 255, 0.12); color: #fff;
+      padding: 4px 11px; border-radius: 980px; font-size: 0.74rem; min-height: 28px;
+    }
+    .btn-copy:hover { background: rgba(255, 255, 255, 0.22); }
+
+    /* Mobile Bottom Thumb Bar & Drawer Backdrop */
+    .drawer-backdrop {
+      display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(4px); z-index: 40;
+    }
+    .drawer-backdrop.open { display: block; }
+
+    .mobile-bottom-bar {
+      display: none;
+      background: var(--glass);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-top: 1px solid var(--border);
+      padding: 8px 14px calc(8px + env(safe-area-inset-bottom));
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-shrink: 0;
+      z-index: 25;
+    }
+
+    /* Modals */
+    .modal-bg {
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.36); backdrop-filter: blur(8px);
+      display: none; align-items: center; justify-content: center; z-index: 100; padding: 16px;
+    }
+    .modal-bg.open { display: flex; }
+    .modal-sheet {
+      background: var(--surface); border-radius: 22px; max-width: 780px; width: 100%;
+      max-height: 86dvh; display: flex; flex-direction: column;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22); overflow: hidden;
+    }
+    .modal-head { padding: 16px 22px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .modal-body { padding: 22px; overflow-y: auto; -webkit-overflow-scrolling: touch; line-height: 1.62; font-size: 0.92rem; color: #2c2c2e; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+    .mini-card { background: var(--bg); padding: 14px; border-radius: 13px; border: 1px solid var(--border); }
+    .mini-card h4 { font-size: 0.87rem; margin-bottom: 5px; }
+    .mini-card p { font-size: 0.81rem; color: var(--text-2); }
+    .live-item {
+      padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px;
+      margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--bg);
+    }
+
+    /* iPad & Tablet (<= 1080px) */
+    @media (max-width: 1080px) {
+      .dual-code-grid { grid-template-columns: minmax(0, 1fr); }
+      .layout { grid-template-columns: 280px minmax(0, 1fr); padding: 12px; gap: 12px; }
+      .reader-scroll { padding: 22px; }
+    }
+
+    /* iPad Portrait & iPhone (<= 900px) */
+    @media (max-width: 900px) {
+      .mobile-menu-btn { display: inline-flex; }
+      .desktop-only { display: none !important; }
+      .layout { grid-template-columns: minmax(0, 1fr); padding: 10px; }
+      .sidebar-card {
+        position: fixed;
+        top: 0; bottom: 0; left: 0;
+        width: min(86vw, 340px);
+        z-index: 50;
+        border-radius: 0 20px 20px 0;
+        transform: translateX(-105%);
+        transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+      .sidebar-card.open { transform: translateX(0); }
+      .insight-grid, .grid-2 { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    /* iPhone Specific (<= 640px) */
+    @media (max-width: 640px) {
+      header { padding: calc(8px + env(safe-area-inset-top)) 12px 8px; }
+      .brand-sub { display: none; }
+      .brand-title { font-size: 0.94rem; }
+      .stat-pill { padding: 5px 10px; font-size: 0.75rem; }
+      .reader-topbar { display: none; }
+      .mobile-bottom-bar { display: flex; }
+      .reader-scroll { padding: 16px 16px 28px; }
+      h1.prob-title { font-size: 1.42rem; }
+      /* Prevent iOS Safari zoom on input focus */
+      input[type="text"], input[type="number"], select, .scratchpad-wrap textarea { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <button class="btn-ghost mobile-menu-btn" id="open-drawer-btn" aria-label="Open 365 Day Menu">☰ Days</button>
+      <div class="brand-icon">C/C++</div>
+      <div class="brand-text">
+        <span class="brand-title">365 Top 1% Mastery</span>
+        <span class="brand-sub">Simple Logic · DSA · Bitwise (C17 &amp; C++20)</span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <div class="stat-pill"><span class="dot-live"></span><strong id="solved-count">0</strong>/365</div>
+      <div class="stat-pill desktop-only">Streak: <strong id="streak-count">0</strong>d</div>
+      <button class="btn-ghost" id="live-feed-btn">Live Feed</button>
+      <button class="btn-ghost desktop-only" id="export-btn">Export</button>
+      <button class="btn-ghost desktop-only" id="import-btn">Import</button>
+      <input type="file" id="import-file" accept=".json" style="display:none" />
+      <button class="btn-dark" id="mentor-btn">Mentor</button>
+    </div>
+  </header>
+
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+
+  <main class="layout">
+    <aside class="card sidebar-card" id="sidebar-card">
+      <div class="sidebar-controls">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+          <span style="font-size:0.78rem; font-weight:700; color:var(--text-2);">365-DAY CURRICULUM</span>
+          <button class="btn-ghost mobile-menu-btn" id="close-drawer-btn" style="padding:3px 10px; min-height:28px;">✕</button>
+        </div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill"></div></div>
+        <div class="search-row">
+          <input type="text" id="search-input" placeholder="Search topic, bitwise, DP…" style="flex:1;" />
+          <input type="number" id="jump-day" min="1" max="365" placeholder="Day" style="width:72px;" />
+        </div>
+        <select id="track-filter">
+          <option value="all">All 12 Tracks (Days 1–365)</option>
+        </select>
+        <div class="seg-ctrl">
+          <button class="seg-btn active" data-diff="all">All</button>
+          <button class="seg-btn" data-diff="easy">Easy</button>
+          <button class="seg-btn" data-diff="medium">Medium</button>
+          <button class="seg-btn" data-diff="hard">Hard</button>
+        </div>
+      </div>
+      <div class="day-list" id="day-list"></div>
+    </aside>
+
+    <section class="card">
+      <div class="reader-topbar">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button class="btn-ghost" id="prev-btn">← Prev Day</button>
+          <button class="btn-ghost" id="next-btn">Next Day →</button>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button class="btn-ghost" id="toggle-solve-btn">Mark as Mastered</button>
+        </div>
+      </div>
+      <div class="reader-scroll">
+        <div class="reader-inner" id="reader-inner"></div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="mobile-bottom-bar">
+    <button class="btn-ghost" id="m-prev-btn" style="flex:1;">← Prev</button>
+    <button class="btn-ghost" id="m-solve-btn" style="flex:1.3;">Mark Done</button>
+    <button class="btn-blue" id="m-next-btn" style="flex:1;">Next →</button>
+  </nav>
+
+  <!-- Mentor Playbook Modal -->
+  <div class="modal-bg" id="mentor-modal">
+    <div class="modal-sheet">
+      <div class="modal-head">
+        <div>
+          <h2 style="font-size:1.15rem;">Top 1% Logic, DSA &amp; Bitwise Playbook</h2>
+          <span style="font-size:0.78rem; color:var(--text-2);">Simple First Principles for 6 YOE Embedded Engineers</span>
+        </div>
+        <button class="btn-ghost" id="close-mentor-btn">Done</button>
+      </div>
+      <div class="modal-body">
+        <p>Top 1% engineers don't write complicated, clever code—they write <strong>simple, bug-free code backed by crystal-clear invariants</strong>. Every day below pairs a <strong>simple C17</strong> solution with a <strong>simple C++20</strong> solution.</p>
+        <div class="grid-2">
+          <div class="mini-card">
+            <h4>1. Derive the Invariant First</h4>
+            <p>Use the Scratchpad before revealing code: write (a) Brute force &amp; waste, (b) What stays true every loop step, (c) Edge cases (`n=0`, `INT_MIN/MAX`, duplicates).</p>
+          </div>
+          <div class="mini-card">
+            <h4>2. Simple Bitwise Weapons</h4>
+            <p>`n &amp; (n-1)` clears lowest 1-bit; `a^a=0` cancels pairs; `(addr+align-1) &amp; ~(align-1)` aligns addresses; always use `uint32_t` before bit shifts.</p>
+          </div>
+          <div class="mini-card">
+            <h4>3. Compare C17 vs C++20 Daily</h4>
+            <p>See how C handles problems cleanly with simple structs, `qsort`, and pointers, and how C++ expresses the exact same logic with `vector`, `unordered_map`, and `deque`.</p>
+          </div>
+          <div class="mini-card">
+            <h4>4. Close Your 4 Embedded Gaps</h4>
+            <p>Firmware rarely uses Tries, Topological Sort, Monotonic Deques, or 2D DP. Months 7–11 drill those cleanly until they feel second nature.</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+          <button class="btn-ghost" id="m-export-btn">Export Progress JSON</button>
+          <button class="btn-ghost" id="m-import-btn">Import Progress JSON</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Internet Feed Modal -->
+  <div class="modal-bg" id="live-modal">
+    <div class="modal-sheet">
+      <div class="modal-head">
+        <div>
+          <h2 style="font-size:1.12rem;">Live Internet Problem Feed</h2>
+          <span style="font-size:0.78rem; color:var(--text-2);">Fetched live over HTTPS from codeforces.com/api</span>
+        </div>
+        <button class="btn-ghost" id="close-live-btn">Close</button>
+      </div>
+      <div class="modal-body">
+        <div style="display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;">
+          <select id="cf-tag">
+            <option value="bitmasks">Bitmasks</option>
+            <option value="dp">Dynamic Programming</option>
+            <option value="graphs">Graphs</option>
+            <option value="binary search">Binary Search</option>
+            <option value="two pointers">Two Pointers</option>
+            <option value="data structures">Data Structures</option>
+            <option value="trees">Trees</option>
+          </select>
+          <select id="cf-rating">
+            <option value="800-1200">Easy (800–1200)</option>
+            <option value="1300-1700">Medium (1300–1700)</option>
+            <option value="1800-2200">Hard (1800–2200)</option>
+          </select>
+          <button class="btn-blue" id="cf-fetch-btn">Fetch Live Problems</button>
+        </div>
+        <div id="cf-results"><span style="color:var(--text-2);">Tap "Fetch Live Problems" to pull live problems from the internet.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================
+    // 1. DETERMINISTIC SEEDED PRNG & 12-MONTH ROADMAP
+    // =========================================================
+    function mulberry32(seed) {
+      let a = seed >>> 0;
+      return function () {
+        a |= 0; a = (a + 0x6D2B79F5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
+    const TRACKS = [
+      { id: 1, name: "M1: Bitwise Algebra & Registers", days: [1, 30] },
+      { id: 2, name: "M2: Arrays, Matrices & Hashing", days: [31, 60] },
+      { id: 3, name: "M3: Two Pointers & Sliding Window", days: [61, 90] },
+      { id: 4, name: "M4: Stacks, Ring Buffers & Deques", days: [91, 120] },
+      { id: 5, name: "M5: Binary Search & Linked Lists", days: [121, 150] },
+      { id: 6, name: "M6: Caches, Parsers & Memory", days: [151, 180] },
+      { id: 7, name: "M7: Binary Trees & BSTs", days: [181, 210] },
+      { id: 8, name: "M8: Tries & Priority Heaps", days: [211, 240] },
+      { id: 9, name: "M9: Graphs, Topo Sort & Dijkstra", days: [241, 270] },
+      { id: 10, name: "M10: 1D/2D Dynamic Programming", days: [271, 300] },
+      { id: 11, name: "M11: Bitmask & Hard State DP", days: [301, 330] },
+      { id: 12, name: "M12: Top 1% Staff Synthesis", days: [331, 365] }
+    ];
+    const getTrack = (d) => TRACKS.find(t => d >= t.days[0] && d <= t.days[1]) || TRACKS[11];
+
+    // =========================================================
+    // 2. VERIFIED, SIMPLE & BUG-FREE C17 + C++20 ARCHETYPES
+    // =========================================================
+    const ARCHETYPES = [
+      // --- BITWISE & REGISTER LOGIC ---
+      {
+        difficulty: "easy", topic: "Bitwise · Kernighan",
+        title: "Count Set Bits (Hamming Weight)",
+        desc: `Given an unsigned 32-bit integer <code>n</code>, return the number of <code>1</code> bits it contains.`,
+        examples: [{ in: "n = 45 (0b101101)", out: "4" }, { in: "n = 0xFFFFFFFF", out: "32" }],
+        constraints: ["0 <= n <= 2^32 - 1", "Time: O(set bits), Space: O(1)"],
+        theory: `Subtracting 1 flips the lowest <code>1</code>-bit to <code>0</code> and trailing <code>0</code>s to <code>1</code>. Doing <code>n & (n - 1)</code> clears one set bit per loop step.`,
+        tip: `Always use <code>uint32_t</code> before shifting or subtracting—signed bit-shift overflow is Undefined Behavior in C/C++.`,
+        cCode: `int popcount32(uint32_t n) {\n  int count = 0;\n  while (n != 0u) {\n    n &= (n - 1u);\n    count++;\n  }\n  return count;\n}`,
+        cppCode: `int popcount32(uint32_t n) {\n  int count = 0;\n  while (n != 0u) {\n    n &= (n - 1u);\n    ++count;\n  }\n  return count;\n}`
+      },
+      {
+        difficulty: "easy", topic: "Bitwise · XOR Algebra",
+        title: "Single Unique Element (XOR)",
+        desc: `Every integer in <code>nums</code> appears twice except one unique element. Find it in <code>O(n)</code> time and <code>O(1)</code> space.`,
+        examples: [{ in: "nums = [4, 1, 2, 1, 2]", out: "4" }, { in: "nums = [7, 3, 7]", out: "3" }],
+        constraints: ["1 <= n <= 10^5", "O(1) extra memory"],
+        theory: `XOR cancels identical pairs (<code>a ^ a = 0</code>) and keeps the unpaired element (<code>a ^ 0 = a</code>), regardless of element order.`,
+        tip: `Unlike sum formulas (<code>n*(n+1)/2</code>), XOR never overflows 16-bit or 32-bit counters.`,
+        cCode: `int singleNumber(const int* nums, int n) {\n  int ans = 0;\n  for (int i = 0; i < n; i++) {\n    ans ^= nums[i];\n  }\n  return ans;\n}`,
+        cppCode: `int singleNumber(const vector<int>& nums) {\n  int ans = 0;\n  for (int x : nums) ans ^= x;\n  return ans;\n}`
+      },
+      {
+        difficulty: "easy", topic: "Bitwise · DMA Alignment",
+        title: "Power-of-2 Check & DMA Align Up",
+        desc: `Verify if <code>align</code> is a power of 2, and round byte address <code>addr</code> up to the nearest multiple of <code>align</code> without division.`,
+        examples: [{ in: "addr = 19, align = 16", out: "32" }, { in: "addr = 64, align = 32", out: "64" }],
+        constraints: ["align is a power of 2 >= 1", "O(1) time"],
+        theory: `<code>x > 0 && (x & (x - 1)) == 0</code> checks for a single 1-bit. Adding <code>align - 1</code> pushes unaligned values into the next block; <code>& ~(align - 1)</code> zeroes low bits.`,
+        tip: `Used in DMA buffers and cache-line alignment. In safety-critical firmware, guard against overflow: <code>addr <= UINT32_MAX - (align - 1)</code>.`,
+        cCode: `bool isPow2(uint32_t x) {\n  return x != 0u && (x & (x - 1u)) == 0u;\n}\n\nuint32_t alignUp(uint32_t addr, uint32_t align) {\n  return (addr + align - 1u) & ~(align - 1u);\n}`,
+        cppCode: `constexpr bool isPow2(uint32_t x) {\n  return x != 0u && (x & (x - 1u)) == 0u;\n}\n\nconstexpr uint32_t alignUp(uint32_t addr, uint32_t align) {\n  return (addr + align - 1u) & ~(align - 1u);\n}`
+      },
+      {
+        difficulty: "medium", topic: "Bitwise · Shift Loop",
+        title: "Reverse Bits of a 32-Bit Register",
+        desc: `Reverse all 32 bits of an unsigned integer <code>n</code> (bit 0 becomes bit 31, etc.).`,
+        examples: [{ in: "n = 0x00000001", out: "0x80000000" }, { in: "n = 0x12345678", out: "0x1E6A2C48" }],
+        constraints: ["32-bit unsigned input", "O(1) time, O(1) space"],
+        theory: `Shift <code>res</code> left by 1 to make room, copy the lowest bit of <code>n</code> (<code>n & 1u</code>), and shift <code>n</code> right by 1—repeated 32 times.`,
+        tip: `This 4-line loop is zero-mistake in interviews. As a follow-up optimization, mention hardware <code>RBIT</code> or 5-step divide-and-conquer byte/nibble swaps.`,
+        cCode: `uint32_t reverseBits32(uint32_t n) {\n  uint32_t res = 0u;\n  for (int i = 0; i < 32; i++) {\n    res = (res << 1) | (n & 1u);\n    n >>= 1;\n  }\n  return res;\n}`,
+        cppCode: `uint32_t reverseBits32(uint32_t n) {\n  uint32_t res = 0u;\n  for (int i = 0; i < 32; ++i) {\n    res = (res << 1) | (n & 1u);\n    n >>= 1;\n  }\n  return res;\n}`
+      },
+      {
+        difficulty: "medium", topic: "Bitwise · Bit-Plane Count",
+        title: "Single Number II (Appears Once vs 3x)",
+        desc: `Every integer in <code>nums</code> appears 3 times except one element appearing once. Find it in <code>O(n)</code> time and <code>O(1)</code> space.`,
+        examples: [{ in: "nums = [2, 2, 3, 2]", out: "3" }, { in: "nums = [0,1,0,1,0,1,99]", out: "99" }],
+        constraints: ["O(n) time, O(1) space"],
+        theory: `Count how many numbers have bit <code>b</code> set across all 32 bit positions. Triples contribute multiples of 3, so if <code>sum % 3 != 0</code>, the unique number has bit <code>b</code> set.`,
+        tip: `Much simpler and more general than XOR state-machines—works identically for 3x, 5x, or any <code>k</code> repetitions without tricky boolean algebra.`,
+        cCode: `int singleNumber3(const int* nums, int n) {\n  uint32_t ans = 0u;\n  for (int b = 0; b < 32; b++) {\n    int sum = 0;\n    for (int i = 0; i < n; i++) {\n      sum += ((uint32_t)nums[i] >> b) & 1u;\n    }\n    if (sum % 3 != 0) ans |= (1u << b);\n  }\n  return (int)ans;\n}`,
+        cppCode: `int singleNumber3(const vector<int>& nums) {\n  uint32_t ans = 0u;\n  for (int b = 0; b < 32; ++b) {\n    int sum = 0;\n    for (int x : nums) sum += (static_cast<uint32_t>(x) >> b) & 1u;\n    if (sum % 3 != 0) ans |= (1u << b);\n  }\n  return static_cast<int>(ans);\n}`
+      },
+      {
+        difficulty: "easy", topic: "Bitwise + DP",
+        title: "Counting Bits for Range [0..n]",
+        desc: `Return an array <code>dp[0..n]</code> where <code>dp[i]</code> is the number of <code>1</code>-bits in integer <code>i</code>, in <code>O(n)</code> time.`,
+        examples: [{ in: "n = 5", out: "[0, 1, 1, 2, 1, 2]" }],
+        constraints: ["n >= 0", "O(n) time"],
+        theory: `<code>i >> 1</code> is <code>i / 2</code> whose popcount is already in <code>dp[i >> 1]</code>. Adding back the dropped lowest bit <code>(i & 1)</code> gives <code>dp[i]</code>.`,
+        tip: `Great example of using prior computed results (DP) + bit shifts to eliminate an inner <code>O(log n)</code> loop.`,
+        cCode: `void countBitsRange(int n, int* dp) {\n  dp[0] = 0;\n  for (int i = 1; i <= n; i++) {\n    dp[i] = dp[i >> 1] + (i & 1);\n  }\n}`,
+        cppCode: `vector<int> countBitsRange(int n) {\n  vector<int> dp(n + 1, 0);\n  for (int i = 1; i <= n; ++i) {\n    dp[i] = dp[i >> 1] + (i & 1);\n  }\n  return dp;\n}`
+      },
+
+      // --- ARRAYS, MATRICES & HASHING ---
+      {
+        difficulty: "easy", topic: "Arrays · Pair Lookup",
+        title: "Two Sum Pair Lookup",
+        desc: `Given <code>nums</code> and <code>target</code>, return indices <code>[i, j]</code> such that <code>nums[i] + nums[j] == target</code>.`,
+        examples: [{ in: "nums = [2, 7, 11, 15], target = 9", out: "[0, 1]" }],
+        constraints: ["2 <= n <= 10^5"],
+        theory: `In C++ (<code>O(n)</code>): store visited value → index in <code>unordered_map</code>. In C (<code>O(n log n)</code>, zero hash collisions): sort <code>(val, origIdx)</code> pairs and walk two pointers inward.`,
+        tip: `In C interviews, sorting <code>{val, idx}</code> pairs + two pointers avoids fixed-size hash table collisions and works cleanly for any input size <code>n</code>.`,
+        cCode: `typedef struct { int val, idx; } Pair;\nstatic int cmpPair(const void* a, const void* b) {\n  int x = ((const Pair*)a)->val, y = ((const Pair*)b)->val;\n  return (x > y) - (x < y);\n}\nvoid twoSum(const int* nums, int n, int target, int out[2]) {\n  Pair* p = (Pair*)malloc((size_t)n * sizeof(Pair));\n  for (int i = 0; i < n; i++) { p[i].val = nums[i]; p[i].idx = i; }\n  qsort(p, (size_t)n, sizeof(Pair), cmpPair);\n  int l = 0, r = n - 1;\n  while (l < r) {\n    long long sum = (long long)p[l].val + p[r].val;\n    if (sum == target) { out[0] = p[l].idx; out[1] = p[r].idx; break; }\n    if (sum < target) l++; else r--;\n  }\n  free(p);\n}`,
+        cppCode: `vector<int> twoSum(const vector<int>& nums, int target) {\n  unordered_map<int, int> seen;\n  seen.reserve(nums.size());\n  for (int i = 0; i < (int)nums.size(); ++i) {\n    auto it = seen.find(target - nums[i]);\n    if (it != seen.end()) return {it->second, i};\n    seen[nums[i]] = i;\n  }\n  return {};\n}`
+      },
+      {
+        difficulty: "easy", topic: "Kadane's Algorithm",
+        title: "Maximum Contiguous Subarray Sum",
+        desc: `Given signed integer array <code>nums</code>, find the contiguous subarray with the largest sum.`,
+        examples: [{ in: "[-2,1,-3,4,-1,2,1,-5,4]", out: "6 ([4,-1,2,1])" }],
+        constraints: ["1 <= n <= 10^5", "O(n) time, O(1) space"],
+        theory: `<code>cur</code> holds the best sum ending at index <code>i</code>: either extend the previous run (<code>cur + nums[i]</code>) or start fresh at <code>nums[i]</code>.`,
+        tip: `Initialize <code>cur</code> and <code>best</code> with <code>nums[0]</code> (never <code>0</code>) so all-negative arrays like <code>[-5, -2]</code> return <code>-2</code>.`,
+        cCode: `int maxSubArray(const int* nums, int n) {\n  if (n <= 0) return 0;\n  int cur = nums[0], best = nums[0];\n  for (int i = 1; i < n; i++) {\n    cur = (cur + nums[i] > nums[i]) ? (cur + nums[i]) : nums[i];\n    if (cur > best) best = cur;\n  }\n  return best;\n}`,
+        cppCode: `int maxSubArray(const vector<int>& nums) {\n  if (nums.empty()) return 0;\n  int cur = nums[0], best = nums[0];\n  for (size_t i = 1; i < nums.size(); ++i) {\n    cur = max(nums[i], cur + nums[i]);\n    best = max(best, cur);\n  }\n  return best;\n}`
+      },
+      {
+        difficulty: "medium", topic: "Matrix · In-Place Rotation",
+        title: "Rotate N×N Image Matrix 90° Clockwise",
+        desc: `Rotate an <code>n x n</code> matrix 90° clockwise in-place (<code>O(1)</code> extra memory).`,
+        examples: [{ in: "[[1,2],[3,4]]", out: "[[3,1],[4,2]]" }],
+        constraints: ["O(n^2) time, O(1) space"],
+        theory: `Two simple in-place steps: (1) Transpose across diagonal <code>(i,j) ↔ (j,i)</code>, then (2) Reverse every row left-to-right.`,
+        tip: `Decomposing rotation into Transpose + Reverse eliminates all 4-way corner index bugs.`,
+        cCode: `void rotate90(int** mat, int n) {\n  for (int i = 0; i < n; i++) {\n    for (int j = i + 1; j < n; j++) {\n      int t = mat[i][j]; mat[i][j] = mat[j][i]; mat[j][i] = t;\n    }\n  }\n  for (int i = 0; i < n; i++) {\n    for (int l = 0, r = n - 1; l < r; l++, r--) {\n      int t = mat[i][l]; mat[i][l] = mat[i][r]; mat[i][r] = t;\n    }\n  }\n}`,
+        cppCode: `void rotate90(vector<vector<int>>& m) {\n  int n = (int)m.size();\n  for (int i = 0; i < n; ++i)\n    for (int j = i + 1; j < n; ++j) swap(m[i][j], m[j][i]);\n  for (auto& row : m) reverse(row.begin(), row.end());\n}`
+      },
+      {
+        difficulty: "medium", topic: "Prefix Sum + Hash Map",
+        title: "Subarray Sum Equals K (With Negatives)",
+        desc: `Count contiguous subarrays in <code>nums</code> (negatives allowed) summing to <code>k</code>.`,
+        examples: [{ in: "nums = [1, 1, 1], k = 2", out: "2" }, { in: "nums = [3, 4, -7, 1, 3, 3], k = 7", out: "3" }],
+        constraints: ["O(n) time"],
+        theory: `Negatives break sliding-window monotonicity. Instead, <code>sum(j+1..i) == k</code> iff <code>prefix[i] - prefix[j] == k</code>. Seed <code>map[0] = 1</code>.`,
+        tip: `In C, always size your open-addressing hash table to a power of 2 <code>&gt;= 2 * n</code> so load factor stays <code>&lt;= 0.5</code> and probing never hangs.`,
+        cCode: `int subarraySum(const int* nums, int n, int k) {\n  int cap = 8; while (cap < n * 2 + 4) cap *= 2;\n  int* keys = (int*)malloc((size_t)cap * sizeof(int));\n  int* cnt = (int*)calloc((size_t)cap, sizeof(int));\n  bool* used = (bool*)calloc((size_t)cap, sizeof(bool));\n  uint32_t mask = (uint32_t)(cap - 1);\n  used[0] = true; keys[0] = 0; cnt[0] = 1;\n  int sum = 0, total = 0;\n  for (int i = 0; i < n; i++) {\n    sum += nums[i];\n    uint32_t h = ((uint32_t)(sum - k) * 2654435761u) & mask;\n    while (used[h]) {\n      if (keys[h] == sum - k) { total += cnt[h]; break; }\n      h = (h + 1u) & mask;\n    }\n    uint32_t ins = ((uint32_t)sum * 2654435761u) & mask;\n    while (used[ins] && keys[ins] != sum) ins = (ins + 1u) & mask;\n    if (!used[ins]) { used[ins] = true; keys[ins] = sum; }\n    cnt[ins]++;\n  }\n  free(keys); free(cnt); free(used);\n  return total;\n}`,
+        cppCode: `int subarraySum(const vector<int>& nums, int k) {\n  unordered_map<int, int> counts;\n  counts[0] = 1;\n  int sum = 0, total = 0;\n  for (int x : nums) {\n    sum += x;\n    if (auto it = counts.find(sum - k); it != counts.end())\n      total += it->second;\n    ++counts[sum];\n  }\n  return total;\n}`
+      },
+      {
+        difficulty: "medium", topic: "Prefix / Suffix Pass",
+        title: "Product of Array Except Self",
+        desc: `Compute <code>out[i] = product of all nums[j] (j != i)</code> in <code>O(n)</code> time without division.`,
+        examples: [{ in: "nums = [1, 2, 3, 4]", out: "[24, 12, 8, 6]" }],
+        constraints: ["O(n) time, no division"],
+        theory: `Forward pass writes prefix products <code>0..i-1</code> into <code>out[i]</code>; backward pass multiplies by running suffix product <code>i+1..n-1</code>.`,
+        tip: `Avoids division-by-zero bugs and expensive divide instructions on small MCUs.`,
+        cCode: `void productExceptSelf(const int* nums, int n, int* out) {\n  int pre = 1, suf = 1;\n  for (int i = 0; i < n; i++) { out[i] = pre; pre *= nums[i]; }\n  for (int i = n - 1; i >= 0; i--) { out[i] *= suf; suf *= nums[i]; }\n}`,
+        cppCode: `vector<int> productExceptSelf(const vector<int>& nums) {\n  int n = (int)nums.size();\n  vector<int> out(n, 1);\n  int pre = 1, suf = 1;\n  for (int i = 0; i < n; ++i) { out[i] = pre; pre *= nums[i]; }\n  for (int i = n - 1; i >= 0; --i) { out[i] *= suf; suf *= nums[i]; }\n  return out;\n}`
+      },
+
+      // --- TWO POINTERS & SLIDING WINDOW ---
+      {
+        difficulty: "easy", topic: "Two Pointers · In-Place",
+        title: "Move Zeroes (Sparse Buffer Compaction)",
+        desc: `Move all <code>0</code>s to the end of <code>nums</code> in-place while preserving relative order of non-zero elements.`,
+        examples: [{ in: "[0, 1, 0, 3, 12]", out: "[1, 3, 12, 0, 0]" }],
+        constraints: ["O(n) time, O(1) space"],
+        theory: `Maintain slow pointer <code>w</code> for next non-zero write slot and fast pointer <code>r</code> scanning forward.`,
+        tip: `Guard <code>if (w != r)</code> before swapping to minimize unnecessary writes.`,
+        cCode: `void moveZeroes(int* a, int n) {\n  for (int w = 0, r = 0; r < n; r++) {\n    if (a[r] != 0) {\n      if (w != r) { int t = a[w]; a[w] = a[r]; a[r] = t; }\n      w++;\n    }\n  }\n}`,
+        cppCode: `void moveZeroes(vector<int>& a) {\n  for (int w = 0, r = 0; r < (int)a.size(); ++r) {\n    if (a[r] != 0) {\n      if (w != r) swap(a[w], a[r]);\n      ++w;\n    }\n  }\n}`
+      },
+      {
+        difficulty: "easy", topic: "Two Pointers · O(1) Space",
+        title: "Valid Palindrome (Alphanumeric Only)",
+        desc: `Return <code>true</code> if alphanumeric characters in <code>s</code> (ignoring case and punctuation) read identically forward and backward.`,
+        examples: [{ in: '"A man, a plan, a canal: Panama"', out: "true" }],
+        constraints: ["O(n) time, O(1) space"],
+        theory: `Advance two pointers inward from both ends, skipping non-alphanumeric bytes inline without allocating a copy.`,
+        tip: `Cast to <code>(unsigned char)</code> before calling <code>isalnum</code>/<code>tolower</code>—passing negative signed <code>char</code> is Undefined Behavior in C/C++.`,
+        cCode: `bool isPalindrome(const char* s) {\n  int l = 0, r = (int)strlen(s) - 1;\n  while (l < r) {\n    while (l < r && !isalnum((unsigned char)s[l])) l++;\n    while (l < r && !isalnum((unsigned char)s[r])) r--;\n    if (tolower((unsigned char)s[l]) != tolower((unsigned char)s[r])) return false;\n    l++; r--;\n  }\n  return true;\n}`,
+        cppCode: `bool isPalindrome(const string& s) {\n  int l = 0, r = (int)s.size() - 1;\n  while (l < r) {\n    while (l < r && !isalnum(static_cast<unsigned char>(s[l]))) ++l;\n    while (l < r && !isalnum(static_cast<unsigned char>(s[r]))) --r;\n    if (tolower(static_cast<unsigned char>(s[l])) != tolower(static_cast<unsigned char>(s[r]))) return false;\n    ++l; --r;\n  }\n  return true;\n}`
+      },
+      {
+        difficulty: "medium", topic: "Two Pointers · Sorted",
+        title: "3Sum (Unique Triplets Summing to 0)",
+        desc: `Return all unique triplets <code>[a, b, c]</code> in <code>nums</code> summing to 0.`,
+        examples: [{ in: "[-1, 0, 1, 2, -1, -4]", out: "[[-1,-1,2], [-1,0,1]]" }],
+        constraints: ["O(n^2) time"],
+        theory: `Sort first, fix <code>nums[i]</code>, then run two pointers <code>(l, r)</code> on the suffix while skipping duplicate values.`,
+        tip: `Break early once <code>nums[i] > 0</code>. Use <code>(x > y) - (x < y)</code> in C <code>qsort</code> to avoid subtraction overflow.`,
+        cCode: `static int cmpI(const void* a, const void* b) {\n  int x = *(const int*)a, y = *(const int*)b;\n  return (x > y) - (x < y);\n}\nint threeSum(int* a, int n, int out[][3]) {\n  qsort(a, (size_t)n, sizeof(int), cmpI);\n  int k = 0;\n  for (int i = 0; i < n - 2; i++) {\n    if (a[i] > 0) break;\n    if (i > 0 && a[i] == a[i - 1]) continue;\n    int l = i + 1, r = n - 1;\n    while (l < r) {\n      int s = a[i] + a[l] + a[r];\n      if (s < 0) l++;\n      else if (s > 0) r--;\n      else {\n        out[k][0] = a[i]; out[k][1] = a[l]; out[k][2] = a[r]; k++;\n        while (l < r && a[l] == a[l + 1]) l++;\n        while (l < r && a[r] == a[r - 1]) r--;\n        l++; r--;\n      }\n    }\n  }\n  return k;\n}`,
+        cppCode: `vector<vector<int>> threeSum(vector<int>& nums) {\n  sort(nums.begin(), nums.end());\n  vector<vector<int>> res;\n  int n = (int)nums.size();\n  for (int i = 0; i < n - 2; ++i) {\n    if (nums[i] > 0) break;\n    if (i > 0 && nums[i] == nums[i - 1]) continue;\n    int l = i + 1, r = n - 1;\n    while (l < r) {\n      int s = nums[i] + nums[l] + nums[r];\n      if (s < 0) ++l; else if (s > 0) --r;\n      else {\n        res.push_back({nums[i], nums[l], nums[r]});\n        while (l < r && nums[l] == nums[l + 1]) ++l;\n        while (l < r && nums[r] == nums[r - 1]) --r;\n        ++l; --r;\n      }\n    }\n  }\n  return res;\n}`
+      },
+      {
+        difficulty: "medium", topic: "Two Pointers · Greedy",
+        title: "Container With Most Water",
+        desc: `Given bar heights <code>h[]</code>, pick two lines forming a container holding maximum water <code>(r - l) * min(h[l], h[r])</code>.`,
+        examples: [{ in: "[1,8,6,2,5,4,8,3,7]", out: "49" }],
+        constraints: ["O(n) time, O(1) space"],
+        theory: `Start at widest span <code>(0, n-1)</code>. Moving the taller wall inward can only shrink width without raising height; moving the shorter wall inward is the only way to improve area.`,
+        tip: `Simple 6-line greedy proof: you only ever discard a shorter wall after recording its maximum possible width.`,
+        cCode: `int maxArea(const int* h, int n) {\n  int l = 0, r = n - 1, best = 0;\n  while (l < r) {\n    int height = (h[l] < h[r]) ? h[l] : h[r];\n    int area = (r - l) * height;\n    if (area > best) best = area;\n    if (h[l] < h[r]) l++; else r--;\n  }\n  return best;\n}`,
+        cppCode: `int maxArea(const vector<int>& h) {\n  int l = 0, r = (int)h.size() - 1, best = 0;\n  while (l < r) {\n    best = max(best, (r - l) * min(h[l], h[r]));\n    if (h[l] < h[r]) ++l; else --r;\n  }\n  return best;\n}`
+      },
+      {
+        difficulty: "hard", topic: "Two Pointers · O(1) Space",
+        title: "Trapping Rain Water",
+        desc: `Compute total water trapped between elevation bars in <code>O(n)</code> time and <code>O(1)</code> space.`,
+        examples: [{ in: "[0,1,0,2,1,0,1,3,2,1,2,1]", out: "6" }],
+        constraints: ["O(n) time, O(1) space"],
+        theory: `Always advance the pointer with smaller height; the taller opposite side guarantees water at our side is bounded solely by our local running max.`,
+        tip: `Explain prefixMax/suffixMax arrays first, then prove why advancing the smaller boundary drops space to <code>O(1)</code>.`,
+        cCode: `int trapWater(const int* h, int n) {\n  int l = 0, r = n - 1, lMax = 0, rMax = 0, w = 0;\n  while (l < r) {\n    if (h[l] < h[r]) {\n      if (h[l] > lMax) lMax = h[l];\n      w += lMax - h[l++];\n    } else {\n      if (h[r] > rMax) rMax = h[r];\n      w += rMax - h[r--];\n    }\n  }\n  return w;\n}`,
+        cppCode: `int trapWater(const vector<int>& h) {\n  int l = 0, r = (int)h.size() - 1, lMax = 0, rMax = 0, w = 0;\n  while (l < r) {\n    if (h[l] < h[r]) { lMax = max(lMax, h[l]); w += lMax - h[l++]; }\n    else { rMax = max(rMax, h[r]); w += rMax - h[r--]; }\n  }\n  return w;\n}`
+      },
+      {
+        difficulty: "medium", topic: "Sliding Window · ASCII LUT",
+        title: "Longest Substring Without Repeating Bytes",
+        desc: `Find the length of the longest substring in <code>s</code> with zero duplicate characters.`,
+        examples: [{ in: '"abcabcbb"', out: "3" }],
+        constraints: ["O(n) time, O(1) space"],
+        theory: `Track last seen index in <code>last[256]</code>. When <code>last[c] >= left</code>, jump <code>left = last[c] + 1</code>.`,
+        tip: `Always cast <code>char</code> to <code>unsigned char</code> before indexing <code>last[256]</code>.`,
+        cCode: `int longestUnique(const char* s) {\n  int last[256];\n  for (int i = 0; i < 256; i++) last[i] = -1;\n  int l = 0, best = 0;\n  for (int r = 0; s[r] != '\\0'; r++) {\n    unsigned char c = (unsigned char)s[r];\n    if (last[c] >= l) l = last[c] + 1;\n    last[c] = r;\n    if (r - l + 1 > best) best = r - l + 1;\n  }\n  return best;\n}`,
+        cppCode: `int longestUnique(const string& s) {\n  int last[256]; fill(begin(last), end(last), -1);\n  int l = 0, best = 0;\n  for (int r = 0; r < (int)s.size(); ++r) {\n    unsigned char c = static_cast<unsigned char>(s[r]);\n    if (last[c] >= l) l = last[c] + 1;\n    last[c] = r;\n    best = max(best, r - l + 1);\n  }\n  return best;\n}`
+      },
+      {
+        difficulty: "hard", topic: "Sliding Window · Frequency",
+        title: "Minimum Window Substring",
+        desc: `Find the shortest substring of <code>s</code> containing all characters of <code>t</code> (with multiplicity).`,
+        examples: [{ in: 's = "ADOBECODEBANC", t = "ABC"', out: '"BANC"' }],
+        constraints: ["O(|s| + |t|) time"],
+        theory: `Maintain scalar <code>have == req</code> tracking satisfied unique chars. Expand right until satisfied, then shrink left greedily.`,
+        tip: `Always guard against empty <code>t</code> first (<code>req == 0</code>), and use fixed <code>int[128]</code> arrays for zero heap allocations.`,
+        cCode: `void minWindowC(const char* s, const char* t, int* outStart, int* outLen) {\n  *outStart = 0; *outLen = 0;\n  if (!s || !t || t[0] == '\\0' || s[0] == '\\0') return;\n  int need[128] = {0}, win[128] = {0}, req = 0;\n  for (int i = 0; t[i] != '\\0'; i++) if (need[(unsigned char)t[i]]++ == 0) req++;\n  int have = 0, l = 0, bestL = 0, bestLen = INT_MAX;\n  for (int r = 0; s[r] != '\\0'; r++) {\n    unsigned char c = (unsigned char)s[r];\n    if (++win[c] == need[c]) have++;\n    while (have == req) {\n      if (r - l + 1 < bestLen) { bestLen = r - l + 1; bestL = l; }\n      unsigned char lc = (unsigned char)s[l++];\n      if (win[lc]-- == need[lc]) have--;\n    }\n  }\n  if (bestLen != INT_MAX) { *outStart = bestL; *outLen = bestLen; }\n}`,
+        cppCode: `string minWindow(const string& s, const string& t) {\n  if (t.empty() || s.size() < t.size()) return "";\n  int need[128] = {0}, win[128] = {0}, req = 0;\n  for (unsigned char c : t) if (need[c]++ == 0) ++req;\n  int have = 0, l = 0, bestLen = INT_MAX, bestL = 0;\n  for (int r = 0; r < (int)s.size(); ++r) {\n    unsigned char c = static_cast<unsigned char>(s[r]);\n    if (++win[c] == need[c]) ++have;\n    while (have == req) {\n      if (r - l + 1 < bestLen) { bestLen = r - l + 1; bestL = l; }\n      unsigned char lc = static_cast<unsigned char>(s[l++]);\n      if (win[lc]-- == need[lc]) --have;\n    }\n  }\n  return bestLen == INT_MAX ? "" : s.substr(bestL, bestLen);\n}`
+      },
+
+      // --- STACKS, RING BUFFERS, PARSERS & DEQUES ---
+      {
+        difficulty: "easy", topic: "Stack · Delimiters",
+        title: "Valid Parentheses / Protocol Frames",
+        desc: `Given string <code>s</code> containing <code>()[]{}</code>, verify every opener closes in proper LIFO order.`,
+        examples: [{ in: '"{[()]}"', out: "true" }, { in: '"{[(])}"', out: "false" }],
+        constraints: ["O(n) time, O(n) space"],
+        theory: `Push openers onto a stack; on each closer, verify stack is non-empty and top matches. Valid iff stack is empty at EOF.`,
+        tip: `Check <code>top < 0</code> before popping and <code>top == -1</code> at the end so stray openers like <code>"((("</code> return <code>false</code>.`,
+        cCode: `bool isValidBrackets(const char* s) {\n  int n = (int)strlen(s), top = -1;\n  char* st = (char*)malloc((size_t)n + 1);\n  bool ok = true;\n  for (int i = 0; i < n; i++) {\n    char c = s[i];\n    if (c == '(' || c == '[' || c == '{') st[++top] = c;\n    else {\n      if (top < 0) { ok = false; break; }\n      char o = st[top--];\n      if ((c == ')' && o != '(') || (c == ']' && o != '[') || (c == '}' && o != '{')) {\n        ok = false; break;\n      }\n    }\n  }\n  free(st);\n  return ok && top == -1;\n}`,
+        cppCode: `bool isValidBrackets(const string& s) {\n  string st;\n  for (char c : s) {\n    if (c == '(' || c == '[' || c == '{') st.push_back(c);\n    else {\n      if (st.empty()) return false;\n      char o = st.back(); st.pop_back();\n      if ((c == ')' && o != '(') || (c == ']' && o != '[') || (c == '}' && o != '{')) return false;\n    }\n  }\n  return st.empty();\n}`
+      },
+      {
+        difficulty: "easy", topic: "String Parser · Overflow Guard",
+        title: "Safe String-to-Int (myAtoi) with Clamping",
+        desc: `Parse a 32-bit signed integer from string <code>s</code>, clamping out-of-range values to <code>[INT_MIN, INT_MAX]</code> without 64-bit overflow.`,
+        examples: [{ in: '"  -42abc"', out: "-42" }, { in: '"99999999999"', out: "INT_MAX" }],
+        constraints: ["32-bit arithmetic only"],
+        theory: `Check overflow <strong>before</strong> multiplying by 10: <code>if (res > INT_MAX / 10 || (res == INT_MAX / 10 && digit > 7))</code>.`,
+        tip: `Never multiply first and check overflow afterward—signed overflow is Undefined Behavior in C/C++.`,
+        cCode: `int myAtoi(const char* s) {\n  int i = 0, sign = 1, res = 0;\n  while (s[i] == ' ') i++;\n  if (s[i] == '-' || s[i] == '+') { if (s[i++] == '-') sign = -1; }\n  while (s[i] >= '0' && s[i] <= '9') {\n    int d = s[i++] - '0';\n    if (res > INT_MAX / 10 || (res == INT_MAX / 10 && d > 7)) {\n      return (sign == 1) ? INT_MAX : INT_MIN;\n    }\n    res = res * 10 + d;\n  }\n  return res * sign;\n}`,
+        cppCode: `int myAtoi(const string& s) {\n  size_t i = 0;\n  while (i < s.size() && s[i] == ' ') ++i;\n  int sign = 1, res = 0;\n  if (i < s.size() && (s[i] == '-' || s[i] == '+')) {\n    if (s[i++] == '-') sign = -1;\n  }\n  while (i < s.size() && isdigit(static_cast<unsigned char>(s[i]))) {\n    int d = s[i++] - '0';\n    if (res > INT_MAX / 10 || (res == INT_MAX / 10 && d > 7))\n      return sign == 1 ? INT_MAX : INT_MIN;\n    res = res * 10 + d;\n  }\n  return res * sign;\n}`
+      },
+      {
+        difficulty: "medium", topic: "Circular Queue / ISR",
+        title: "Fixed-Capacity Ring Buffer",
+        desc: `Implement an <code>O(1)</code> fixed-capacity circular queue supporting enqueue and dequeue.`,
+        examples: [{ in: "cap=3: push(10), push(20), pop()->10", out: "O(1) circular wrap" }],
+        constraints: ["O(1) per op, zero array shifting"],
+        theory: `Maintain <code>head</code>, <code>tail</code>, and <code>size</code> inside a pre-allocated buffer; wrap indices via <code>(idx + 1) % cap</code>.`,
+        tip: `In SPSC ISR firmware, producer writes <code>tail</code> and consumer writes <code>head</code>—using atomic acquire/release avoids locks.`,
+        cCode: `typedef struct { int *buf, head, tail, size, cap; } RingBuf;\nbool rbPush(RingBuf* q, int v) {\n  if (q->size == q->cap) return false;\n  q->buf[q->tail] = v; q->tail = (q->tail + 1) % q->cap; q->size++; return true;\n}\nbool rbPop(RingBuf* q, int* out) {\n  if (q->size == 0) return false;\n  *out = q->buf[q->head]; q->head = (q->head + 1) % q->cap; q->size--; return true;\n}`,
+        cppCode: `class RingBuffer {\n  vector<int> buf; int head = 0, tail = 0, sz = 0, cap;\npublic:\n  explicit RingBuffer(int k) : buf(k), cap(k) {}\n  bool push(int v) {\n    if (sz == cap) return false;\n    buf[tail] = v; tail = (tail + 1) % cap; ++sz; return true;\n  }\n  bool pop(int& out) {\n    if (sz == 0) return false;\n    out = buf[head]; head = (head + 1) % cap; --sz; return true;\n  }\n};`
+      },
+      {
+        difficulty: "medium", topic: "Monotonic Stack",
+        title: "Daily Temperatures (Next Greater Element)",
+        desc: `Given thermal readings <code>t[]</code>, return ticks until a strictly warmer reading for each index (or <code>0</code>).`,
+        examples: [{ in: "[73,74,75,71,69,72,76,73]", out: "[1,1,4,2,1,1,0,0]" }],
+        constraints: ["O(n) time"],
+        theory: `Keep a decreasing stack of unresolved indices. Each index is pushed once and popped at most once → strictly <code>O(n)</code>.`,
+        tip: `Classic pattern whenever you need the nearest future element strictly greater/smaller than current.`,
+        cCode: `void nextWarmer(const int* t, int n, int* out) {\n  if (n <= 0) return;\n  int* st = (int*)malloc((size_t)n * sizeof(int)); int top = -1;\n  for (int i = 0; i < n; i++) out[i] = 0;\n  for (int i = 0; i < n; i++) {\n    while (top >= 0 && t[i] > t[st[top]]) { int idx = st[top--]; out[idx] = i - idx; }\n    st[++top] = i;\n  }\n  free(st);\n}`,
+        cppCode: `vector<int> nextWarmer(const vector<int>& t) {\n  vector<int> out(t.size(), 0), st;\n  for (int i = 0; i < (int)t.size(); ++i) {\n    while (!st.empty() && t[i] > t[st.back()]) {\n      out[st.back()] = i - st.back(); st.pop_back();\n    }\n    st.push_back(i);\n  }\n  return out;\n}`
+      },
+      {
+        difficulty: "hard", topic: "Monotonic Deque",
+        title: "Sliding Window Maximum",
+        desc: `Return the maximum value inside every contiguous window of size <code>k</code> in strict <code>O(n)</code> time.`,
+        examples: [{ in: "nums = [1,3,-1,-3,5,3,6,7], k = 3", out: "[3,3,5,5,6,7]" }],
+        constraints: ["O(n) worst-case time"],
+        theory: `Maintain a decreasing deque of <strong>indices</strong>. Evict expired front indices <code><= i - k</code> and dominated back indices <code>a[back] <= a[i]</code>.`,
+        tip: `Deterministic <code>O(n)</code> worst-case per stream, beating a Heap (<code>O(n log k)</code>).`,
+        cCode: `int maxSlidingWindow(const int* a, int n, int k, int* out) {\n  if (n <= 0 || k <= 0 || k > n) return 0;\n  int* dq = (int*)malloc((size_t)n * sizeof(int));\n  int head = 0, tail = 0, m = 0;\n  for (int i = 0; i < n; i++) {\n    if (head < tail && dq[head] <= i - k) head++;\n    while (head < tail && a[dq[tail - 1]] <= a[i]) tail--;\n    dq[tail++] = i;\n    if (i >= k - 1) out[m++] = a[dq[head]];\n  }\n  free(dq);\n  return m;\n}`,
+        cppCode: `vector<int> maxSlidingWindow(const vector<int>& a, int k) {\n  if (a.empty() || k <= 0 || k > (int)a.size()) return {};\n  deque<int> dq; vector<int> out;\n  for (int i = 0; i < (int)a.size(); ++i) {\n    if (!dq.empty() && dq.front() <= i - k) dq.pop_front();\n    while (!dq.empty() && a[dq.back()] <= a[i]) dq.pop_back();\n    dq.push_back(i);\n    if (i >= k - 1) out.push_back(a[dq.front()]);\n  }\n  return out;\n}`
+      },
+
+      // --- BINARY SEARCH, LINKED LISTS & CACHES ---
+      {
+        difficulty: "medium", topic: "Binary Search",
+        title: "Search in Rotated Sorted Array",
+        desc: `Find <code>target</code> in a rotated strictly increasing array in <code>O(log n)</code> time, or return <code>-1</code>.`,
+        examples: [{ in: "[4,5,6,7,0,1,2], target=0", out: "4" }],
+        constraints: ["O(log n) time"],
+        theory: `At least one half <code>[l..mid]</code> or <code>[mid..r]</code> is strictly sorted. Check <code>a[l] <= a[m]</code> to pick the sorted half and test if <code>target</code> falls inside it.`,
+        tip: `Always write <code>l + (r - l) / 2</code> to prevent signed overflow, and use <code>&lt;=</code> on <code>a[l] <= a[m]</code> for 2-element ranges.`,
+        cCode: `int searchRotated(const int* a, int n, int target) {\n  int l = 0, r = n - 1;\n  while (l <= r) {\n    int m = l + (r - l) / 2;\n    if (a[m] == target) return m;\n    if (a[l] <= a[m]) {\n      if (target >= a[l] && target < a[m]) r = m - 1; else l = m + 1;\n    } else {\n      if (target > a[m] && target <= a[r]) l = m + 1; else r = m - 1;\n    }\n  }\n  return -1;\n}`,
+        cppCode: `int searchRotated(const vector<int>& a, int target) {\n  int l = 0, r = (int)a.size() - 1;\n  while (l <= r) {\n    int m = l + (r - l) / 2;\n    if (a[m] == target) return m;\n    if (a[l] <= a[m]) {\n      if (target >= a[l] && target < a[m]) r = m - 1; else l = m + 1;\n    } else {\n      if (target > a[m] && target <= a[r]) l = m + 1; else r = m - 1;\n    }\n  }\n  return -1;\n}`
+      },
+      {
+        difficulty: "medium", topic: "Binary Search on Answer",
+        title: "Minimum Bandwidth Capacity in D Cycles",
+        desc: `Ship ordered chunks <code>w[]</code> sequentially within <code>D</code> cycles. Find minimum capacity per cycle.`,
+        examples: [{ in: "w = [1..10], D = 5", out: "15" }],
+        constraints: ["O(n log(sum)) time"],
+        theory: `Feasibility predicate <code>canFit(cap)</code> is monotonic over <code>[max(w), sum(w)]</code>—binary search the capacity domain.`,
+        tip: `Guard empty input first, and never set <code>lo = 0</code> when individual chunks cannot be split.`,
+        cCode: `int minCapacity(const int* w, int n, int D) {\n  if (n <= 0 || D <= 0) return 0;\n  int lo = w[0], hi = 0;\n  for (int i = 0; i < n; i++) { if (w[i] > lo) lo = w[i]; hi += w[i]; }\n  while (lo < hi) {\n    int mid = lo + (hi - lo) / 2, days = 1, cur = 0;\n    for (int i = 0; i < n; i++) { if (cur + w[i] > mid) { days++; cur = 0; } cur += w[i]; }\n    if (days <= D) hi = mid; else lo = mid + 1;\n  }\n  return lo;\n}`,
+        cppCode: `int minCapacity(const vector<int>& w, int D) {\n  if (w.empty() || D <= 0) return 0;\n  int lo = *max_element(w.begin(), w.end());\n  int hi = accumulate(w.begin(), w.end(), 0);\n  while (lo < hi) {\n    int mid = lo + (hi - lo) / 2, days = 1, cur = 0;\n    for (int x : w) { if (cur + x > mid) { ++days; cur = 0; } cur += x; }\n    if (days <= D) hi = mid; else lo = mid + 1;\n  }\n  return lo;\n}`
+      },
+      {
+        difficulty: "medium", topic: "Linked List · Pointers",
+        title: "Floyd Cycle Entry & In-Place Reverse",
+        desc: `Detect a cycle in a singly linked list and return the cycle entry node in <code>O(1)</code> space.`,
+        examples: [{ in: "3 -> 2 -> 0 -> -4 -> (back to 2)", out: "Node 2" }],
+        constraints: ["O(n) time, O(1) space"],
+        theory: `When <code>slow</code> (1x) and <code>fast</code> (2x) collide inside a cycle, resetting <code>slow = head</code> and advancing both 1x meets at the cycle entry node.`,
+        tip: `Know the 1-line proof: <code>L1 + L2 = k * C</code> implies the remaining distance to cycle entry equals <code>L1</code>.`,
+        cCode: `struct Node { int val; struct Node* next; };\nstruct Node* detectCycle(struct Node* head) {\n  struct Node *slow = head, *fast = head;\n  while (fast && fast->next) {\n    slow = slow->next; fast = fast->next->next;\n    if (slow == fast) {\n      slow = head;\n      while (slow != fast) { slow = slow->next; fast = fast->next; }\n      return slow;\n    }\n  }\n  return NULL;\n}`,
+        cppCode: `struct ListNode { int val; ListNode* next; };\nListNode* detectCycle(ListNode* head) {\n  ListNode *slow = head, *fast = head;\n  while (fast && fast->next) {\n    slow = slow->next; fast = fast->next->next;\n    if (slow == fast) {\n      slow = head;\n      while (slow != fast) { slow = slow->next; fast = fast->next; }\n      return slow;\n    }\n  }\n  return nullptr;\n}`
+      },
+      {
+        difficulty: "medium", topic: "Cache Architecture · O(1)",
+        title: "O(1) LRU Cache (Hash + Doubly Linked List)",
+        desc: `Design an LRU Cache supporting <code>get(key)</code> and <code>put(key, val)</code> with capacity eviction.`,
+        examples: [{ in: "cap=2: put(1,1), put(2,2), get(1), put(3,3) evicts 2", out: "get(2) -> -1" }],
+        constraints: ["O(1) get and put"],
+        theory: `Hash map gives <code>O(1)</code> lookup; Doubly Linked List gives <code>O(1)</code> move-to-front and <code>O(1)</code> tail eviction.`,
+        tip: `In C, using an index-backed pool <code>nodes[cap]</code> keeps all cache metadata in one contiguous array with zero <code>malloc</code> per <code>put</code>.`,
+        cCode: `typedef struct { int key, val, prev, next; } LRUNode;\ntypedef struct { int cap, size, head, tail; LRUNode* p; } LRUCache;\nstatic void unlinkNode(LRUCache* c, int i) {\n  int pr = c->p[i].prev, nx = c->p[i].next;\n  if (pr != -1) c->p[pr].next = nx; else c->head = nx;\n  if (nx != -1) c->p[nx].prev = pr; else c->tail = pr;\n}\nstatic void pushFront(LRUCache* c, int i) {\n  c->p[i].prev = -1; c->p[i].next = c->head;\n  if (c->head != -1) c->p[c->head].prev = i;\n  c->head = i; if (c->tail == -1) c->tail = i;\n}\nint lruGet(LRUCache* c, int key) {\n  for (int i = c->head; i != -1; i = c->p[i].next) {\n    if (c->p[i].key == key) { unlinkNode(c, i); pushFront(c, i); return c->p[i].val; }\n  }\n  return -1;\n}\nvoid lruPut(LRUCache* c, int key, int val) {\n  for (int i = c->head; i != -1; i = c->p[i].next) {\n    if (c->p[i].key == key) { c->p[i].val = val; unlinkNode(c, i); pushFront(c, i); return; }\n  }\n  int slot = (c->size < c->cap) ? c->size++ : c->tail;\n  if (slot == c->tail && c->size == c->cap && c->tail != -1) unlinkNode(c, slot);\n  c->p[slot].key = key; c->p[slot].val = val; pushFront(c, slot);\n}`,
+        cppCode: `class LRUCache {\n  int cap;\n  list<pair<int, int>> dll;\n  unordered_map<int, list<pair<int, int>>::iterator> mp;\npublic:\n  explicit LRUCache(int c) : cap(c) {}\n  int get(int k) {\n    auto it = mp.find(k);\n    if (it == mp.end()) return -1;\n    dll.splice(dll.begin(), dll, it->second);\n    return it->second->second;\n  }\n  void put(int k, int v) {\n    if (auto it = mp.find(k); it != mp.end()) {\n      it->second->second = v;\n      dll.splice(dll.begin(), dll, it->second); return;\n    }\n    if ((int)dll.size() == cap) { mp.erase(dll.back().first); dll.pop_back(); }\n    dll.emplace_front(k, v); mp[k] = dll.begin();\n  }\n};`
+      },
+
+      // --- TREES, TRIES & HEAPS ---
+      {
+        difficulty: "medium", topic: "Binary Search Tree",
+        title: "Validate Binary Search Tree",
+        desc: `Verify whether a binary tree satisfies the global BST ordering property across all descendants.`,
+        examples: [{ in: "[5, 1, 4, null, null, 3, 6]", out: "false (3 < 5 in right subtree)" }],
+        constraints: ["Node values span full 32-bit int range"],
+        theory: `Propagate strict ancestor bounds <code>(lo, hi)</code> down the recursion. Every node must satisfy <code>lo &lt; val &lt; hi</code>.`,
+        tip: `Use <code>LLONG_MIN..LLONG_MAX</code> so legitimate <code>INT_MIN</code>/<code>INT_MAX</code> node values never fail boundary checks.`,
+        cCode: `struct TreeNode { int val; struct TreeNode *left, *right; };\nbool validBST(struct TreeNode* r, long long lo, long long hi) {\n  if (!r) return true;\n  if (r->val <= lo || r->val >= hi) return false;\n  return validBST(r->left, lo, r->val) && validBST(r->right, r->val, hi);\n}`,
+        cppCode: `struct TreeNode { int val; TreeNode *left, *right; };\nbool isValidBST(TreeNode* r, long long lo = LLONG_MIN, long long hi = LLONG_MAX) {\n  if (!r) return true;\n  if (r->val <= lo || r->val >= hi) return false;\n  return isValidBST(r->left, lo, r->val) && isValidBST(r->right, r->val, hi);\n}`
+      },
+      {
+        difficulty: "medium", topic: "Binary Trees · Postorder",
+        title: "Lowest Common Ancestor (LCA)",
+        desc: `Find the lowest common ancestor of nodes <code>p</code> and <code>q</code> in a binary tree.`,
+        examples: [{ in: "root=[3,5,1,6,2,0,8], p=5, q=1", out: "3" }],
+        constraints: ["O(n) time"],
+        theory: `Postorder DFS returns whichever target exists in each subtree; the deepest node receiving non-null from both sides is the LCA.`,
+        tip: `In a BST, LCA simplifies to an iterative <code>O(h)</code> time, <code>O(1)</code> space walk comparing values against root.`,
+        cCode: `struct TreeNode* lca(struct TreeNode* r, struct TreeNode* p, struct TreeNode* q) {\n  if (!r || r == p || r == q) return r;\n  struct TreeNode* L = lca(r->left, p, q);\n  struct TreeNode* R = lca(r->right, p, q);\n  return (L && R) ? r : (L ? L : R);\n}`,
+        cppCode: `TreeNode* lowestCommonAncestor(TreeNode* r, TreeNode* p, TreeNode* q) {\n  if (!r || r == p || r == q) return r;\n  TreeNode* L = lowestCommonAncestor(r->left, p, q);\n  TreeNode* R = lowestCommonAncestor(r->right, p, q);\n  return (L && R) ? r : (L ? L : R);\n}`
+      },
+      {
+        difficulty: "medium", topic: "Trie · Prefix Routing",
+        title: "Prefix Trie Command Router",
+        desc: `Implement a Prefix Trie supporting <code>insert</code>, <code>search</code>, and <code>startsWith</code> in <code>O(L)</code> time.`,
+        examples: [{ in: 'insert("dma_read"), startsWith("dma_")', out: "true" }],
+        constraints: ["O(L) per query"],
+        theory: `Shared prefixes share edges from root; an <code>end</code> flag distinguishes full tokens from prefixes.`,
+        tip: `Always use <code>calloc(1, sizeof(TrieNode))</code> in C so all 26 child pointers start as <code>NULL</code>.`,
+        cCode: `typedef struct TrieNode { struct TrieNode* ch[26]; bool end; } TrieNode;\nTrieNode* trieNew(void) { return (TrieNode*)calloc(1, sizeof(TrieNode)); }\nvoid trieInsert(TrieNode* r, const char* w) {\n  for (int i = 0; w[i]; i++) {\n    int idx = w[i] - 'a';\n    if (!r->ch[idx]) r->ch[idx] = trieNew();\n    r = r->ch[idx];\n  }\n  r->end = true;\n}\nbool trieFind(const TrieNode* r, const char* s, bool exact) {\n  for (int i = 0; s[i]; i++) {\n    r = r->ch[s[i] - 'a'];\n    if (!r) return false;\n  }\n  return exact ? r->end : true;\n}`,
+        cppCode: `class Trie {\n  struct Node { Node* ch[26]{}; bool end = false; };\n  Node* root = new Node();\npublic:\n  void insert(const string& w) {\n    Node* cur = root;\n    for (char c : w) { int i = c - 'a'; if (!cur->ch[i]) cur->ch[i] = new Node(); cur = cur->ch[i]; }\n    cur->end = true;\n  }\n  bool query(const string& s, bool exact = true) const {\n    Node* cur = root;\n    for (char c : s) { cur = cur->ch[c - 'a']; if (!cur) return false; }\n    return exact ? cur->end : true;\n  }\n};`
+      },
+      {
+        difficulty: "hard", topic: "Heap / Divide & Conquer",
+        title: "Merge K Sorted Telemetry Streams",
+        desc: `Merge <code>k</code> sorted lists containing <code>N</code> total elements into one sorted list in <code>O(N log k)</code> time.`,
+        examples: [{ in: "[[1,4,5], [1,3,4], [2,6]]", out: "[1,1,2,3,4,4,5,6]" }],
+        constraints: ["O(N log k) time"],
+        theory: `Pairwise Divide & Conquer merges lists bottom-up in <code>log k</code> rounds with zero auxiliary heap allocations; C++ can also use a size-<code>k</code> Min-Heap.`,
+        tip: `Pairwise merging achieves identical <code>O(N log k)</code> complexity as a heap with <code>O(1)</code> extra memory.`,
+        cCode: `struct ListNode { int val; struct ListNode* next; };\nstatic struct ListNode* merge2(struct ListNode* a, struct ListNode* b) {\n  struct ListNode dummy = {0, NULL}, *t = &dummy;\n  while (a && b) {\n    if (a->val <= b->val) { t->next = a; a = a->next; }\n    else { t->next = b; b = b->next; }\n    t = t->next;\n  }\n  t->next = a ? a : b;\n  return dummy.next;\n}\nstruct ListNode* mergeKLists(struct ListNode** lists, int k) {\n  if (k <= 0) return NULL;\n  for (int step = 1; step < k; step *= 2)\n    for (int i = 0; i + step < k; i += step * 2)\n      lists[i] = merge2(lists[i], lists[i + step]);\n  return lists[0];\n}`,
+        cppCode: `struct ListNode { int val; ListNode* next; };\nListNode* mergeKLists(vector<ListNode*>& lists) {\n  auto cmp = [](ListNode* a, ListNode* b) { return a->val > b->val; };\n  priority_queue<ListNode*, vector<ListNode*>, decltype(cmp)> pq(cmp);\n  for (auto* h : lists) if (h) pq.push(h);\n  ListNode dummy{0, nullptr}, *tail = &dummy;\n  while (!pq.empty()) {\n    auto* node = pq.top(); pq.pop();\n    tail = tail->next = node;\n    if (node->next) pq.push(node->next);\n  }\n  return dummy.next;\n}`
+      },
+
+      // --- GRAPHS, TOPO SORT, DSU & DIJKSTRA ---
+      {
+        difficulty: "medium", topic: "Graph · Topological Sort",
+        title: "Driver Dependency Cycle Check (Kahn's BFS)",
+        desc: `Given <code>n</code> modules and prerequisite pairs <code>[a, b]</code> (<code>b</code> before <code>a</code>), return <code>true</code> iff no cycle exists.`,
+        examples: [{ in: "n=2, [[1,0],[0,1]]", out: "false" }],
+        constraints: ["O(V + E) time"],
+        theory: `Repeatedly dequeue nodes with <code>indegree == 0</code> and decrement neighbor indegrees. Acyclic iff <code>visited == n</code>.`,
+        tip: `Kahn's iterative BFS avoids recursion stack overflow on deep driver dependency chains.`,
+        cCode: `bool canFinish(int n, const int deps[][2], int m) {\n  int *indeg = (int*)calloc((size_t)n, sizeof(int));\n  int *head = (int*)malloc((size_t)n * sizeof(int));\n  int *to = (int*)malloc((size_t)(m + 1) * sizeof(int));\n  int *nxt = (int*)malloc((size_t)(m + 1) * sizeof(int));\n  for (int i = 0; i < n; i++) head[i] = -1;\n  for (int i = 0; i < m; i++) {\n    int u = deps[i][0], v = deps[i][1];\n    to[i] = u; nxt[i] = head[v]; head[v] = i; indeg[u]++;\n  }\n  int *q = (int*)malloc((size_t)n * sizeof(int)), qh = 0, qt = 0, vis = 0;\n  for (int i = 0; i < n; i++) if (indeg[i] == 0) q[qt++] = i;\n  while (qh < qt) {\n    int u = q[qh++]; vis++;\n    for (int e = head[u]; e != -1; e = nxt[e]) {\n      if (--indeg[to[e]] == 0) q[qt++] = to[e];\n    }\n  }\n  free(indeg); free(head); free(to); free(nxt); free(q);\n  return vis == n;\n}`,
+        cppCode: `bool canFinish(int n, const vector<vector<int>>& deps) {\n  vector<vector<int>> adj(n);\n  vector<int> indeg(n, 0);\n  for (auto& d : deps) { adj[d[1]].push_back(d[0]); ++indeg[d[0]]; }\n  queue<int> q;\n  for (int i = 0; i < n; ++i) if (indeg[i] == 0) q.push(i);\n  int vis = 0;\n  while (!q.empty()) {\n    int u = q.front(); q.pop(); ++vis;\n    for (int v : adj[u]) if (--indeg[v] == 0) q.push(v);\n  }\n  return vis == n;\n}`
+      },
+      {
+        difficulty: "medium", topic: "Graph · Union-Find (DSU)",
+        title: "Connected Components & Cycle Detection",
+        desc: `Given <code>n</code> nodes and undirected edges, detect redundant cycle-creating edges or count components in near-<code>O(1)</code> per union.`,
+        examples: [{ in: "n=4, edges=[[0,1],[1,2],[2,0]]", out: "[2,0] closes cycle" }],
+        constraints: ["O(alpha(n)) per operation"],
+        theory: `Path compression flattens parent pointers during <code>find</code>; union by size attaches the smaller component under the larger root.`,
+        tip: `DSU is leaner and faster than repeated BFS/DFS on dynamic edge streams.`,
+        cCode: `int dsuFind(int* p, int x) {\n  return (p[x] == x) ? x : (p[x] = dsuFind(p, p[x]));\n}\nbool dsuUnion(int* p, int* sz, int a, int b) {\n  a = dsuFind(p, a); b = dsuFind(p, b);\n  if (a == b) return false;\n  if (sz[a] < sz[b]) { int t = a; a = b; b = t; }\n  p[b] = a; sz[a] += sz[b];\n  return true;\n}`,
+        cppCode: `struct DSU {\n  vector<int> p, sz;\n  explicit DSU(int n) : p(n), sz(n, 1) { iota(p.begin(), p.end(), 0); }\n  int find(int x) { return p[x] == x ? x : p[x] = find(p[x]); }\n  bool unite(int a, int b) {\n    a = find(a); b = find(b);\n    if (a == b) return false;\n    if (sz[a] < sz[b]) swap(a, b);\n    p[b] = a; sz[a] += sz[b]; return true;\n  }\n};`
+      },
+      {
+        difficulty: "hard", topic: "Graph · Dijkstra",
+        title: "Shortest Weighted Network Latency",
+        desc: `Given <code>n</code> nodes and non-negative weighted directed edges <code>[u, v, w]</code>, find shortest latency from <code>src</code> to <code>dst</code> (or <code>-1</code>).`,
+        examples: [{ in: "n=4, [[0,1,4],[0,2,1],[2,1,2],[1,3,1]], src=0, dst=3", out: "4" }],
+        constraints: ["O((V + E) log V) time"],
+        theory: `Min-Heap extracts the closest unfinalized node. Skip stale entries via <code>if (d > dist[u]) continue;</code>.`,
+        tip: `Non-negative edge weights are required for greedy finality; negative weights need Bellman-Ford.`,
+        cCode: `typedef struct { int d, u; } HItem;\nstatic void hPush(HItem* h, int* sz, HItem it) {\n  int i = (*sz)++; h[i] = it;\n  while (i > 0 && h[(i - 1) / 2].d > h[i].d) {\n    int p = (i - 1) / 2; HItem t = h[p]; h[p] = h[i]; h[i] = t; i = p;\n  }\n}\nstatic HItem hPop(HItem* h, int* sz) {\n  HItem top = h[0]; h[0] = h[--(*sz)]; int i = 0;\n  while (1) {\n    int s = i, l = 2 * i + 1, r = 2 * i + 2;\n    if (l < *sz && h[l].d < h[s].d) s = l;\n    if (r < *sz && h[r].d < h[s].d) s = r;\n    if (s == i) break;\n    HItem t = h[i]; h[i] = h[s]; h[s] = t; i = s;\n  }\n  return top;\n}\nint shortestPath(int n, const int edges[][3], int m, int src, int dst) {\n  int *head = malloc((size_t)n * sizeof(int)), *dist = malloc((size_t)n * sizeof(int));\n  int *to = malloc((size_t)(m + 1) * sizeof(int)), *wt = malloc((size_t)(m + 1) * sizeof(int)), *nxt = malloc((size_t)(m + 1) * sizeof(int));\n  for (int i = 0; i < n; i++) { head[i] = -1; dist[i] = INT_MAX; }\n  for (int i = 0; i < m; i++) { to[i] = edges[i][1]; wt[i] = edges[i][2]; nxt[i] = head[edges[i][0]]; head[edges[i][0]] = i; }\n  HItem* heap = malloc((size_t)(m + n + 1) * sizeof(HItem)); int hsz = 0;\n  dist[src] = 0; hPush(heap, &hsz, (HItem){0, src});\n  while (hsz > 0) {\n    HItem cur = hPop(heap, &hsz);\n    if (cur.d > dist[cur.u]) continue;\n    if (cur.u == dst) break;\n    for (int e = head[cur.u]; e != -1; e = nxt[e]) {\n      if (cur.d + wt[e] < dist[to[e]]) {\n        dist[to[e]] = cur.d + wt[e]; hPush(heap, &hsz, (HItem){dist[to[e]], to[e]});\n      }\n    }\n  }\n  int ans = (dist[dst] == INT_MAX) ? -1 : dist[dst];\n  free(head); free(dist); free(to); free(wt); free(nxt); free(heap);\n  return ans;\n}`,
+        cppCode: `int shortestPath(int n, const vector<vector<int>>& edges, int src, int dst) {\n  vector<vector<pair<int,int>>> adj(n);\n  for (auto& e : edges) adj[e[0]].push_back({e[1], e[2]});\n  vector<int> dist(n, INT_MAX);\n  using P = pair<int, int>;\n  priority_queue<P, vector<P>, greater<P>> pq;\n  dist[src] = 0; pq.push({0, src});\n  while (!pq.empty()) {\n    auto [d, u] = pq.top(); pq.pop();\n    if (d > dist[u]) continue;\n    if (u == dst) return d;\n    for (auto [v, w] : adj[u]) {\n      if (d + w < dist[v]) { dist[v] = d + w; pq.push({dist[v], v}); }\n    }\n  }\n  return -1;\n}`
+      },
+
+      // --- DYNAMIC PROGRAMMING & BACKTRACKING ---
+      {
+        difficulty: "medium", topic: "1D Dynamic Programming",
+        title: "Coin Change (Minimum Packet Count)",
+        desc: `Given packet sizes <code>coins[]</code> and total <code>amount</code>, return minimum packets summing to <code>amount</code>, or <code>-1</code>.`,
+        examples: [{ in: "coins=[1,3,4], amount=6", out: "2 (3+3)" }],
+        constraints: ["O(amount * k) time"],
+        theory: `<code>dp[a] = min(1 + dp[a - c])</code> over valid coins. Greedy fails on <code>[1, 3, 4]</code> for <code>6</code>.`,
+        tip: `Use <code>amount + 1</code> as sentinel infinity so adding <code>+ 1</code> can never overflow signed int.`,
+        cCode: `int coinChange(const int* c, int k, int amt) {\n  if (amt < 0) return -1;\n  int inf = amt + 1;\n  int* dp = (int*)malloc((size_t)(amt + 1) * sizeof(int));\n  for (int i = 0; i <= amt; i++) dp[i] = inf;\n  dp[0] = 0;\n  for (int a = 1; a <= amt; a++)\n    for (int j = 0; j < k; j++)\n      if (a >= c[j] && dp[a - c[j]] + 1 < dp[a]) dp[a] = dp[a - c[j]] + 1;\n  int ans = (dp[amt] > amt) ? -1 : dp[amt];\n  free(dp);\n  return ans;\n}`,
+        cppCode: `int coinChange(const vector<int>& coins, int amt) {\n  if (amt < 0) return -1;\n  vector<int> dp(amt + 1, amt + 1);\n  dp[0] = 0;\n  for (int a = 1; a <= amt; ++a)\n    for (int c : coins)\n      if (a >= c) dp[a] = min(dp[a], dp[a - c] + 1);\n  return (dp[amt] > amt) ? -1 : dp[amt];\n}`
+      },
+      {
+        difficulty: "medium", topic: "O(1)-Space DP",
+        title: "House Robber (Max Non-Adjacent Sum)",
+        desc: `Maximize the sum of elements chosen from non-negative array <code>nums</code> such that no two chosen elements are adjacent.`,
+        examples: [{ in: "[2, 7, 9, 3, 1]", out: "12 (2 + 9 + 1)" }],
+        constraints: ["O(n) time, O(1) space"],
+        theory: `<code>dp[i] = max(dp[i-1], dp[i-2] + nums[i])</code> compressed into two scalar registers <code>p1</code> and <code>p2</code>.`,
+        tip: `Whenever 1D DP reads only <code>i-1</code> and <code>i-2</code>, drop RAM from <code>O(n)</code> to <code>O(1)</code>.`,
+        cCode: `int maxNonAdj(const int* a, int n) {\n  int p2 = 0, p1 = 0;\n  for (int i = 0; i < n; i++) {\n    int take = p2 + a[i];\n    int cur = (take > p1) ? take : p1;\n    p2 = p1; p1 = cur;\n  }\n  return p1;\n}`,
+        cppCode: `int maxNonAdj(const vector<int>& a) {\n  int p2 = 0, p1 = 0;\n  for (int x : a) {\n    int cur = max(p1, p2 + x);\n    p2 = p1; p1 = cur;\n  }\n  return p1;\n}`
+      },
+      {
+        difficulty: "medium", topic: "DP + Binary Search",
+        title: "Longest Increasing Subsequence (O(n log n))",
+        desc: `Find the length of the longest strictly increasing subsequence in <code>nums</code> in <code>O(n log n)</code> time.`,
+        examples: [{ in: "[10,9,2,5,3,7,101,18]", out: "4 ([2,3,7,101])" }],
+        constraints: ["O(n log n) time"],
+        theory: `<code>tails[len]</code> stores the smallest possible ending value of an increasing subsequence of length <code>len + 1</code>. Binary search to replace or append.`,
+        tip: `Knowing the <code>O(n log n)</code> patience-sorting method distinguishes top-tier candidates from standard <code>O(n^2)</code> DP answers.`,
+        cCode: `int lengthOfLIS(const int* a, int n) {\n  if (n <= 0) return 0;\n  int* tails = (int*)malloc((size_t)n * sizeof(int)), len = 0;\n  for (int i = 0; i < n; i++) {\n    int l = 0, r = len;\n    while (l < r) { int m = l + (r - l) / 2; if (tails[m] < a[i]) l = m + 1; else r = m; }\n    tails[l] = a[i];\n    if (l == len) len++;\n  }\n  free(tails); return len;\n}`,
+        cppCode: `int lengthOfLIS(const vector<int>& a) {\n  vector<int> tails;\n  for (int x : a) {\n    auto it = lower_bound(tails.begin(), tails.end(), x);\n    if (it == tails.end()) tails.push_back(x);\n    else *it = x;\n  }\n  return (int)tails.size();\n}`
+      },
+      {
+        difficulty: "medium", topic: "1D-Compressed Knapsack",
+        title: "0/1 Knapsack (Backward Capacity Sweep)",
+        desc: `Given weights <code>w[]</code>, values <code>v[]</code>, and capacity <code>W</code>, maximize value using each item at most once.`,
+        examples: [{ in: "w=[1,3,4], v=[15,20,30], W=4", out: "35" }],
+        constraints: ["O(n * W) time, O(W) space"],
+        theory: `Sweep capacity <strong>backwards</strong> from <code>W</code> down to <code>w[i]</code> so each item updates only states from prior items (never reusing itself).`,
+        tip: `Forward sweep = Unbounded Knapsack; Backward sweep = 0/1 Knapsack.`,
+        cCode: `int knapsack01(const int* w, const int* v, int n, int W) {\n  int* dp = (int*)calloc((size_t)(W + 1), sizeof(int));\n  for (int i = 0; i < n; i++) {\n    for (int c = W; c >= w[i]; c--) {\n      int cand = dp[c - w[i]] + v[i];\n      if (cand > dp[c]) dp[c] = cand;\n    }\n  }\n  int ans = dp[W]; free(dp); return ans;\n}`,
+        cppCode: `int knapsack01(const vector<int>& w, const vector<int>& v, int W) {\n  vector<int> dp(W + 1, 0);\n  for (size_t i = 0; i < w.size(); ++i)\n    for (int c = W; c >= w[i]; --c)\n      dp[c] = max(dp[c], dp[c - w[i]] + v[i]);\n  return dp[W];\n}`
+      },
+      {
+        difficulty: "hard", topic: "Space-Compressed 2D DP",
+        title: "Edit Distance (Levenshtein)",
+        desc: `Minimum insert, delete, or replace edits converting <code>w1</code> to <code>w2</code> in <code>O(n)</code> space.`,
+        examples: [{ in: 'w1="horse", w2="ros"', out: "3" }],
+        constraints: ["O(m*n) time, O(n) space"],
+        theory: `Save <code>dp[i-1][j-1]</code> in scalar <code>prevDiag</code> before overwriting <code>dp[j]</code>, compressing the 2D table into a single 1D row.`,
+        tip: `Handles empty strings cleanly: if <code>w1</code> or <code>w2</code> is empty, returns the other's length.`,
+        cCode: `int editDist(const char* w1, const char* w2) {\n  int m = (int)strlen(w1), n = (int)strlen(w2);\n  int* dp = (int*)malloc((size_t)(n + 1) * sizeof(int));\n  for (int j = 0; j <= n; j++) dp[j] = j;\n  for (int i = 1; i <= m; i++) {\n    int prevDiag = dp[0]; dp[0] = i;\n    for (int j = 1; j <= n; j++) {\n      int tmp = dp[j];\n      if (w1[i - 1] == w2[j - 1]) dp[j] = prevDiag;\n      else { int mn = dp[j] < dp[j - 1] ? dp[j] : dp[j - 1]; dp[j] = 1 + (prevDiag < mn ? prevDiag : mn); }\n      prevDiag = tmp;\n    }\n  }\n  int ans = dp[n]; free(dp); return ans;\n}`,
+        cppCode: `int editDist(const string& w1, const string& w2) {\n  int m = (int)w1.size(), n = (int)w2.size();\n  vector<int> dp(n + 1); iota(dp.begin(), dp.end(), 0);\n  for (int i = 1; i <= m; ++i) {\n    int prevDiag = dp[0]; dp[0] = i;\n    for (int j = 1; j <= n; ++j) {\n      int tmp = dp[j];\n      if (w1[i - 1] == w2[j - 1]) dp[j] = prevDiag;\n      else dp[j] = 1 + min({dp[j], dp[j - 1], prevDiag});\n      prevDiag = tmp;\n    }\n  }\n  return dp[n];\n}`
+      },
+      {
+        difficulty: "hard", topic: "Bitmask Backtracking",
+        title: "N-Queens via Bitmasks",
+        desc: `Count valid placements of <code>n</code> non-attacking queens on an <code>n x n</code> board using bitmasks.`,
+        examples: [{ in: "n = 4", out: "2" }, { in: "n = 8", out: "92" }],
+        constraints: ["1 <= n <= 15", "Zero heap memory"],
+        theory: `Valid slots on current row: <code>avail = all & ~(cols | d1 | d2)</code>. Extract lowest valid bit via <code>avail & (~avail + 1u)</code> and shift diagonals per row.`,
+        tip: `Using a clean helper function in both C and C++ keeps recursion crystal clear without template lambda noise.`,
+        cCode: `static int dfsQ(uint32_t c, uint32_t d1, uint32_t d2, uint32_t all) {\n  if (c == all) return 1;\n  int cnt = 0; uint32_t av = all & ~(c | d1 | d2);\n  while (av) {\n    uint32_t b = av & (~av + 1u); av -= b;\n    cnt += dfsQ(c | b, (d1 | b) << 1, (d2 | b) >> 1, all);\n  }\n  return cnt;\n}\nint totalNQueens(int n) { return dfsQ(0u, 0u, 0u, (1u << n) - 1u); }`,
+        cppCode: `int dfsQ(uint32_t c, uint32_t d1, uint32_t d2, uint32_t all) {\n  if (c == all) return 1;\n  int cnt = 0; uint32_t av = all & ~(c | d1 | d2);\n  while (av) {\n    uint32_t b = av & (~av + 1u); av -= b;\n    cnt += dfsQ(c | b, (d1 | b) << 1, (d2 | b) >> 1, all);\n  }\n  return cnt;\n}\nint totalNQueens(int n) { return dfsQ(0u, 0u, 0u, (1u << n) - 1u); }`
+      },
+      {
+        difficulty: "hard", topic: "Binary Search Partition",
+        title: "Median of Two Sorted Arrays",
+        desc: `Return the combined median of two sorted arrays in <code>O(log(min(m, n)))</code> time.`,
+        examples: [{ in: "[1, 3], [2]", out: "2.0" }, { in: "[1, 2], [3, 4]", out: "2.5" }],
+        constraints: ["m + n >= 1", "O(log(min(m, n)))"],
+        theory: `Binary search partition cut <code>i</code> in the shorter array so left-half max <= right-half min across both arrays.`,
+        tip: `Guard empty combined input (<code>m + n == 0</code>), swap if <code>m > n</code>, and use <code>INT_MIN</code>/<code>INT_MAX</code> sentinels.`,
+        cCode: `double findMedian(const int* a, int m, const int* b, int n) {\n  if (m + n == 0) return 0.0;\n  if (m > n) return findMedian(b, n, a, m);\n  int lo = 0, hi = m;\n  while (lo <= hi) {\n    int i = lo + (hi - lo) / 2, j = (m + n + 1) / 2 - i;\n    int lA = i ? a[i - 1] : INT_MIN, rA = i < m ? a[i] : INT_MAX;\n    int lB = j ? b[j - 1] : INT_MIN, rB = j < n ? b[j] : INT_MAX;\n    if (lA <= rB && lB <= rA) {\n      int mx = lA > lB ? lA : lB, mn = rA < rB ? rA : rB;\n      return ((m + n) % 2 == 0) ? (mx + mn) * 0.5 : (double)mx;\n    } else if (lA > rB) hi = i - 1; else lo = i + 1;\n  }\n  return 0.0;\n}`,
+        cppCode: `double findMedian(const vector<int>& a, const vector<int>& b) {\n  if (a.empty() && b.empty()) return 0.0;\n  if (a.size() > b.size()) return findMedian(b, a);\n  int m = (int)a.size(), n = (int)b.size(), lo = 0, hi = m;\n  while (lo <= hi) {\n    int i = lo + (hi - lo) / 2, j = (m + n + 1) / 2 - i;\n    int lA = i ? a[i - 1] : INT_MIN, rA = i < m ? a[i] : INT_MAX;\n    int lB = j ? b[j - 1] : INT_MIN, rB = j < n ? b[j] : INT_MAX;\n    if (lA <= rB && lB <= rA) {\n      if ((m + n) % 2 == 0) return (max(lA, lB) + min(rA, rB)) * 0.5;\n      return static_cast<double>(max(lA, lB));\n    } else if (lA > rB) hi = i - 1; else lo = i + 1;\n  }\n  return 0.0;\n}`
+      }
+    ];
+
+    // =========================================================
+    // 3. BUILD DETERMINISTIC 365-DAY CURRICULUM
+    // =========================================================
+    const EASY_A = ARCHETYPES.filter(a => a.difficulty === "easy");
+    const MED_A = ARCHETYPES.filter(a => a.difficulty === "medium");
+    const HARD_A = ARCHETYPES.filter(a => a.difficulty === "hard");
+    const FOCUS_MODES = ["Core Invariant", "Zero-Heap C Drill", "Edge-Case Stress", "Latency-Critical", "Whiteboard Round", "Staff Calibration"];
+
+    function pickArch(day, rng) {
+      let pool;
+      if (day <= 60) pool = (day % 3 === 0) ? MED_A : EASY_A;
+      else if (day <= 180) pool = (day % 8 === 0) ? HARD_A : (day % 9 === 1 ? EASY_A : MED_A);
+      else if (day <= 300) pool = (day % 4 === 0) ? HARD_A : MED_A;
+      else pool = (day % 3 === 0) ? MED_A : HARD_A;
+      return pool[(day + Math.floor(rng() * pool.length)) % pool.length];
+    }
+
+    const ALL_365 = [];
+    for (let day = 1; day <= 365; day++) {
+      const rng = mulberry32(day * 2654435761);
+      const track = getTrack(day);
+      ALL_365.push({
+        day,
+        trackId: track.id,
+        trackName: track.name,
+        focusMode: FOCUS_MODES[day % FOCUS_MODES.length],
+        ...pickArch(day, rng)
+      });
+    }
+
+    // =========================================================
+    // 4. PERSISTENCE & UI STATE
+    // =========================================================
+    const STORE_KEY = "top1_365_dual_v4";
+    let state = { activeDay: 1, solView: "both", solvedDays: [], solveDates: [], notes: {} };
+    try {
+      const raw = localStorage.getItem(STORE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === "object") state = { ...state, ...parsed };
+      }
+    } catch {}
+    const saveState = () => { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch {} };
+
+    const solvedSet = new Set((state.solvedDays || []).filter(n => Number.isInteger(n) && n >= 1 && n <= 365));
+    let currentDiff = "all";
+    let currentTrack = "all";
+    let searchQ = "";
+    let solView = state.solView || "both";
+    let solutionOpen = false;
+    let currentCh = ALL_365[Math.min(Math.max((state.activeDay || 1) - 1, 0), 364)];
+
+    const dayListEl = document.getElementById("day-list");
+    const readerInnerEl = document.getElementById("reader-inner");
+    const solvedEl = document.getElementById("solved-count");
+    const streakEl = document.getElementById("streak-count");
+    const progressFillEl = document.getElementById("progress-fill");
+    const trackSel = document.getElementById("track-filter");
+    const toggleSolveBtn = document.getElementById("toggle-solve-btn");
+    const mSolveBtn = document.getElementById("m-solve-btn");
+    const sidebarCard = document.getElementById("sidebar-card");
+    const drawerBackdrop = document.getElementById("drawer-backdrop");
+
+    TRACKS.forEach(t => {
+      const o = document.createElement("option");
+      o.value = String(t.id);
+      o.textContent = `${t.name} (D${t.days[0]}–${t.days[1]})`;
+      trackSel.appendChild(o);
+    });
+
+    const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const openDrawer = () => { sidebarCard.classList.add("open"); drawerBackdrop.classList.add("open"); };
+    const closeDrawer = () => { sidebarCard.classList.remove("open"); drawerBackdrop.classList.remove("open"); };
+
+    function calcStreak() {
+      const dates = Array.from(new Set(state.solveDates || [])).sort().reverse();
+      if (!dates.length) return 0;
+      const t = new Date().toISOString().slice(0, 10);
+      const y = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+      if (dates[0] !== t && dates[0] !== y) return 0;
+      let s = 1;
+      for (let i = 1; i < dates.length; i++) {
+        if (Math.round((new Date(dates[i - 1]) - new Date(dates[i])) / 86400000) === 1) s++; else break;
+      }
+      return s;
+    }
+
+    function updateMetrics() {
+      solvedEl.textContent = solvedSet.size;
+      streakEl.textContent = calcStreak();
+      progressFillEl.style.width = `${((solvedSet.size / 365) * 100).toFixed(1)}%`;
+      const isSolved = solvedSet.has(currentCh.day);
+      toggleSolveBtn.textContent = isSolved ? "✓ Mastered (Undo)" : "Mark as Mastered";
+      toggleSolveBtn.className = isSolved ? "btn-green" : "btn-ghost";
+      mSolveBtn.textContent = isSolved ? "✓ Mastered" : "Mark Done";
+      mSolveBtn.className = isSolved ? "btn-green" : "btn-ghost";
+    }
+
+    function renderList() {
+      const q = searchQ.trim().toLowerCase();
+      const filtered = ALL_365.filter(c => {
+        if (currentDiff !== "all" && c.difficulty !== currentDiff) return false;
+        if (currentTrack !== "all" && String(c.trackId) !== currentTrack) return false;
+        if (q && !`day ${c.day} ${c.title} ${c.topic} ${c.trackName}`.toLowerCase().includes(q)) return false;
+        return true;
+      });
+      const frag = document.createDocumentFragment();
+      filtered.forEach(c => {
+        const d = document.createElement("div");
+        d.className = `day-item ${c.day === currentCh.day ? "active" : ""}`;
+        d.innerHTML = `
+          <div class="day-meta">
+            <span class="day-sub">Day ${c.day} · ${esc(c.topic)}</span>
+            <span class="day-title">${esc(c.title)}</span>
+          </div>
+          <div class="day-right">
+            ${solvedSet.has(c.day) ? '<span class="chk">✓</span>' : ""}
+            <span class="dot dot-${c.difficulty}"></span>
+          </div>
+        `;
+        d.onclick = () => { loadDay(c.day); closeDrawer(); };
+        frag.appendChild(d);
+      });
+      dayListEl.innerHTML = "";
+      dayListEl.appendChild(frag);
+    }
+
+    function renderReader() {
+      const c = currentCh;
+      const savedNote = (state.notes && state.notes[c.day]) || "";
+      const showC = solView === "both" || solView === "c";
+      const showCpp = solView === "both" || solView === "cpp";
+
+      readerInnerEl.innerHTML = `
+        <div class="tags">
+          <span class="tag tag-day">Day ${c.day} of 365</span>
+          <span class="tag tag-${c.difficulty}">${c.difficulty.toUpperCase()}</span>
+          <span class="tag tag-track">${esc(c.trackName)}</span>
+          <span class="tag tag-track">${esc(c.focusMode)}</span>
+        </div>
+
+        <h1 class="prob-title">${esc(c.title)}</h1>
+        <p class="prob-desc">${c.desc}</p>
+
+        <div class="sec-title">Examples</div>
+        <div class="examples-grid">
+          ${c.examples.map(ex => `
+            <div class="ex-card">
+              <div><span class="ex-lbl">Input:</span> ${esc(ex.in)}</div>
+              <div><span class="ex-lbl">Output:</span> ${esc(ex.out)}</div>
+            </div>
+          `).join("")}
+        </div>
+
+        <div class="sec-title">Constraints</div>
+        <ul class="constraints-list">
+          ${c.constraints.map(k => `<li>${esc(k)}</li>`).join("")}
+        </ul>
+
+        <div class="insight-grid">
+          <div class="insight-card insight-theory">
+            <div class="insight-head">📘 Small Theory &amp; Logical Invariant</div>
+            <p>${c.theory}</p>
+          </div>
+          <div class="insight-card insight-tip">
+            <div class="insight-head">⚡ Top 1% Mentor Tip (6 YOE Embedded)</div>
+            <p>${c.tip}</p>
+          </div>
+        </div>
+
+        <div class="scratchpad-wrap">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:0.82rem; font-weight:600;">Logical Scratchpad (Plan invariant &amp; edge cases first)</span>
+            <span style="font-size:0.74rem; color:var(--text-3);">Auto-saved</span>
+          </div>
+          <textarea id="note-box" placeholder="1. Brute force & bottleneck...\n2. Optimal loop invariant...\n3. Edge cases (n=0, overflow, duplicates)...">${esc(savedNote)}</textarea>
+        </div>
+
+        <div class="solution-section">
+          <div class="solution-bar">
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+              <strong style="font-size:0.9rem;">C17 &amp; C++20 Solutions</strong>
+              <div class="seg-ctrl" style="width:205px;">
+                <button class="seg-btn ${solView === "both" ? "active" : ""}" data-sview="both">Both</button>
+                <button class="seg-btn ${solView === "c" ? "active" : ""}" data-sview="c">C Only</button>
+                <button class="seg-btn ${solView === "cpp" ? "active" : ""}" data-sview="cpp">C++ Only</button>
+              </div>
+            </div>
+            <button class="btn-blue" id="reveal-btn">${solutionOpen ? "Hide Solutions" : "Reveal C & C++ Solutions"}</button>
+          </div>
+
+          <div class="solution-body ${solutionOpen ? "open" : ""}" id="solution-body">
+            <div class="dual-code-grid ${solView !== "both" ? "single-col" : ""}">
+              ${showC ? `
+                <div class="code-shell">
+                  <div class="code-shell-top">
+                    <span><span class="lang-pill-c">C17</span> solution.c</span>
+                    <button class="btn-copy" id="copy-c-btn">Copy C</button>
+                  </div>
+                  <pre>${esc(c.cCode)}</pre>
+                </div>
+              ` : ""}
+              ${showCpp ? `
+                <div class="code-shell">
+                  <div class="code-shell-top">
+                    <span><span class="lang-pill-cpp">C++20</span> solution.cpp</span>
+                    <button class="btn-copy" id="copy-cpp-btn">Copy C++</button>
+                  </div>
+                  <pre>${esc(c.cppCode)}</pre>
+                </div>
+              ` : ""}
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("note-box").addEventListener("input", (e) => {
+        if (!state.notes) state.notes = {};
+        state.notes[c.day] = e.target.value;
+        saveState();
+      });
+
+      document.getElementById("reveal-btn").onclick = () => {
+        solutionOpen = !solutionOpen;
+        renderReader();
+      };
+
+      document.querySelectorAll("[data-sview]").forEach(btn => {
+        btn.onclick = () => {
+          solView = btn.dataset.sview;
+          state.solView = solView;
+          solutionOpen = true;
+          saveState();
+          renderReader();
+        };
+      });
+
+      const copyC = document.getElementById("copy-c-btn");
+      if (copyC) copyC.onclick = () => copySnippet(c.cCode, copyC, "Copy C");
+      const copyCpp = document.getElementById("copy-cpp-btn");
+      if (copyCpp) copyCpp.onclick = () => copySnippet(c.cppCode, copyCpp, "Copy C++");
+    }
+
+    async function copySnippet(text, btn, label) {
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.textContent = "Copied ✓";
+        setTimeout(() => btn.textContent = label, 1500);
+      } catch {}
+    }
+
+    function loadDay(dayNum) {
+      const d = Math.min(Math.max(dayNum, 1), 365);
+      currentCh = ALL_365[d - 1];
+      state.activeDay = d;
+      solutionOpen = false;
+      saveState();
+      updateMetrics();
+      renderList();
+      renderReader();
+      document.querySelector(".reader-scroll").scrollTop = 0;
+    }
+
+    function toggleCurrentSolved() {
+      if (solvedSet.has(currentCh.day)) solvedSet.delete(currentCh.day);
+      else {
+        solvedSet.add(currentCh.day);
+        const today = new Date().toISOString().slice(0, 10);
+        if (!Array.isArray(state.solveDates)) state.solveDates = [];
+        if (!state.solveDates.includes(today)) state.solveDates.push(today);
+      }
+      state.solvedDays = Array.from(solvedSet);
+      saveState();
+      updateMetrics();
+      renderList();
+    }
+
+    // Live Internet Feed (Codeforces API)
+    document.getElementById("cf-fetch-btn").onclick = async () => {
+      const box = document.getElementById("cf-results");
+      const tag = document.getElementById("cf-tag").value;
+      const [minR, maxR] = document.getElementById("cf-rating").value.split("-").map(Number);
+      box.innerHTML = `<span style="color:var(--text-2);">Fetching live problems over HTTPS…</span>`;
+      try {
+        const res = await fetch(`https://codeforces.com/api/problemset.problems?tags=${encodeURIComponent(tag)}`);
+        const data = await res.json();
+        if (data.status !== "OK") throw new Error("API Error");
+        const list = data.result.problems.filter(p => p.rating && p.rating >= minR && p.rating <= maxR).slice(0, 12);
+        box.innerHTML = list.length ? list.map(p => `
+          <div class="live-item">
+            <div>
+              <div style="font-weight:600; font-size:0.9rem;">${esc(p.contestId + p.index + ". " + p.name)}</div>
+              <div style="font-size:0.77rem; color:var(--text-2);">Rating: ${p.rating} · ${esc(p.tags.slice(0, 4).join(", "))}</div>
+            </div>
+            <a href="https://codeforces.com/problemset/problem/${p.contestId}/${p.index}" target="_blank" rel="noopener noreferrer" class="btn-blue" style="text-decoration:none;">Solve ↗</a>
+          </div>
+        `).join("") : `<span style="color:var(--text-2);">No matching problems found.</span>`;
+      } catch (err) {
+        box.innerHTML = `<span style="color:var(--red-text);">Network error: ${esc(err.message)}</span>`;
+      }
+    };
+
+    // Event Wiring
+    document.getElementById("open-drawer-btn").onclick = openDrawer;
+    document.getElementById("close-drawer-btn").onclick = closeDrawer;
+    drawerBackdrop.onclick = closeDrawer;
+
+    toggleSolveBtn.onclick = toggleCurrentSolved;
+    mSolveBtn.onclick = toggleCurrentSolved;
+    document.getElementById("prev-btn").onclick = () => loadDay(currentCh.day - 1);
+    document.getElementById("next-btn").onclick = () => loadDay(currentCh.day + 1);
+    document.getElementById("m-prev-btn").onclick = () => loadDay(currentCh.day - 1);
+    document.getElementById("m-next-btn").onclick = () => loadDay(currentCh.day + 1);
+
+    document.querySelectorAll(".seg-btn[data-diff]").forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll(".seg-btn[data-diff]").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentDiff = btn.dataset.diff;
+        renderList();
+      };
+    });
+
+    trackSel.onchange = (e) => { currentTrack = e.target.value; renderList(); };
+    document.getElementById("search-input").oninput = (e) => { searchQ = e.target.value; renderList(); };
+    document.getElementById("jump-day").onchange = (e) => {
+      const v = parseInt(e.target.value, 10);
+      if (!isNaN(v)) { loadDay(v); closeDrawer(); }
+    };
+
+    const mentorModal = document.getElementById("mentor-modal");
+    document.getElementById("mentor-btn").onclick = () => mentorModal.classList.add("open");
+    document.getElementById("close-mentor-btn").onclick = () => mentorModal.classList.remove("open");
+    mentorModal.onclick = (e) => { if (e.target === mentorModal) mentorModal.classList.remove("open"); };
+
+    const liveModal = document.getElementById("live-modal");
+    document.getElementById("live-feed-btn").onclick = () => liveModal.classList.add("open");
+    document.getElementById("close-live-btn").onclick = () => liveModal.classList.remove("open");
+    liveModal.onclick = (e) => { if (e.target === liveModal) liveModal.classList.remove("open"); };
+
+    function exportJson() {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "top1-365-mastery.json";
+      a.click();
+    }
+    document.getElementById("export-btn").onclick = exportJson;
+    document.getElementById("m-export-btn").onclick = exportJson;
+    document.getElementById("import-btn").onclick = () => document.getElementById("import-file").click();
+    document.getElementById("m-import-btn").onclick = () => document.getElementById("import-file").click();
+    document.getElementById("import-file").onchange = (e) => {
+      const f = e.target.files[0]; if (!f) return;
+      const r = new FileReader();
+      r.onload = () => {
+        try {
+          const parsed = JSON.parse(r.result);
+          if (!parsed || typeof parsed !== "object") throw new Error();
+          state = { ...state, ...parsed };
+          solvedSet.clear();
+          (state.solvedDays || []).filter(n => Number.isInteger(n) && n >= 1 && n <= 365).forEach(d => solvedSet.add(d));
+          saveState();
+          loadDay(state.activeDay || 1);
+        } catch { alert("Invalid JSON backup."); }
+      };
+      r.readAsText(f);
+    };
+
+    // Init
+    loadDay(state.activeDay || 1);
+  </script>
+</body>
+</html>
