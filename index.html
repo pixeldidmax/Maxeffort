@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <title>365 Mastery — C &amp; C++ Top 1% Prep</title>
+  <title>365 Mastery — C/C++ &amp; Audio Systems Prep</title>
   <style>
     :root {
       --bg: #f5f5f7;
@@ -24,6 +24,7 @@
       --orange-text: #9a5500;
       --red: #ff3b30;
       --red-text: #b81d13;
+      --indigo: #5856d6;
       --code-bg: #1c1c1e;
       --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
       --font-mono: "SF Mono", "Fira Code", Menlo, Monaco, Consolas, monospace;
@@ -47,10 +48,9 @@
       padding-right: env(safe-area-inset-right);
     }
 
-    /* Frosted Glass Apple Header */
     header {
       min-height: 60px;
-      padding: calc(8px + env(safe-area-inset-top)) 20px 8px;
+      padding: calc(8px + env(safe-area-inset-top)) 18px 8px;
       background: var(--glass);
       backdrop-filter: saturate(180%) blur(20px);
       -webkit-backdrop-filter: saturate(180%) blur(20px);
@@ -58,7 +58,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
       flex-shrink: 0;
       z-index: 30;
     }
@@ -67,22 +67,22 @@
     .brand-icon {
       width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
       background: linear-gradient(135deg, #1d1d1f 0%, #434347 100%);
-      color: #fff; font-weight: 700; font-size: 0.76rem;
+      color: #fff; font-weight: 700; font-size: 0.74rem;
       display: flex; align-items: center; justify-content: center;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
     }
     .brand-text { min-width: 0; }
-    .brand-title { font-weight: 600; font-size: 1rem; letter-spacing: -0.02em; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .brand-sub { font-size: 0.74rem; color: var(--text-2); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .brand-title { font-weight: 600; font-size: 0.98rem; letter-spacing: -0.02em; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .brand-sub { font-size: 0.73rem; color: var(--text-2); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    .header-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .header-right { display: flex; align-items: center; gap: 7px; flex-shrink: 0; }
 
     .stat-pill {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 980px;
-      padding: 6px 12px;
-      font-size: 0.8rem;
+      padding: 6px 11px;
+      font-size: 0.79rem;
       color: var(--text-2);
       display: inline-flex;
       align-items: center;
@@ -95,22 +95,24 @@
       font-family: var(--font-sans);
       cursor: pointer;
       border: none;
-      font-size: 0.83rem;
+      font-size: 0.82rem;
       font-weight: 500;
       transition: all 0.16s ease;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 5px;
       min-height: 36px;
       touch-action: manipulation;
     }
 
-    .btn-blue { background: var(--blue); color: #fff; padding: 7px 15px; border-radius: 980px; }
+    .btn-blue { background: var(--blue); color: #fff; padding: 7px 14px; border-radius: 980px; }
     .btn-blue:hover { background: var(--blue-hover); }
-    .btn-dark { background: var(--text); color: #fff; padding: 7px 15px; border-radius: 980px; }
+    .btn-indigo { background: var(--indigo); color: #fff; padding: 7px 14px; border-radius: 980px; }
+    .btn-indigo:hover { filter: brightness(1.08); }
+    .btn-dark { background: var(--text); color: #fff; padding: 7px 14px; border-radius: 980px; }
     .btn-dark:hover { background: #333337; }
-    .btn-green { background: var(--green); color: #07290e; font-weight: 600; padding: 7px 15px; border-radius: 980px; }
+    .btn-green { background: var(--green); color: #07290e; font-weight: 600; padding: 7px 14px; border-radius: 980px; }
     .btn-ghost {
       background: var(--surface); color: var(--text);
       border: 1px solid var(--border-strong); padding: 6px 12px; border-radius: 980px;
@@ -119,7 +121,6 @@
 
     .mobile-menu-btn { display: none; }
 
-    /* Spatial Workspace */
     .layout {
       flex: 1;
       display: grid;
@@ -144,7 +145,6 @@
       min-width: 0;
     }
 
-    /* Sidebar */
     .sidebar-controls {
       padding: 14px;
       border-bottom: 1px solid var(--border);
@@ -188,13 +188,7 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08); font-weight: 600;
     }
 
-    .day-list {
-      flex: 1;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      padding: 8px 10px;
-    }
-
+    .day-list { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 8px 10px; }
     .day-item {
       padding: 11px 12px; border-radius: 12px; margin-bottom: 4px;
       cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 8px;
@@ -215,7 +209,6 @@
     .dot-hard { background: var(--red); }
     .chk { color: var(--green-text); font-weight: 700; font-size: 0.88rem; }
 
-    /* Main Reader */
     .reader-topbar {
       padding: 12px 24px;
       border-bottom: 1px solid var(--border);
@@ -232,7 +225,7 @@
       padding: 26px 32px 44px;
     }
 
-    .reader-inner { max-width: 980px; margin: 0 auto; min-width: 0; }
+    .reader-inner { max-width: 1040px; margin: 0 auto; min-width: 0; }
 
     .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
     .tag { font-size: 0.73rem; font-weight: 600; padding: 4px 10px; border-radius: 980px; }
@@ -263,7 +256,6 @@
     .ex-lbl { color: var(--text-2); }
     .constraints-list { padding-left: 20px; color: var(--text-2); font-size: 0.9rem; line-height: 1.65; }
 
-    /* Theory & Tip Cards */
     .insight-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; margin-top: 22px; }
     .insight-card { border-radius: 16px; padding: 17px 19px; border: 1px solid var(--border); min-width: 0; }
     .insight-theory { background: linear-gradient(145deg, #f3faf5 0%, #fafdfb 100%); border-color: rgba(40, 205, 65, 0.25); }
@@ -273,7 +265,6 @@
     .insight-tip .insight-head { color: var(--blue); }
     .insight-card p { font-size: 0.9rem; line-height: 1.58; color: #2c2c2e; }
 
-    /* Scratchpad */
     .scratchpad-wrap { margin-top: 20px; background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
     .scratchpad-wrap textarea {
       width: 100%; min-height: 76px; margin-top: 8px; border: 1px solid var(--border-strong);
@@ -282,7 +273,6 @@
     }
     .scratchpad-wrap textarea:focus { border-color: var(--blue); }
 
-    /* Dual C + C++ Solutions Card */
     .solution-section { margin-top: 22px; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; background: #fff; }
     .solution-bar {
       padding: 13px 18px; background: var(--bg); border-bottom: 1px solid var(--border);
@@ -324,8 +314,8 @@
       padding: 14px 16px;
       color: #f5f5f7;
       font-family: var(--font-mono);
-      font-size: 0.8rem;
-      line-height: 1.54;
+      font-size: 0.79rem;
+      line-height: 1.52;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
       white-space: pre;
@@ -338,7 +328,6 @@
     }
     .btn-copy:hover { background: rgba(255, 255, 255, 0.22); }
 
-    /* Mobile Bottom Thumb Bar & Drawer Backdrop */
     .drawer-backdrop {
       display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.35);
       backdrop-filter: blur(4px); z-index: 40;
@@ -362,16 +351,16 @@
     /* Modals */
     .modal-bg {
       position: fixed; inset: 0; background: rgba(0, 0, 0, 0.36); backdrop-filter: blur(8px);
-      display: none; align-items: center; justify-content: center; z-index: 100; padding: 16px;
+      display: none; align-items: center; justify-content: center; z-index: 100; padding: 14px;
     }
     .modal-bg.open { display: flex; }
     .modal-sheet {
-      background: var(--surface); border-radius: 22px; max-width: 780px; width: 100%;
-      max-height: 86dvh; display: flex; flex-direction: column;
+      background: var(--surface); border-radius: 22px; max-width: 880px; width: 100%;
+      max-height: 88dvh; display: flex; flex-direction: column;
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22); overflow: hidden;
     }
     .modal-head { padding: 16px 22px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-    .modal-body { padding: 22px; overflow-y: auto; -webkit-overflow-scrolling: touch; line-height: 1.62; font-size: 0.92rem; color: #2c2c2e; }
+    .modal-body { padding: 20px 22px; overflow-y: auto; -webkit-overflow-scrolling: touch; line-height: 1.62; font-size: 0.92rem; color: #2c2c2e; }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
     .mini-card { background: var(--bg); padding: 14px; border-radius: 13px; border: 1px solid var(--border); }
     .mini-card h4 { font-size: 0.87rem; margin-bottom: 5px; }
@@ -381,14 +370,53 @@
       margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--bg);
     }
 
-    /* iPad & Tablet (<= 1080px) */
-    @media (max-width: 1080px) {
+    /* Audio Hub Specific */
+    .chip-wrap { display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0 16px; }
+    .topic-chip {
+      background: var(--bg); border: 1px solid var(--border-strong); color: var(--text);
+      padding: 5px 12px; border-radius: 980px; font-size: 0.77rem; font-weight: 500; min-height: 30px;
+    }
+    .topic-chip:hover { background: #e8e8ed; }
+    .topic-chip.active { background: var(--indigo); color: #fff; border-color: var(--indigo); }
+
+    .audio-section {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 15px 17px;
+      margin-bottom: 12px;
+    }
+    .audio-section h3 {
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--indigo);
+      margin-bottom: 8px;
+    }
+    .audio-section p, .audio-section li {
+      font-size: 0.89rem;
+      line-height: 1.6;
+      color: #2c2c2e;
+    }
+    .audio-section ul { padding-left: 18px; margin-top: 6px; }
+    .audio-flow {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      background: #1c1c1e;
+      color: #82e0aa;
+      padding: 11px 14px;
+      border-radius: 10px;
+      overflow-x: auto;
+      white-space: pre;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 1120px) {
       .dual-code-grid { grid-template-columns: minmax(0, 1fr); }
       .layout { grid-template-columns: 280px minmax(0, 1fr); padding: 12px; gap: 12px; }
       .reader-scroll { padding: 22px; }
     }
 
-    /* iPad Portrait & iPhone (<= 900px) */
     @media (max-width: 900px) {
       .mobile-menu-btn { display: inline-flex; }
       .desktop-only { display: none !important; }
@@ -408,17 +436,16 @@
       .insight-grid, .grid-2 { grid-template-columns: minmax(0, 1fr); }
     }
 
-    /* iPhone Specific (<= 640px) */
     @media (max-width: 640px) {
-      header { padding: calc(8px + env(safe-area-inset-top)) 12px 8px; }
-      .brand-sub { display: none; }
-      .brand-title { font-size: 0.94rem; }
-      .stat-pill { padding: 5px 10px; font-size: 0.75rem; }
+      header { padding: calc(8px + env(safe-area-inset-top)) 10px 8px; }
+      .brand-sub, .brand-icon { display: none; }
+      .brand-title { font-size: 0.9rem; }
+      .stat-pill { padding: 4px 8px; font-size: 0.72rem; }
+      button { padding: 6px 10px; font-size: 0.78rem; }
       .reader-topbar { display: none; }
       .mobile-bottom-bar { display: flex; }
-      .reader-scroll { padding: 16px 16px 28px; }
-      h1.prob-title { font-size: 1.42rem; }
-      /* Prevent iOS Safari zoom on input focus */
+      .reader-scroll { padding: 16px 15px 28px; }
+      h1.prob-title { font-size: 1.4rem; }
       input[type="text"], input[type="number"], select, .scratchpad-wrap textarea { font-size: 16px; }
     }
   </style>
@@ -431,14 +458,15 @@
       <div class="brand-icon">C/C++</div>
       <div class="brand-text">
         <span class="brand-title">365 Top 1% Mastery</span>
-        <span class="brand-sub">Simple Logic · DSA · Bitwise (C17 &amp; C++20)</span>
+        <span class="brand-sub">C17 / C++20 · Audio HAL &amp; Systems</span>
       </div>
     </div>
 
     <div class="header-right">
       <div class="stat-pill"><span class="dot-live"></span><strong id="solved-count">0</strong>/365</div>
       <div class="stat-pill desktop-only">Streak: <strong id="streak-count">0</strong>d</div>
-      <button class="btn-ghost" id="live-feed-btn">Live Feed</button>
+      <button class="btn-indigo" id="audio-hub-btn">Audio Hub</button>
+      <button class="btn-ghost desktop-only" id="live-feed-btn">Live Feed</button>
       <button class="btn-ghost desktop-only" id="export-btn">Export</button>
       <button class="btn-ghost desktop-only" id="import-btn">Import</button>
       <input type="file" id="import-file" accept=".json" style="display:none" />
@@ -495,18 +523,40 @@
     <button class="btn-blue" id="m-next-btn" style="flex:1;">Next →</button>
   </nav>
 
+  <!-- AUDIO ENGINEERING HUB MODAL (Google L6 Audio HAL & Automotive Mentor) -->
+  <div class="modal-bg" id="audio-modal">
+    <div class="modal-sheet">
+      <div class="modal-head">
+        <div>
+          <h2 style="font-size:1.15rem;">Audio Engineering Hub (Google L6 Mentor)</h2>
+          <span style="font-size:0.78rem; color:var(--text-2);">Audio HAL · AAOS Automotive · ALSA/ASoC · Real-Time DSP</span>
+        </div>
+        <button class="btn-ghost" id="close-audio-btn">Done</button>
+      </div>
+      <div class="modal-body">
+        <div style="display:flex; gap:8px;">
+          <input type="text" id="audio-search-input" placeholder="Ask any audio question or topic (e.g., AIDL Audio HAL, A2B TDM, ASRC clock drift, XRUN, Early Audio)…" style="flex:1;" />
+          <button class="btn-indigo" id="audio-ask-btn">Ask Mentor</button>
+        </div>
+
+        <div class="chip-wrap" id="audio-chips"></div>
+        <div id="audio-answer-area"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Mentor Playbook Modal -->
   <div class="modal-bg" id="mentor-modal">
     <div class="modal-sheet">
       <div class="modal-head">
         <div>
           <h2 style="font-size:1.15rem;">Top 1% Logic, DSA &amp; Bitwise Playbook</h2>
-          <span style="font-size:0.78rem; color:var(--text-2);">Simple First Principles for 6 YOE Embedded Engineers</span>
+          <span style="font-size:0.78rem; color:var(--text-2);">Simple First Principles for 6 YOE Embedded Audio Engineers</span>
         </div>
         <button class="btn-ghost" id="close-mentor-btn">Done</button>
       </div>
       <div class="modal-body">
-        <p>Top 1% engineers don't write complicated, clever code—they write <strong>simple, bug-free code backed by crystal-clear invariants</strong>. Every day below pairs a <strong>simple C17</strong> solution with a <strong>simple C++20</strong> solution.</p>
+        <p>Every day provides two <strong>complete, runnable C17 and C++20 programs</strong> (including headers and <code>main()</code>). Plus use the <strong>Audio Hub</strong> to master L6 Audio HAL, AAOS, and real-time DSP internals.</p>
         <div class="grid-2">
           <div class="mini-card">
             <h4>1. Derive the Invariant First</h4>
@@ -518,14 +568,15 @@
           </div>
           <div class="mini-card">
             <h4>3. Compare C17 vs C++20 Daily</h4>
-            <p>See how C handles problems cleanly with simple structs, `qsort`, and pointers, and how C++ expresses the exact same logic with `vector`, `unordered_map`, and `deque`.</p>
+            <p>Copy &amp; run either program directly in GCC/Clang (`gcc -std=c17 -Wall -Wextra` or `g++ -std=c++20 -Wall -Wextra`).</p>
           </div>
           <div class="mini-card">
-            <h4>4. Close Your 4 Embedded Gaps</h4>
-            <p>Firmware rarely uses Tries, Topological Sort, Monotonic Deques, or 2D DP. Months 7–11 drill those cleanly until they feel second nature.</p>
+            <h4>4. Leverage Your Audio Edge</h4>
+            <p>Real-time audio guarantees (zero `malloc`, zero mutexes on audio thread, DMA alignment, ASRC drift) translate directly into Top 1% Systems &amp; DSA mastery.</p>
           </div>
         </div>
         <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+          <button class="btn-ghost" id="m-live-btn">Open Codeforces Live Feed</button>
           <button class="btn-ghost" id="m-export-btn">Export Progress JSON</button>
           <button class="btn-ghost" id="m-import-btn">Import Progress JSON</button>
         </div>
@@ -597,10 +648,9 @@
     const getTrack = (d) => TRACKS.find(t => d >= t.days[0] && d <= t.days[1]) || TRACKS[11];
 
     // =========================================================
-    // 2. VERIFIED, SIMPLE & BUG-FREE C17 + C++20 ARCHETYPES
+    // 2. COMPLETE, VERIFIED C17 & C++20 PROGRAMS (WITH main())
     // =========================================================
     const ARCHETYPES = [
-      // --- BITWISE & REGISTER LOGIC ---
       {
         difficulty: "easy", topic: "Bitwise · Kernighan",
         title: "Count Set Bits (Hamming Weight)",
@@ -609,8 +659,8 @@
         constraints: ["0 <= n <= 2^32 - 1", "Time: O(set bits), Space: O(1)"],
         theory: `Subtracting 1 flips the lowest <code>1</code>-bit to <code>0</code> and trailing <code>0</code>s to <code>1</code>. Doing <code>n & (n - 1)</code> clears one set bit per loop step.`,
         tip: `Always use <code>uint32_t</code> before shifting or subtracting—signed bit-shift overflow is Undefined Behavior in C/C++.`,
-        cCode: `int popcount32(uint32_t n) {\n  int count = 0;\n  while (n != 0u) {\n    n &= (n - 1u);\n    count++;\n  }\n  return count;\n}`,
-        cppCode: `int popcount32(uint32_t n) {\n  int count = 0;\n  while (n != 0u) {\n    n &= (n - 1u);\n    ++count;\n  }\n  return count;\n}`
+        cCode: `#include <stdio.h>\n#include <stdint.h>\n\nint popcount32(uint32_t n) {\n  int count = 0;\n  while (n != 0u) {\n    n &= (n - 1u);\n    count++;\n  }\n  return count;\n}\n\nint main(void) {\n  printf("popcount(45) = %d\\n", popcount32(45u));\n  printf("popcount(0xFFFFFFFF) = %d\\n", popcount32(0xFFFFFFFFu));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <cstdint>\nusing namespace std;\n\nint popcount32(uint32_t n) {\n  int count = 0;\n  while (n != 0u) {\n    n &= (n - 1u);\n    ++count;\n  }\n  return count;\n}\n\nint main() {\n  cout << "popcount(45) = " << popcount32(45u) << "\\n";\n  cout << "popcount(0xFFFFFFFF) = " << popcount32(0xFFFFFFFFu) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "easy", topic: "Bitwise · XOR Algebra",
@@ -620,8 +670,8 @@
         constraints: ["1 <= n <= 10^5", "O(1) extra memory"],
         theory: `XOR cancels identical pairs (<code>a ^ a = 0</code>) and keeps the unpaired element (<code>a ^ 0 = a</code>), regardless of element order.`,
         tip: `Unlike sum formulas (<code>n*(n+1)/2</code>), XOR never overflows 16-bit or 32-bit counters.`,
-        cCode: `int singleNumber(const int* nums, int n) {\n  int ans = 0;\n  for (int i = 0; i < n; i++) {\n    ans ^= nums[i];\n  }\n  return ans;\n}`,
-        cppCode: `int singleNumber(const vector<int>& nums) {\n  int ans = 0;\n  for (int x : nums) ans ^= x;\n  return ans;\n}`
+        cCode: `#include <stdio.h>\n\nint singleNumber(const int* nums, int n) {\n  int ans = 0;\n  for (int i = 0; i < n; i++) {\n    ans ^= nums[i];\n  }\n  return ans;\n}\n\nint main(void) {\n  int a[] = {4, 1, 2, 1, 2};\n  int b[] = {7, 3, 7};\n  printf("Unique 1: %d\\n", singleNumber(a, 5));\n  printf("Unique 2: %d\\n", singleNumber(b, 3));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\nusing namespace std;\n\nint singleNumber(const vector<int>& nums) {\n  int ans = 0;\n  for (int x : nums) ans ^= x;\n  return ans;\n}\n\nint main() {\n  cout << "Unique 1: " << singleNumber({4, 1, 2, 1, 2}) << "\\n";\n  cout << "Unique 2: " << singleNumber({7, 3, 7}) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "easy", topic: "Bitwise · DMA Alignment",
@@ -630,9 +680,9 @@
         examples: [{ in: "addr = 19, align = 16", out: "32" }, { in: "addr = 64, align = 32", out: "64" }],
         constraints: ["align is a power of 2 >= 1", "O(1) time"],
         theory: `<code>x > 0 && (x & (x - 1)) == 0</code> checks for a single 1-bit. Adding <code>align - 1</code> pushes unaligned values into the next block; <code>& ~(align - 1)</code> zeroes low bits.`,
-        tip: `Used in DMA buffers and cache-line alignment. In safety-critical firmware, guard against overflow: <code>addr <= UINT32_MAX - (align - 1)</code>.`,
-        cCode: `bool isPow2(uint32_t x) {\n  return x != 0u && (x & (x - 1u)) == 0u;\n}\n\nuint32_t alignUp(uint32_t addr, uint32_t align) {\n  return (addr + align - 1u) & ~(align - 1u);\n}`,
-        cppCode: `constexpr bool isPow2(uint32_t x) {\n  return x != 0u && (x & (x - 1u)) == 0u;\n}\n\nconstexpr uint32_t alignUp(uint32_t addr, uint32_t align) {\n  return (addr + align - 1u) & ~(align - 1u);\n}`
+        tip: `Used in audio DMA ring buffers and cache-line alignment. Guard against wrap-around: <code>addr <= UINT32_MAX - (align - 1)</code>.`,
+        cCode: `#include <stdio.h>\n#include <stdint.h>\n#include <stdbool.h>\n\nbool isPow2(uint32_t x) {\n  return x != 0u && (x & (x - 1u)) == 0u;\n}\n\nuint32_t alignUp(uint32_t addr, uint32_t align) {\n  return (addr + align - 1u) & ~(align - 1u);\n}\n\nint main(void) {\n  printf("isPow2(16): %s\\n", isPow2(16u) ? "true" : "false");\n  printf("alignUp(19, 16) = %u\\n", alignUp(19u, 16u));\n  printf("alignUp(64, 32) = %u\\n", alignUp(64u, 32u));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <cstdint>\nusing namespace std;\n\nconstexpr bool isPow2(uint32_t x) {\n  return x != 0u && (x & (x - 1u)) == 0u;\n}\n\nconstexpr uint32_t alignUp(uint32_t addr, uint32_t align) {\n  return (addr + align - 1u) & ~(align - 1u);\n}\n\nint main() {\n  cout << boolalpha << "isPow2(16): " << isPow2(16u) << "\\n";\n  cout << "alignUp(19, 16) = " << alignUp(19u, 16u) << "\\n";\n  cout << "alignUp(64, 32) = " << alignUp(64u, 32u) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "Bitwise · Shift Loop",
@@ -641,9 +691,9 @@
         examples: [{ in: "n = 0x00000001", out: "0x80000000" }, { in: "n = 0x12345678", out: "0x1E6A2C48" }],
         constraints: ["32-bit unsigned input", "O(1) time, O(1) space"],
         theory: `Shift <code>res</code> left by 1 to make room, copy the lowest bit of <code>n</code> (<code>n & 1u</code>), and shift <code>n</code> right by 1—repeated 32 times.`,
-        tip: `This 4-line loop is zero-mistake in interviews. As a follow-up optimization, mention hardware <code>RBIT</code> or 5-step divide-and-conquer byte/nibble swaps.`,
-        cCode: `uint32_t reverseBits32(uint32_t n) {\n  uint32_t res = 0u;\n  for (int i = 0; i < 32; i++) {\n    res = (res << 1) | (n & 1u);\n    n >>= 1;\n  }\n  return res;\n}`,
-        cppCode: `uint32_t reverseBits32(uint32_t n) {\n  uint32_t res = 0u;\n  for (int i = 0; i < 32; ++i) {\n    res = (res << 1) | (n & 1u);\n    n >>= 1;\n  }\n  return res;\n}`
+        tip: `This 4-line loop is zero-mistake in interviews. Mention hardware <code>RBIT</code> or 5-step byte/nibble swaps as an optimization.`,
+        cCode: `#include <stdio.h>\n#include <stdint.h>\n\nuint32_t reverseBits32(uint32_t n) {\n  uint32_t res = 0u;\n  for (int i = 0; i < 32; i++) {\n    res = (res << 1) | (n & 1u);\n    n >>= 1;\n  }\n  return res;\n}\n\nint main(void) {\n  printf("0x%08X\\n", reverseBits32(0x00000001u));\n  printf("0x%08X\\n", reverseBits32(0x12345678u));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <iomanip>\n#include <cstdint>\nusing namespace std;\n\nuint32_t reverseBits32(uint32_t n) {\n  uint32_t res = 0u;\n  for (int i = 0; i < 32; ++i) {\n    res = (res << 1) | (n & 1u);\n    n >>= 1;\n  }\n  return res;\n}\n\nint main() {\n  cout << hex << uppercase << setfill('0');\n  cout << "0x" << setw(8) << reverseBits32(0x00000001u) << "\\n";\n  cout << "0x" << setw(8) << reverseBits32(0x12345678u) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "Bitwise · Bit-Plane Count",
@@ -652,9 +702,9 @@
         examples: [{ in: "nums = [2, 2, 3, 2]", out: "3" }, { in: "nums = [0,1,0,1,0,1,99]", out: "99" }],
         constraints: ["O(n) time, O(1) space"],
         theory: `Count how many numbers have bit <code>b</code> set across all 32 bit positions. Triples contribute multiples of 3, so if <code>sum % 3 != 0</code>, the unique number has bit <code>b</code> set.`,
-        tip: `Much simpler and more general than XOR state-machines—works identically for 3x, 5x, or any <code>k</code> repetitions without tricky boolean algebra.`,
-        cCode: `int singleNumber3(const int* nums, int n) {\n  uint32_t ans = 0u;\n  for (int b = 0; b < 32; b++) {\n    int sum = 0;\n    for (int i = 0; i < n; i++) {\n      sum += ((uint32_t)nums[i] >> b) & 1u;\n    }\n    if (sum % 3 != 0) ans |= (1u << b);\n  }\n  return (int)ans;\n}`,
-        cppCode: `int singleNumber3(const vector<int>& nums) {\n  uint32_t ans = 0u;\n  for (int b = 0; b < 32; ++b) {\n    int sum = 0;\n    for (int x : nums) sum += (static_cast<uint32_t>(x) >> b) & 1u;\n    if (sum % 3 != 0) ans |= (1u << b);\n  }\n  return static_cast<int>(ans);\n}`
+        tip: `Simpler and more general than XOR state-machines—works identically for 3x, 5x, or any <code>k</code> repetitions.`,
+        cCode: `#include <stdio.h>\n#include <stdint.h>\n\nint singleNumber3(const int* nums, int n) {\n  uint32_t ans = 0u;\n  for (int b = 0; b < 32; b++) {\n    int sum = 0;\n    for (int i = 0; i < n; i++) {\n      sum += (int)(((uint32_t)nums[i] >> b) & 1u);\n    }\n    if (sum % 3 != 0) ans |= (1u << b);\n  }\n  return (int)ans;\n}\n\nint main(void) {\n  int a[] = {2, 2, 3, 2}, b[] = {0, 1, 0, 1, 0, 1, 99};\n  printf("Single 1: %d\\n", singleNumber3(a, 4));\n  printf("Single 2: %d\\n", singleNumber3(b, 7));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <cstdint>\nusing namespace std;\n\nint singleNumber3(const vector<int>& nums) {\n  uint32_t ans = 0u;\n  for (int b = 0; b < 32; ++b) {\n    int sum = 0;\n    for (int x : nums) sum += static_cast<int>((static_cast<uint32_t>(x) >> b) & 1u);\n    if (sum % 3 != 0) ans |= (1u << b);\n  }\n  return static_cast<int>(ans);\n}\n\nint main() {\n  cout << "Single 1: " << singleNumber3({2, 2, 3, 2}) << "\\n";\n  cout << "Single 2: " << singleNumber3({0, 1, 0, 1, 0, 1, 99}) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "easy", topic: "Bitwise + DP",
@@ -663,12 +713,10 @@
         examples: [{ in: "n = 5", out: "[0, 1, 1, 2, 1, 2]" }],
         constraints: ["n >= 0", "O(n) time"],
         theory: `<code>i >> 1</code> is <code>i / 2</code> whose popcount is already in <code>dp[i >> 1]</code>. Adding back the dropped lowest bit <code>(i & 1)</code> gives <code>dp[i]</code>.`,
-        tip: `Great example of using prior computed results (DP) + bit shifts to eliminate an inner <code>O(log n)</code> loop.`,
-        cCode: `void countBitsRange(int n, int* dp) {\n  dp[0] = 0;\n  for (int i = 1; i <= n; i++) {\n    dp[i] = dp[i >> 1] + (i & 1);\n  }\n}`,
-        cppCode: `vector<int> countBitsRange(int n) {\n  vector<int> dp(n + 1, 0);\n  for (int i = 1; i <= n; ++i) {\n    dp[i] = dp[i >> 1] + (i & 1);\n  }\n  return dp;\n}`
+        tip: `Using prior computed results (DP) + bit shifts eliminates an inner <code>O(log n)</code> loop.`,
+        cCode: `#include <stdio.h>\n\nvoid countBitsRange(int n, int* dp) {\n  dp[0] = 0;\n  for (int i = 1; i <= n; i++) dp[i] = dp[i >> 1] + (i & 1);\n}\n\nint main(void) {\n  int n = 5, dp[6];\n  countBitsRange(n, dp);\n  for (int i = 0; i <= n; i++) printf("%d ", dp[i]);\n  printf("\\n");\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\nusing namespace std;\n\nvector<int> countBitsRange(int n) {\n  vector<int> dp(n + 1, 0);\n  for (int i = 1; i <= n; ++i) dp[i] = dp[i >> 1] + (i & 1);\n  return dp;\n}\n\nint main() {\n  for (int x : countBitsRange(5)) cout << x << " ";\n  cout << "\\n";\n  return 0;\n}`
       },
-
-      // --- ARRAYS, MATRICES & HASHING ---
       {
         difficulty: "easy", topic: "Arrays · Pair Lookup",
         title: "Two Sum Pair Lookup",
@@ -676,9 +724,9 @@
         examples: [{ in: "nums = [2, 7, 11, 15], target = 9", out: "[0, 1]" }],
         constraints: ["2 <= n <= 10^5"],
         theory: `In C++ (<code>O(n)</code>): store visited value → index in <code>unordered_map</code>. In C (<code>O(n log n)</code>, zero hash collisions): sort <code>(val, origIdx)</code> pairs and walk two pointers inward.`,
-        tip: `In C interviews, sorting <code>{val, idx}</code> pairs + two pointers avoids fixed-size hash table collisions and works cleanly for any input size <code>n</code>.`,
-        cCode: `typedef struct { int val, idx; } Pair;\nstatic int cmpPair(const void* a, const void* b) {\n  int x = ((const Pair*)a)->val, y = ((const Pair*)b)->val;\n  return (x > y) - (x < y);\n}\nvoid twoSum(const int* nums, int n, int target, int out[2]) {\n  Pair* p = (Pair*)malloc((size_t)n * sizeof(Pair));\n  for (int i = 0; i < n; i++) { p[i].val = nums[i]; p[i].idx = i; }\n  qsort(p, (size_t)n, sizeof(Pair), cmpPair);\n  int l = 0, r = n - 1;\n  while (l < r) {\n    long long sum = (long long)p[l].val + p[r].val;\n    if (sum == target) { out[0] = p[l].idx; out[1] = p[r].idx; break; }\n    if (sum < target) l++; else r--;\n  }\n  free(p);\n}`,
-        cppCode: `vector<int> twoSum(const vector<int>& nums, int target) {\n  unordered_map<int, int> seen;\n  seen.reserve(nums.size());\n  for (int i = 0; i < (int)nums.size(); ++i) {\n    auto it = seen.find(target - nums[i]);\n    if (it != seen.end()) return {it->second, i};\n    seen[nums[i]] = i;\n  }\n  return {};\n}`
+        tip: `In C interviews, sorting <code>{val, idx}</code> pairs + two pointers avoids fixed-size hash table collisions for any <code>n</code>.`,
+        cCode: `#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct { int val, idx; } Pair;\nstatic int cmpPair(const void* a, const void* b) {\n  int x = ((const Pair*)a)->val, y = ((const Pair*)b)->val;\n  return (x > y) - (x < y);\n}\n\nvoid twoSum(const int* nums, int n, int target, int out[2]) {\n  Pair* p = (Pair*)malloc((size_t)n * sizeof(Pair));\n  for (int i = 0; i < n; i++) { p[i].val = nums[i]; p[i].idx = i; }\n  qsort(p, (size_t)n, sizeof(Pair), cmpPair);\n  int l = 0, r = n - 1;\n  while (l < r) {\n    long long sum = (long long)p[l].val + p[r].val;\n    if (sum == target) {\n      out[0] = p[l].idx; out[1] = p[r].idx;\n      if (out[0] > out[1]) { int t = out[0]; out[0] = out[1]; out[1] = t; }\n      break;\n    }\n    if (sum < target) l++; else r--;\n  }\n  free(p);\n}\n\nint main(void) {\n  int nums[] = {2, 7, 11, 15}, out[2] = {-1, -1};\n  twoSum(nums, 4, 9, out);\n  printf("[%d, %d]\\n", out[0], out[1]);\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <unordered_map>\nusing namespace std;\n\nvector<int> twoSum(const vector<int>& nums, int target) {\n  unordered_map<int, int> seen;\n  seen.reserve(nums.size());\n  for (int i = 0; i < (int)nums.size(); ++i) {\n    auto it = seen.find(target - nums[i]);\n    if (it != seen.end()) return {it->second, i};\n    seen[nums[i]] = i;\n  }\n  return {};\n}\n\nint main() {\n  auto ans = twoSum({2, 7, 11, 15}, 9);\n  cout << "[" << ans[0] << ", " << ans[1] << "]\\n";\n  return 0;\n}`
       },
       {
         difficulty: "easy", topic: "Kadane's Algorithm",
@@ -688,8 +736,8 @@
         constraints: ["1 <= n <= 10^5", "O(n) time, O(1) space"],
         theory: `<code>cur</code> holds the best sum ending at index <code>i</code>: either extend the previous run (<code>cur + nums[i]</code>) or start fresh at <code>nums[i]</code>.`,
         tip: `Initialize <code>cur</code> and <code>best</code> with <code>nums[0]</code> (never <code>0</code>) so all-negative arrays like <code>[-5, -2]</code> return <code>-2</code>.`,
-        cCode: `int maxSubArray(const int* nums, int n) {\n  if (n <= 0) return 0;\n  int cur = nums[0], best = nums[0];\n  for (int i = 1; i < n; i++) {\n    cur = (cur + nums[i] > nums[i]) ? (cur + nums[i]) : nums[i];\n    if (cur > best) best = cur;\n  }\n  return best;\n}`,
-        cppCode: `int maxSubArray(const vector<int>& nums) {\n  if (nums.empty()) return 0;\n  int cur = nums[0], best = nums[0];\n  for (size_t i = 1; i < nums.size(); ++i) {\n    cur = max(nums[i], cur + nums[i]);\n    best = max(best, cur);\n  }\n  return best;\n}`
+        cCode: `#include <stdio.h>\n\nint maxSubArray(const int* nums, int n) {\n  if (n <= 0) return 0;\n  int cur = nums[0], best = nums[0];\n  for (int i = 1; i < n; i++) {\n    cur = (cur + nums[i] > nums[i]) ? (cur + nums[i]) : nums[i];\n    if (cur > best) best = cur;\n  }\n  return best;\n}\n\nint main(void) {\n  int a[] = {-2, 1, -3, 4, -1, 2, 1, -5, 4};\n  printf("Max Subarray Sum = %d\\n", maxSubArray(a, 9));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint maxSubArray(const vector<int>& nums) {\n  if (nums.empty()) return 0;\n  int cur = nums[0], best = nums[0];\n  for (size_t i = 1; i < nums.size(); ++i) {\n    cur = max(nums[i], cur + nums[i]);\n    best = max(best, cur);\n  }\n  return best;\n}\n\nint main() {\n  cout << "Max Subarray Sum = " << maxSubArray({-2, 1, -3, 4, -1, 2, 1, -5, 4}) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "Matrix · In-Place Rotation",
@@ -699,19 +747,19 @@
         constraints: ["O(n^2) time, O(1) space"],
         theory: `Two simple in-place steps: (1) Transpose across diagonal <code>(i,j) ↔ (j,i)</code>, then (2) Reverse every row left-to-right.`,
         tip: `Decomposing rotation into Transpose + Reverse eliminates all 4-way corner index bugs.`,
-        cCode: `void rotate90(int** mat, int n) {\n  for (int i = 0; i < n; i++) {\n    for (int j = i + 1; j < n; j++) {\n      int t = mat[i][j]; mat[i][j] = mat[j][i]; mat[j][i] = t;\n    }\n  }\n  for (int i = 0; i < n; i++) {\n    for (int l = 0, r = n - 1; l < r; l++, r--) {\n      int t = mat[i][l]; mat[i][l] = mat[i][r]; mat[i][r] = t;\n    }\n  }\n}`,
-        cppCode: `void rotate90(vector<vector<int>>& m) {\n  int n = (int)m.size();\n  for (int i = 0; i < n; ++i)\n    for (int j = i + 1; j < n; ++j) swap(m[i][j], m[j][i]);\n  for (auto& row : m) reverse(row.begin(), row.end());\n}`
+        cCode: `#include <stdio.h>\n\nvoid rotate90(int** mat, int n) {\n  for (int i = 0; i < n; i++)\n    for (int j = i + 1; j < n; j++) { int t = mat[i][j]; mat[i][j] = mat[j][i]; mat[j][i] = t; }\n  for (int i = 0; i < n; i++)\n    for (int l = 0, r = n - 1; l < r; l++, r--) { int t = mat[i][l]; mat[i][l] = mat[i][r]; mat[i][r] = t; }\n}\n\nint main(void) {\n  int r0[] = {1, 2}, r1[] = {3, 4};\n  int* mat[] = {r0, r1};\n  rotate90(mat, 2);\n  for (int i = 0; i < 2; i++) printf("[%d, %d]\\n", mat[i][0], mat[i][1]);\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nvoid rotate90(vector<vector<int>>& m) {\n  int n = (int)m.size();\n  for (int i = 0; i < n; ++i)\n    for (int j = i + 1; j < n; ++j) swap(m[i][j], m[j][i]);\n  for (auto& row : m) reverse(row.begin(), row.end());\n}\n\nint main() {\n  vector<vector<int>> m = {{1, 2}, {3, 4}};\n  rotate90(m);\n  for (const auto& row : m) cout << "[" << row[0] << ", " << row[1] << "]\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "Prefix Sum + Hash Map",
         title: "Subarray Sum Equals K (With Negatives)",
         desc: `Count contiguous subarrays in <code>nums</code> (negatives allowed) summing to <code>k</code>.`,
-        examples: [{ in: "nums = [1, 1, 1], k = 2", out: "2" }, { in: "nums = [3, 4, -7, 1, 3, 3], k = 7", out: "3" }],
+        examples: [{ in: "nums = [3, 4, -7, 1, 3, 3], k = 7", out: "3" }],
         constraints: ["O(n) time"],
         theory: `Negatives break sliding-window monotonicity. Instead, <code>sum(j+1..i) == k</code> iff <code>prefix[i] - prefix[j] == k</code>. Seed <code>map[0] = 1</code>.`,
-        tip: `In C, always size your open-addressing hash table to a power of 2 <code>&gt;= 2 * n</code> so load factor stays <code>&lt;= 0.5</code> and probing never hangs.`,
-        cCode: `int subarraySum(const int* nums, int n, int k) {\n  int cap = 8; while (cap < n * 2 + 4) cap *= 2;\n  int* keys = (int*)malloc((size_t)cap * sizeof(int));\n  int* cnt = (int*)calloc((size_t)cap, sizeof(int));\n  bool* used = (bool*)calloc((size_t)cap, sizeof(bool));\n  uint32_t mask = (uint32_t)(cap - 1);\n  used[0] = true; keys[0] = 0; cnt[0] = 1;\n  int sum = 0, total = 0;\n  for (int i = 0; i < n; i++) {\n    sum += nums[i];\n    uint32_t h = ((uint32_t)(sum - k) * 2654435761u) & mask;\n    while (used[h]) {\n      if (keys[h] == sum - k) { total += cnt[h]; break; }\n      h = (h + 1u) & mask;\n    }\n    uint32_t ins = ((uint32_t)sum * 2654435761u) & mask;\n    while (used[ins] && keys[ins] != sum) ins = (ins + 1u) & mask;\n    if (!used[ins]) { used[ins] = true; keys[ins] = sum; }\n    cnt[ins]++;\n  }\n  free(keys); free(cnt); free(used);\n  return total;\n}`,
-        cppCode: `int subarraySum(const vector<int>& nums, int k) {\n  unordered_map<int, int> counts;\n  counts[0] = 1;\n  int sum = 0, total = 0;\n  for (int x : nums) {\n    sum += x;\n    if (auto it = counts.find(sum - k); it != counts.end())\n      total += it->second;\n    ++counts[sum];\n  }\n  return total;\n}`
+        tip: `In C, always size your open-addressing hash table to a power of 2 <code>&gt;= 2 * n</code> so load factor stays <code>&lt;= 0.5</code>.`,
+        cCode: `#include <stdio.h>\n#include <stdlib.h>\n#include <stdint.h>\n#include <stdbool.h>\n\nint subarraySum(const int* nums, int n, int k) {\n  if (n <= 0) return 0;\n  int cap = 8; while (cap < n * 2 + 4) cap *= 2;\n  int* keys = (int*)malloc((size_t)cap * sizeof(int));\n  int* cnt = (int*)calloc((size_t)cap, sizeof(int));\n  bool* used = (bool*)calloc((size_t)cap, sizeof(bool));\n  uint32_t mask = (uint32_t)(cap - 1);\n  used[0] = true; keys[0] = 0; cnt[0] = 1;\n  int sum = 0, total = 0;\n  for (int i = 0; i < n; i++) {\n    sum += nums[i];\n    uint32_t h = ((uint32_t)(sum - k) * 2654435761u) & mask;\n    while (used[h]) { if (keys[h] == sum - k) { total += cnt[h]; break; } h = (h + 1u) & mask; }\n    uint32_t ins = ((uint32_t)sum * 2654435761u) & mask;\n    while (used[ins] && keys[ins] != sum) ins = (ins + 1u) & mask;\n    if (!used[ins]) { used[ins] = true; keys[ins] = sum; }\n    cnt[ins]++;\n  }\n  free(keys); free(cnt); free(used);\n  return total;\n}\n\nint main(void) {\n  int a[] = {3, 4, -7, 1, 3, 3};\n  printf("Count = %d\\n", subarraySum(a, 6, 7));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <unordered_map>\nusing namespace std;\n\nint subarraySum(const vector<int>& nums, int k) {\n  unordered_map<int, int> counts;\n  counts[0] = 1;\n  int sum = 0, total = 0;\n  for (int x : nums) {\n    sum += x;\n    if (auto it = counts.find(sum - k); it != counts.end()) total += it->second;\n    ++counts[sum];\n  }\n  return total;\n}\n\nint main() {\n  cout << "Count = " << subarraySum({3, 4, -7, 1, 3, 3}, 7) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "Prefix / Suffix Pass",
@@ -721,11 +769,9 @@
         constraints: ["O(n) time, no division"],
         theory: `Forward pass writes prefix products <code>0..i-1</code> into <code>out[i]</code>; backward pass multiplies by running suffix product <code>i+1..n-1</code>.`,
         tip: `Avoids division-by-zero bugs and expensive divide instructions on small MCUs.`,
-        cCode: `void productExceptSelf(const int* nums, int n, int* out) {\n  int pre = 1, suf = 1;\n  for (int i = 0; i < n; i++) { out[i] = pre; pre *= nums[i]; }\n  for (int i = n - 1; i >= 0; i--) { out[i] *= suf; suf *= nums[i]; }\n}`,
-        cppCode: `vector<int> productExceptSelf(const vector<int>& nums) {\n  int n = (int)nums.size();\n  vector<int> out(n, 1);\n  int pre = 1, suf = 1;\n  for (int i = 0; i < n; ++i) { out[i] = pre; pre *= nums[i]; }\n  for (int i = n - 1; i >= 0; --i) { out[i] *= suf; suf *= nums[i]; }\n  return out;\n}`
+        cCode: `#include <stdio.h>\n\nvoid productExceptSelf(const int* nums, int n, int* out) {\n  int pre = 1, suf = 1;\n  for (int i = 0; i < n; i++) { out[i] = pre; pre *= nums[i]; }\n  for (int i = n - 1; i >= 0; i--) { out[i] *= suf; suf *= nums[i]; }\n}\n\nint main(void) {\n  int a[] = {1, 2, 3, 4}, out[4];\n  productExceptSelf(a, 4, out);\n  for (int i = 0; i < 4; i++) printf("%d ", out[i]);\n  printf("\\n");\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\nusing namespace std;\n\nvector<int> productExceptSelf(const vector<int>& nums) {\n  int n = (int)nums.size();\n  vector<int> out(n, 1);\n  int pre = 1, suf = 1;\n  for (int i = 0; i < n; ++i) { out[i] = pre; pre *= nums[i]; }\n  for (int i = n - 1; i >= 0; --i) { out[i] *= suf; suf *= nums[i]; }\n  return out;\n}\n\nint main() {\n  for (int x : productExceptSelf({1, 2, 3, 4})) cout << x << " ";\n  cout << "\\n";\n  return 0;\n}`
       },
-
-      // --- TWO POINTERS & SLIDING WINDOW ---
       {
         difficulty: "easy", topic: "Two Pointers · In-Place",
         title: "Move Zeroes (Sparse Buffer Compaction)",
@@ -733,9 +779,9 @@
         examples: [{ in: "[0, 1, 0, 3, 12]", out: "[1, 3, 12, 0, 0]" }],
         constraints: ["O(n) time, O(1) space"],
         theory: `Maintain slow pointer <code>w</code> for next non-zero write slot and fast pointer <code>r</code> scanning forward.`,
-        tip: `Guard <code>if (w != r)</code> before swapping to minimize unnecessary writes.`,
-        cCode: `void moveZeroes(int* a, int n) {\n  for (int w = 0, r = 0; r < n; r++) {\n    if (a[r] != 0) {\n      if (w != r) { int t = a[w]; a[w] = a[r]; a[r] = t; }\n      w++;\n    }\n  }\n}`,
-        cppCode: `void moveZeroes(vector<int>& a) {\n  for (int w = 0, r = 0; r < (int)a.size(); ++r) {\n    if (a[r] != 0) {\n      if (w != r) swap(a[w], a[r]);\n      ++w;\n    }\n  }\n}`
+        tip: `Guard <code>if (w != r)</code> before swapping to minimize unnecessary memory writes.`,
+        cCode: `#include <stdio.h>\n\nvoid moveZeroes(int* a, int n) {\n  for (int w = 0, r = 0; r < n; r++) {\n    if (a[r] != 0) {\n      if (w != r) { int t = a[w]; a[w] = a[r]; a[r] = t; }\n      w++;\n    }\n  }\n}\n\nint main(void) {\n  int a[] = {0, 1, 0, 3, 12};\n  moveZeroes(a, 5);\n  for (int i = 0; i < 5; i++) printf("%d ", a[i]);\n  printf("\\n");\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <utility>\nusing namespace std;\n\nvoid moveZeroes(vector<int>& a) {\n  for (int w = 0, r = 0; r < (int)a.size(); ++r) {\n    if (a[r] != 0) { if (w != r) swap(a[w], a[r]); ++w; }\n  }\n}\n\nint main() {\n  vector<int> a = {0, 1, 0, 3, 12};\n  moveZeroes(a);\n  for (int x : a) cout << x << " ";\n  cout << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "easy", topic: "Two Pointers · O(1) Space",
@@ -744,9 +790,9 @@
         examples: [{ in: '"A man, a plan, a canal: Panama"', out: "true" }],
         constraints: ["O(n) time, O(1) space"],
         theory: `Advance two pointers inward from both ends, skipping non-alphanumeric bytes inline without allocating a copy.`,
-        tip: `Cast to <code>(unsigned char)</code> before calling <code>isalnum</code>/<code>tolower</code>—passing negative signed <code>char</code> is Undefined Behavior in C/C++.`,
-        cCode: `bool isPalindrome(const char* s) {\n  int l = 0, r = (int)strlen(s) - 1;\n  while (l < r) {\n    while (l < r && !isalnum((unsigned char)s[l])) l++;\n    while (l < r && !isalnum((unsigned char)s[r])) r--;\n    if (tolower((unsigned char)s[l]) != tolower((unsigned char)s[r])) return false;\n    l++; r--;\n  }\n  return true;\n}`,
-        cppCode: `bool isPalindrome(const string& s) {\n  int l = 0, r = (int)s.size() - 1;\n  while (l < r) {\n    while (l < r && !isalnum(static_cast<unsigned char>(s[l]))) ++l;\n    while (l < r && !isalnum(static_cast<unsigned char>(s[r]))) --r;\n    if (tolower(static_cast<unsigned char>(s[l])) != tolower(static_cast<unsigned char>(s[r]))) return false;\n    ++l; --r;\n  }\n  return true;\n}`
+        tip: `Cast to <code>(unsigned char)</code> before calling <code>isalnum</code>/<code>tolower</code>—negative signed <code>char</code> is UB in C/C++.`,
+        cCode: `#include <stdio.h>\n#include <stdbool.h>\n#include <string.h>\n#include <ctype.h>\n\nbool isPalindrome(const char* s) {\n  int l = 0, r = (int)strlen(s) - 1;\n  while (l < r) {\n    while (l < r && !isalnum((unsigned char)s[l])) l++;\n    while (l < r && !isalnum((unsigned char)s[r])) r--;\n    if (tolower((unsigned char)s[l]) != tolower((unsigned char)s[r])) return false;\n    l++; r--;\n  }\n  return true;\n}\n\nint main(void) {\n  printf("%s\\n", isPalindrome("A man, a plan, a canal: Panama") ? "true" : "false");\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <string>\n#include <cctype>\nusing namespace std;\n\nbool isPalindrome(const string& s) {\n  int l = 0, r = (int)s.size() - 1;\n  while (l < r) {\n    while (l < r && !isalnum(static_cast<unsigned char>(s[l]))) ++l;\n    while (l < r && !isalnum(static_cast<unsigned char>(s[r]))) --r;\n    if (tolower(static_cast<unsigned char>(s[l])) != tolower(static_cast<unsigned char>(s[r]))) return false;\n    ++l; --r;\n  }\n  return true;\n}\n\nint main() {\n  cout << boolalpha << isPalindrome("A man, a plan, a canal: Panama") << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "Two Pointers · Sorted",
@@ -756,8 +802,8 @@
         constraints: ["O(n^2) time"],
         theory: `Sort first, fix <code>nums[i]</code>, then run two pointers <code>(l, r)</code> on the suffix while skipping duplicate values.`,
         tip: `Break early once <code>nums[i] > 0</code>. Use <code>(x > y) - (x < y)</code> in C <code>qsort</code> to avoid subtraction overflow.`,
-        cCode: `static int cmpI(const void* a, const void* b) {\n  int x = *(const int*)a, y = *(const int*)b;\n  return (x > y) - (x < y);\n}\nint threeSum(int* a, int n, int out[][3]) {\n  qsort(a, (size_t)n, sizeof(int), cmpI);\n  int k = 0;\n  for (int i = 0; i < n - 2; i++) {\n    if (a[i] > 0) break;\n    if (i > 0 && a[i] == a[i - 1]) continue;\n    int l = i + 1, r = n - 1;\n    while (l < r) {\n      int s = a[i] + a[l] + a[r];\n      if (s < 0) l++;\n      else if (s > 0) r--;\n      else {\n        out[k][0] = a[i]; out[k][1] = a[l]; out[k][2] = a[r]; k++;\n        while (l < r && a[l] == a[l + 1]) l++;\n        while (l < r && a[r] == a[r - 1]) r--;\n        l++; r--;\n      }\n    }\n  }\n  return k;\n}`,
-        cppCode: `vector<vector<int>> threeSum(vector<int>& nums) {\n  sort(nums.begin(), nums.end());\n  vector<vector<int>> res;\n  int n = (int)nums.size();\n  for (int i = 0; i < n - 2; ++i) {\n    if (nums[i] > 0) break;\n    if (i > 0 && nums[i] == nums[i - 1]) continue;\n    int l = i + 1, r = n - 1;\n    while (l < r) {\n      int s = nums[i] + nums[l] + nums[r];\n      if (s < 0) ++l; else if (s > 0) --r;\n      else {\n        res.push_back({nums[i], nums[l], nums[r]});\n        while (l < r && nums[l] == nums[l + 1]) ++l;\n        while (l < r && nums[r] == nums[r - 1]) --r;\n        ++l; --r;\n      }\n    }\n  }\n  return res;\n}`
+        cCode: `#include <stdio.h>\n#include <stdlib.h>\n\nstatic int cmpI(const void* a, const void* b) {\n  int x = *(const int*)a, y = *(const int*)b;\n  return (x > y) - (x < y);\n}\n\nint threeSum(int* a, int n, int out[][3]) {\n  qsort(a, (size_t)n, sizeof(int), cmpI);\n  int k = 0;\n  for (int i = 0; i < n - 2; i++) {\n    if (a[i] > 0) break;\n    if (i > 0 && a[i] == a[i - 1]) continue;\n    int l = i + 1, r = n - 1;\n    while (l < r) {\n      int s = a[i] + a[l] + a[r];\n      if (s < 0) l++;\n      else if (s > 0) r--;\n      else {\n        out[k][0] = a[i]; out[k][1] = a[l]; out[k][2] = a[r]; k++;\n        while (l < r && a[l] == a[l + 1]) l++;\n        while (l < r && a[r] == a[r - 1]) r--;\n        l++; r--;\n      }\n    }\n  }\n  return k;\n}\n\nint main(void) {\n  int a[] = {-1, 0, 1, 2, -1, -4}, out[16][3];\n  int k = threeSum(a, 6, out);\n  for (int i = 0; i < k; i++) printf("[%d, %d, %d]\\n", out[i][0], out[i][1], out[i][2]);\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nvector<vector<int>> threeSum(vector<int> nums) {\n  sort(nums.begin(), nums.end());\n  vector<vector<int>> res;\n  int n = (int)nums.size();\n  for (int i = 0; i < n - 2; ++i) {\n    if (nums[i] > 0) break;\n    if (i > 0 && nums[i] == nums[i - 1]) continue;\n    int l = i + 1, r = n - 1;\n    while (l < r) {\n      int s = nums[i] + nums[l] + nums[r];\n      if (s < 0) ++l; else if (s > 0) --r;\n      else {\n        res.push_back({nums[i], nums[l], nums[r]});\n        while (l < r && nums[l] == nums[l + 1]) ++l;\n        while (l < r && nums[r] == nums[r - 1]) --r;\n        ++l; --r;\n      }\n    }\n  }\n  return res;\n}\n\nint main() {\n  for (auto& t : threeSum({-1, 0, 1, 2, -1, -4}))\n    cout << "[" << t[0] << ", " << t[1] << ", " << t[2] << "]\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "Two Pointers · Greedy",
@@ -767,8 +813,8 @@
         constraints: ["O(n) time, O(1) space"],
         theory: `Start at widest span <code>(0, n-1)</code>. Moving the taller wall inward can only shrink width without raising height; moving the shorter wall inward is the only way to improve area.`,
         tip: `Simple 6-line greedy proof: you only ever discard a shorter wall after recording its maximum possible width.`,
-        cCode: `int maxArea(const int* h, int n) {\n  int l = 0, r = n - 1, best = 0;\n  while (l < r) {\n    int height = (h[l] < h[r]) ? h[l] : h[r];\n    int area = (r - l) * height;\n    if (area > best) best = area;\n    if (h[l] < h[r]) l++; else r--;\n  }\n  return best;\n}`,
-        cppCode: `int maxArea(const vector<int>& h) {\n  int l = 0, r = (int)h.size() - 1, best = 0;\n  while (l < r) {\n    best = max(best, (r - l) * min(h[l], h[r]));\n    if (h[l] < h[r]) ++l; else --r;\n  }\n  return best;\n}`
+        cCode: `#include <stdio.h>\n\nint maxArea(const int* h, int n) {\n  int l = 0, r = n - 1, best = 0;\n  while (l < r) {\n    int height = (h[l] < h[r]) ? h[l] : h[r];\n    int area = (r - l) * height;\n    if (area > best) best = area;\n    if (h[l] < h[r]) l++; else r--;\n  }\n  return best;\n}\n\nint main(void) {\n  int h[] = {1, 8, 6, 2, 5, 4, 8, 3, 7};\n  printf("Max Area = %d\\n", maxArea(h, 9));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint maxArea(const vector<int>& h) {\n  int l = 0, r = (int)h.size() - 1, best = 0;\n  while (l < r) {\n    best = max(best, (r - l) * min(h[l], h[r]));\n    if (h[l] < h[r]) ++l; else --r;\n  }\n  return best;\n}\n\nint main() {\n  cout << "Max Area = " << maxArea({1, 8, 6, 2, 5, 4, 8, 3, 7}) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "hard", topic: "Two Pointers · O(1) Space",
@@ -778,8 +824,8 @@
         constraints: ["O(n) time, O(1) space"],
         theory: `Always advance the pointer with smaller height; the taller opposite side guarantees water at our side is bounded solely by our local running max.`,
         tip: `Explain prefixMax/suffixMax arrays first, then prove why advancing the smaller boundary drops space to <code>O(1)</code>.`,
-        cCode: `int trapWater(const int* h, int n) {\n  int l = 0, r = n - 1, lMax = 0, rMax = 0, w = 0;\n  while (l < r) {\n    if (h[l] < h[r]) {\n      if (h[l] > lMax) lMax = h[l];\n      w += lMax - h[l++];\n    } else {\n      if (h[r] > rMax) rMax = h[r];\n      w += rMax - h[r--];\n    }\n  }\n  return w;\n}`,
-        cppCode: `int trapWater(const vector<int>& h) {\n  int l = 0, r = (int)h.size() - 1, lMax = 0, rMax = 0, w = 0;\n  while (l < r) {\n    if (h[l] < h[r]) { lMax = max(lMax, h[l]); w += lMax - h[l++]; }\n    else { rMax = max(rMax, h[r]); w += rMax - h[r--]; }\n  }\n  return w;\n}`
+        cCode: `#include <stdio.h>\n\nint trapWater(const int* h, int n) {\n  int l = 0, r = n - 1, lMax = 0, rMax = 0, w = 0;\n  while (l < r) {\n    if (h[l] < h[r]) { if (h[l] > lMax) lMax = h[l]; w += lMax - h[l++]; }\n    else { if (h[r] > rMax) rMax = h[r]; w += rMax - h[r--]; }\n  }\n  return w;\n}\n\nint main(void) {\n  int h[] = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};\n  printf("Trapped Water = %d\\n", trapWater(h, 12));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint trapWater(const vector<int>& h) {\n  int l = 0, r = (int)h.size() - 1, lMax = 0, rMax = 0, w = 0;\n  while (l < r) {\n    if (h[l] < h[r]) { lMax = max(lMax, h[l]); w += lMax - h[l++]; }\n    else { rMax = max(rMax, h[r]); w += rMax - h[r--]; }\n  }\n  return w;\n}\n\nint main() {\n  cout << "Trapped Water = " << trapWater({0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "Sliding Window · ASCII LUT",
@@ -789,8 +835,8 @@
         constraints: ["O(n) time, O(1) space"],
         theory: `Track last seen index in <code>last[256]</code>. When <code>last[c] >= left</code>, jump <code>left = last[c] + 1</code>.`,
         tip: `Always cast <code>char</code> to <code>unsigned char</code> before indexing <code>last[256]</code>.`,
-        cCode: `int longestUnique(const char* s) {\n  int last[256];\n  for (int i = 0; i < 256; i++) last[i] = -1;\n  int l = 0, best = 0;\n  for (int r = 0; s[r] != '\\0'; r++) {\n    unsigned char c = (unsigned char)s[r];\n    if (last[c] >= l) l = last[c] + 1;\n    last[c] = r;\n    if (r - l + 1 > best) best = r - l + 1;\n  }\n  return best;\n}`,
-        cppCode: `int longestUnique(const string& s) {\n  int last[256]; fill(begin(last), end(last), -1);\n  int l = 0, best = 0;\n  for (int r = 0; r < (int)s.size(); ++r) {\n    unsigned char c = static_cast<unsigned char>(s[r]);\n    if (last[c] >= l) l = last[c] + 1;\n    last[c] = r;\n    best = max(best, r - l + 1);\n  }\n  return best;\n}`
+        cCode: `#include <stdio.h>\n\nint longestUnique(const char* s) {\n  int last[256];\n  for (int i = 0; i < 256; i++) last[i] = -1;\n  int l = 0, best = 0;\n  for (int r = 0; s[r] != '\\0'; r++) {\n    unsigned char c = (unsigned char)s[r];\n    if (last[c] >= l) l = last[c] + 1;\n    last[c] = r;\n    if (r - l + 1 > best) best = r - l + 1;\n  }\n  return best;\n}\n\nint main(void) {\n  printf("%d\\n", longestUnique("abcabcbb"));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint longestUnique(const string& s) {\n  int last[256]; fill(begin(last), end(last), -1);\n  int l = 0, best = 0;\n  for (int r = 0; r < (int)s.size(); ++r) {\n    unsigned char c = static_cast<unsigned char>(s[r]);\n    if (last[c] >= l) l = last[c] + 1;\n    last[c] = r;\n    best = max(best, r - l + 1);\n  }\n  return best;\n}\n\nint main() {\n  cout << longestUnique("abcabcbb") << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "hard", topic: "Sliding Window · Frequency",
@@ -800,11 +846,9 @@
         constraints: ["O(|s| + |t|) time"],
         theory: `Maintain scalar <code>have == req</code> tracking satisfied unique chars. Expand right until satisfied, then shrink left greedily.`,
         tip: `Always guard against empty <code>t</code> first (<code>req == 0</code>), and use fixed <code>int[128]</code> arrays for zero heap allocations.`,
-        cCode: `void minWindowC(const char* s, const char* t, int* outStart, int* outLen) {\n  *outStart = 0; *outLen = 0;\n  if (!s || !t || t[0] == '\\0' || s[0] == '\\0') return;\n  int need[128] = {0}, win[128] = {0}, req = 0;\n  for (int i = 0; t[i] != '\\0'; i++) if (need[(unsigned char)t[i]]++ == 0) req++;\n  int have = 0, l = 0, bestL = 0, bestLen = INT_MAX;\n  for (int r = 0; s[r] != '\\0'; r++) {\n    unsigned char c = (unsigned char)s[r];\n    if (++win[c] == need[c]) have++;\n    while (have == req) {\n      if (r - l + 1 < bestLen) { bestLen = r - l + 1; bestL = l; }\n      unsigned char lc = (unsigned char)s[l++];\n      if (win[lc]-- == need[lc]) have--;\n    }\n  }\n  if (bestLen != INT_MAX) { *outStart = bestL; *outLen = bestLen; }\n}`,
-        cppCode: `string minWindow(const string& s, const string& t) {\n  if (t.empty() || s.size() < t.size()) return "";\n  int need[128] = {0}, win[128] = {0}, req = 0;\n  for (unsigned char c : t) if (need[c]++ == 0) ++req;\n  int have = 0, l = 0, bestLen = INT_MAX, bestL = 0;\n  for (int r = 0; r < (int)s.size(); ++r) {\n    unsigned char c = static_cast<unsigned char>(s[r]);\n    if (++win[c] == need[c]) ++have;\n    while (have == req) {\n      if (r - l + 1 < bestLen) { bestLen = r - l + 1; bestL = l; }\n      unsigned char lc = static_cast<unsigned char>(s[l++]);\n      if (win[lc]-- == need[lc]) --have;\n    }\n  }\n  return bestLen == INT_MAX ? "" : s.substr(bestL, bestLen);\n}`
+        cCode: `#include <stdio.h>\n#include <limits.h>\n\nvoid minWindowC(const char* s, const char* t, int* outStart, int* outLen) {\n  *outStart = 0; *outLen = 0;\n  if (!s || !t || t[0] == '\\0' || s[0] == '\\0') return;\n  int need[128] = {0}, win[128] = {0}, req = 0;\n  for (int i = 0; t[i] != '\\0'; i++) if (need[(unsigned char)t[i]]++ == 0) req++;\n  int have = 0, l = 0, bestL = 0, bestLen = INT_MAX;\n  for (int r = 0; s[r] != '\\0'; r++) {\n    unsigned char c = (unsigned char)s[r];\n    if (++win[c] == need[c]) have++;\n    while (have == req) {\n      if (r - l + 1 < bestLen) { bestLen = r - l + 1; bestL = l; }\n      unsigned char lc = (unsigned char)s[l++];\n      if (win[lc]-- == need[lc]) have--;\n    }\n  }\n  if (bestLen != INT_MAX) { *outStart = bestL; *outLen = bestLen; }\n}\n\nint main(void) {\n  const char* s = "ADOBECODEBANC";\n  int start = 0, len = 0;\n  minWindowC(s, "ABC", &start, &len);\n  printf("Min Window: %.*s\\n", len, s + start);\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <string>\n#include <climits>\nusing namespace std;\n\nstring minWindow(const string& s, const string& t) {\n  if (t.empty() || s.size() < t.size()) return "";\n  int need[128] = {0}, win[128] = {0}, req = 0;\n  for (unsigned char c : t) if (need[c]++ == 0) ++req;\n  int have = 0, l = 0, bestLen = INT_MAX, bestL = 0;\n  for (int r = 0; r < (int)s.size(); ++r) {\n    unsigned char c = static_cast<unsigned char>(s[r]);\n    if (++win[c] == need[c]) ++have;\n    while (have == req) {\n      if (r - l + 1 < bestLen) { bestLen = r - l + 1; bestL = l; }\n      unsigned char lc = static_cast<unsigned char>(s[l++]);\n      if (win[lc]-- == need[lc]) --have;\n    }\n  }\n  return bestLen == INT_MAX ? "" : s.substr(bestL, bestLen);\n}\n\nint main() {\n  cout << "Min Window: " << minWindow("ADOBECODEBANC", "ABC") << "\\n";\n  return 0;\n}`
       },
-
-      // --- STACKS, RING BUFFERS, PARSERS & DEQUES ---
       {
         difficulty: "easy", topic: "Stack · Delimiters",
         title: "Valid Parentheses / Protocol Frames",
@@ -813,8 +857,8 @@
         constraints: ["O(n) time, O(n) space"],
         theory: `Push openers onto a stack; on each closer, verify stack is non-empty and top matches. Valid iff stack is empty at EOF.`,
         tip: `Check <code>top < 0</code> before popping and <code>top == -1</code> at the end so stray openers like <code>"((("</code> return <code>false</code>.`,
-        cCode: `bool isValidBrackets(const char* s) {\n  int n = (int)strlen(s), top = -1;\n  char* st = (char*)malloc((size_t)n + 1);\n  bool ok = true;\n  for (int i = 0; i < n; i++) {\n    char c = s[i];\n    if (c == '(' || c == '[' || c == '{') st[++top] = c;\n    else {\n      if (top < 0) { ok = false; break; }\n      char o = st[top--];\n      if ((c == ')' && o != '(') || (c == ']' && o != '[') || (c == '}' && o != '{')) {\n        ok = false; break;\n      }\n    }\n  }\n  free(st);\n  return ok && top == -1;\n}`,
-        cppCode: `bool isValidBrackets(const string& s) {\n  string st;\n  for (char c : s) {\n    if (c == '(' || c == '[' || c == '{') st.push_back(c);\n    else {\n      if (st.empty()) return false;\n      char o = st.back(); st.pop_back();\n      if ((c == ')' && o != '(') || (c == ']' && o != '[') || (c == '}' && o != '{')) return false;\n    }\n  }\n  return st.empty();\n}`
+        cCode: `#include <stdio.h>\n#include <stdlib.h>\n#include <stdbool.h>\n#include <string.h>\n\nbool isValidBrackets(const char* s) {\n  int n = (int)strlen(s), top = -1;\n  char* st = (char*)malloc((size_t)n + 1);\n  bool ok = true;\n  for (int i = 0; i < n; i++) {\n    char c = s[i];\n    if (c == '(' || c == '[' || c == '{') st[++top] = c;\n    else {\n      if (top < 0) { ok = false; break; }\n      char o = st[top--];\n      if ((c == ')' && o != '(') || (c == ']' && o != '[') || (c == '}' && o != '{')) { ok = false; break; }\n    }\n  }\n  free(st);\n  return ok && top == -1;\n}\n\nint main(void) {\n  printf("%s\\n", isValidBrackets("{[()]}") ? "true" : "false");\n  printf("%s\\n", isValidBrackets("{[(])}") ? "true" : "false");\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <string>\nusing namespace std;\n\nbool isValidBrackets(const string& s) {\n  string st;\n  for (char c : s) {\n    if (c == '(' || c == '[' || c == '{') st.push_back(c);\n    else {\n      if (st.empty()) return false;\n      char o = st.back(); st.pop_back();\n      if ((c == ')' && o != '(') || (c == ']' && o != '[') || (c == '}' && o != '{')) return false;\n    }\n  }\n  return st.empty();\n}\n\nint main() {\n  cout << boolalpha << isValidBrackets("{[()]}") << "\\n";\n  cout << isValidBrackets("{[(])}") << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "easy", topic: "String Parser · Overflow Guard",
@@ -824,8 +868,8 @@
         constraints: ["32-bit arithmetic only"],
         theory: `Check overflow <strong>before</strong> multiplying by 10: <code>if (res > INT_MAX / 10 || (res == INT_MAX / 10 && digit > 7))</code>.`,
         tip: `Never multiply first and check overflow afterward—signed overflow is Undefined Behavior in C/C++.`,
-        cCode: `int myAtoi(const char* s) {\n  int i = 0, sign = 1, res = 0;\n  while (s[i] == ' ') i++;\n  if (s[i] == '-' || s[i] == '+') { if (s[i++] == '-') sign = -1; }\n  while (s[i] >= '0' && s[i] <= '9') {\n    int d = s[i++] - '0';\n    if (res > INT_MAX / 10 || (res == INT_MAX / 10 && d > 7)) {\n      return (sign == 1) ? INT_MAX : INT_MIN;\n    }\n    res = res * 10 + d;\n  }\n  return res * sign;\n}`,
-        cppCode: `int myAtoi(const string& s) {\n  size_t i = 0;\n  while (i < s.size() && s[i] == ' ') ++i;\n  int sign = 1, res = 0;\n  if (i < s.size() && (s[i] == '-' || s[i] == '+')) {\n    if (s[i++] == '-') sign = -1;\n  }\n  while (i < s.size() && isdigit(static_cast<unsigned char>(s[i]))) {\n    int d = s[i++] - '0';\n    if (res > INT_MAX / 10 || (res == INT_MAX / 10 && d > 7))\n      return sign == 1 ? INT_MAX : INT_MIN;\n    res = res * 10 + d;\n  }\n  return res * sign;\n}`
+        cCode: `#include <stdio.h>\n#include <limits.h>\n\nint myAtoi(const char* s) {\n  int i = 0, sign = 1, res = 0;\n  while (s[i] == ' ') i++;\n  if (s[i] == '-' || s[i] == '+') { if (s[i++] == '-') sign = -1; }\n  while (s[i] >= '0' && s[i] <= '9') {\n    int d = s[i++] - '0';\n    if (res > INT_MAX / 10 || (res == INT_MAX / 10 && d > 7)) return (sign == 1) ? INT_MAX : INT_MIN;\n    res = res * 10 + d;\n  }\n  return res * sign;\n}\n\nint main(void) {\n  printf("%d\\n", myAtoi("  -42abc"));\n  printf("%d\\n", myAtoi("99999999999"));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <string>\n#include <climits>\n#include <cctype>\nusing namespace std;\n\nint myAtoi(const string& s) {\n  size_t i = 0;\n  while (i < s.size() && s[i] == ' ') ++i;\n  int sign = 1, res = 0;\n  if (i < s.size() && (s[i] == '-' || s[i] == '+')) { if (s[i++] == '-') sign = -1; }\n  while (i < s.size() && isdigit(static_cast<unsigned char>(s[i]))) {\n    int d = s[i++] - '0';\n    if (res > INT_MAX / 10 || (res == INT_MAX / 10 && d > 7)) return sign == 1 ? INT_MAX : INT_MIN;\n    res = res * 10 + d;\n  }\n  return res * sign;\n}\n\nint main() {\n  cout << myAtoi("  -42abc") << "\\n";\n  cout << myAtoi("99999999999") << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "Circular Queue / ISR",
@@ -835,8 +879,8 @@
         constraints: ["O(1) per op, zero array shifting"],
         theory: `Maintain <code>head</code>, <code>tail</code>, and <code>size</code> inside a pre-allocated buffer; wrap indices via <code>(idx + 1) % cap</code>.`,
         tip: `In SPSC ISR firmware, producer writes <code>tail</code> and consumer writes <code>head</code>—using atomic acquire/release avoids locks.`,
-        cCode: `typedef struct { int *buf, head, tail, size, cap; } RingBuf;\nbool rbPush(RingBuf* q, int v) {\n  if (q->size == q->cap) return false;\n  q->buf[q->tail] = v; q->tail = (q->tail + 1) % q->cap; q->size++; return true;\n}\nbool rbPop(RingBuf* q, int* out) {\n  if (q->size == 0) return false;\n  *out = q->buf[q->head]; q->head = (q->head + 1) % q->cap; q->size--; return true;\n}`,
-        cppCode: `class RingBuffer {\n  vector<int> buf; int head = 0, tail = 0, sz = 0, cap;\npublic:\n  explicit RingBuffer(int k) : buf(k), cap(k) {}\n  bool push(int v) {\n    if (sz == cap) return false;\n    buf[tail] = v; tail = (tail + 1) % cap; ++sz; return true;\n  }\n  bool pop(int& out) {\n    if (sz == 0) return false;\n    out = buf[head]; head = (head + 1) % cap; --sz; return true;\n  }\n};`
+        cCode: `#include <stdio.h>\n#include <stdbool.h>\n\ntypedef struct { int *buf, head, tail, size, cap; } RingBuf;\n\nbool rbPush(RingBuf* q, int v) {\n  if (q->size == q->cap) return false;\n  q->buf[q->tail] = v; q->tail = (q->tail + 1) % q->cap; q->size++; return true;\n}\nbool rbPop(RingBuf* q, int* out) {\n  if (q->size == 0) return false;\n  *out = q->buf[q->head]; q->head = (q->head + 1) % q->cap; q->size--; return true;\n}\n\nint main(void) {\n  int mem[3], val = 0;\n  RingBuf rb = {mem, 0, 0, 0, 3};\n  rbPush(&rb, 10); rbPush(&rb, 20);\n  if (rbPop(&rb, &val)) printf("Popped: %d\\n", val);\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\nusing namespace std;\n\nclass RingBuffer {\n  vector<int> buf; int head = 0, tail = 0, sz = 0, cap;\npublic:\n  explicit RingBuffer(int k) : buf(k), cap(k) {}\n  bool push(int v) {\n    if (sz == cap) return false;\n    buf[tail] = v; tail = (tail + 1) % cap; ++sz; return true;\n  }\n  bool pop(int& out) {\n    if (sz == 0) return false;\n    out = buf[head]; head = (head + 1) % cap; --sz; return true;\n  }\n};\n\nint main() {\n  RingBuffer rb(3); int val = 0;\n  rb.push(10); rb.push(20);\n  if (rb.pop(val)) cout << "Popped: " << val << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "Monotonic Stack",
@@ -846,8 +890,8 @@
         constraints: ["O(n) time"],
         theory: `Keep a decreasing stack of unresolved indices. Each index is pushed once and popped at most once → strictly <code>O(n)</code>.`,
         tip: `Classic pattern whenever you need the nearest future element strictly greater/smaller than current.`,
-        cCode: `void nextWarmer(const int* t, int n, int* out) {\n  if (n <= 0) return;\n  int* st = (int*)malloc((size_t)n * sizeof(int)); int top = -1;\n  for (int i = 0; i < n; i++) out[i] = 0;\n  for (int i = 0; i < n; i++) {\n    while (top >= 0 && t[i] > t[st[top]]) { int idx = st[top--]; out[idx] = i - idx; }\n    st[++top] = i;\n  }\n  free(st);\n}`,
-        cppCode: `vector<int> nextWarmer(const vector<int>& t) {\n  vector<int> out(t.size(), 0), st;\n  for (int i = 0; i < (int)t.size(); ++i) {\n    while (!st.empty() && t[i] > t[st.back()]) {\n      out[st.back()] = i - st.back(); st.pop_back();\n    }\n    st.push_back(i);\n  }\n  return out;\n}`
+        cCode: `#include <stdio.h>\n#include <stdlib.h>\n\nvoid nextWarmer(const int* t, int n, int* out) {\n  if (n <= 0) return;\n  int* st = (int*)malloc((size_t)n * sizeof(int)); int top = -1;\n  for (int i = 0; i < n; i++) out[i] = 0;\n  for (int i = 0; i < n; i++) {\n    while (top >= 0 && t[i] > t[st[top]]) { int idx = st[top--]; out[idx] = i - idx; }\n    st[++top] = i;\n  }\n  free(st);\n}\n\nint main(void) {\n  int t[] = {73, 74, 75, 71, 69, 72, 76, 73}, out[8];\n  nextWarmer(t, 8, out);\n  for (int i = 0; i < 8; i++) printf("%d ", out[i]);\n  printf("\\n");\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\nusing namespace std;\n\nvector<int> nextWarmer(const vector<int>& t) {\n  vector<int> out(t.size(), 0), st;\n  for (int i = 0; i < (int)t.size(); ++i) {\n    while (!st.empty() && t[i] > t[st.back()]) { out[st.back()] = i - st.back(); st.pop_back(); }\n    st.push_back(i);\n  }\n  return out;\n}\n\nint main() {\n  for (int x : nextWarmer({73, 74, 75, 71, 69, 72, 76, 73})) cout << x << " ";\n  cout << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "hard", topic: "Monotonic Deque",
@@ -857,11 +901,9 @@
         constraints: ["O(n) worst-case time"],
         theory: `Maintain a decreasing deque of <strong>indices</strong>. Evict expired front indices <code><= i - k</code> and dominated back indices <code>a[back] <= a[i]</code>.`,
         tip: `Deterministic <code>O(n)</code> worst-case per stream, beating a Heap (<code>O(n log k)</code>).`,
-        cCode: `int maxSlidingWindow(const int* a, int n, int k, int* out) {\n  if (n <= 0 || k <= 0 || k > n) return 0;\n  int* dq = (int*)malloc((size_t)n * sizeof(int));\n  int head = 0, tail = 0, m = 0;\n  for (int i = 0; i < n; i++) {\n    if (head < tail && dq[head] <= i - k) head++;\n    while (head < tail && a[dq[tail - 1]] <= a[i]) tail--;\n    dq[tail++] = i;\n    if (i >= k - 1) out[m++] = a[dq[head]];\n  }\n  free(dq);\n  return m;\n}`,
-        cppCode: `vector<int> maxSlidingWindow(const vector<int>& a, int k) {\n  if (a.empty() || k <= 0 || k > (int)a.size()) return {};\n  deque<int> dq; vector<int> out;\n  for (int i = 0; i < (int)a.size(); ++i) {\n    if (!dq.empty() && dq.front() <= i - k) dq.pop_front();\n    while (!dq.empty() && a[dq.back()] <= a[i]) dq.pop_back();\n    dq.push_back(i);\n    if (i >= k - 1) out.push_back(a[dq.front()]);\n  }\n  return out;\n}`
+        cCode: `#include <stdio.h>\n#include <stdlib.h>\n\nint maxSlidingWindow(const int* a, int n, int k, int* out) {\n  if (n <= 0 || k <= 0 || k > n) return 0;\n  int* dq = (int*)malloc((size_t)n * sizeof(int));\n  int head = 0, tail = 0, m = 0;\n  for (int i = 0; i < n; i++) {\n    if (head < tail && dq[head] <= i - k) head++;\n    while (head < tail && a[dq[tail - 1]] <= a[i]) tail--;\n    dq[tail++] = i;\n    if (i >= k - 1) out[m++] = a[dq[head]];\n  }\n  free(dq); return m;\n}\n\nint main(void) {\n  int a[] = {1, 3, -1, -3, 5, 3, 6, 7}, out[8];\n  int m = maxSlidingWindow(a, 8, 3, out);\n  for (int i = 0; i < m; i++) printf("%d ", out[i]);\n  printf("\\n");\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <deque>\nusing namespace std;\n\nvector<int> maxSlidingWindow(const vector<int>& a, int k) {\n  if (a.empty() || k <= 0 || k > (int)a.size()) return {};\n  deque<int> dq; vector<int> out;\n  for (int i = 0; i < (int)a.size(); ++i) {\n    if (!dq.empty() && dq.front() <= i - k) dq.pop_front();\n    while (!dq.empty() && a[dq.back()] <= a[i]) dq.pop_back();\n    dq.push_back(i);\n    if (i >= k - 1) out.push_back(a[dq.front()]);\n  }\n  return out;\n}\n\nint main() {\n  for (int x : maxSlidingWindow({1, 3, -1, -3, 5, 3, 6, 7}, 3)) cout << x << " ";\n  cout << "\\n";\n  return 0;\n}`
       },
-
-      // --- BINARY SEARCH, LINKED LISTS & CACHES ---
       {
         difficulty: "medium", topic: "Binary Search",
         title: "Search in Rotated Sorted Array",
@@ -869,9 +911,9 @@
         examples: [{ in: "[4,5,6,7,0,1,2], target=0", out: "4" }],
         constraints: ["O(log n) time"],
         theory: `At least one half <code>[l..mid]</code> or <code>[mid..r]</code> is strictly sorted. Check <code>a[l] <= a[m]</code> to pick the sorted half and test if <code>target</code> falls inside it.`,
-        tip: `Always write <code>l + (r - l) / 2</code> to prevent signed overflow, and use <code>&lt;=</code> on <code>a[l] <= a[m]</code> for 2-element ranges.`,
-        cCode: `int searchRotated(const int* a, int n, int target) {\n  int l = 0, r = n - 1;\n  while (l <= r) {\n    int m = l + (r - l) / 2;\n    if (a[m] == target) return m;\n    if (a[l] <= a[m]) {\n      if (target >= a[l] && target < a[m]) r = m - 1; else l = m + 1;\n    } else {\n      if (target > a[m] && target <= a[r]) l = m + 1; else r = m - 1;\n    }\n  }\n  return -1;\n}`,
-        cppCode: `int searchRotated(const vector<int>& a, int target) {\n  int l = 0, r = (int)a.size() - 1;\n  while (l <= r) {\n    int m = l + (r - l) / 2;\n    if (a[m] == target) return m;\n    if (a[l] <= a[m]) {\n      if (target >= a[l] && target < a[m]) r = m - 1; else l = m + 1;\n    } else {\n      if (target > a[m] && target <= a[r]) l = m + 1; else r = m - 1;\n    }\n  }\n  return -1;\n}`
+        tip: `Always write <code>l + (r - l) / 2</code> to prevent signed overflow, and use <code>&lt;=</code> on <code>a[l] <= a[m]</code>.`,
+        cCode: `#include <stdio.h>\n\nint searchRotated(const int* a, int n, int target) {\n  int l = 0, r = n - 1;\n  while (l <= r) {\n    int m = l + (r - l) / 2;\n    if (a[m] == target) return m;\n    if (a[l] <= a[m]) {\n      if (target >= a[l] && target < a[m]) r = m - 1; else l = m + 1;\n    } else {\n      if (target > a[m] && target <= a[r]) l = m + 1; else r = m - 1;\n    }\n  }\n  return -1;\n}\n\nint main(void) {\n  int a[] = {4, 5, 6, 7, 0, 1, 2};\n  printf("Index = %d\\n", searchRotated(a, 7, 0));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\nusing namespace std;\n\nint searchRotated(const vector<int>& a, int target) {\n  int l = 0, r = (int)a.size() - 1;\n  while (l <= r) {\n    int m = l + (r - l) / 2;\n    if (a[m] == target) return m;\n    if (a[l] <= a[m]) {\n      if (target >= a[l] && target < a[m]) r = m - 1; else l = m + 1;\n    } else {\n      if (target > a[m] && target <= a[r]) l = m + 1; else r = m - 1;\n    }\n  }\n  return -1;\n}\n\nint main() {\n  cout << "Index = " << searchRotated({4, 5, 6, 7, 0, 1, 2}, 0) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "Binary Search on Answer",
@@ -881,33 +923,31 @@
         constraints: ["O(n log(sum)) time"],
         theory: `Feasibility predicate <code>canFit(cap)</code> is monotonic over <code>[max(w), sum(w)]</code>—binary search the capacity domain.`,
         tip: `Guard empty input first, and never set <code>lo = 0</code> when individual chunks cannot be split.`,
-        cCode: `int minCapacity(const int* w, int n, int D) {\n  if (n <= 0 || D <= 0) return 0;\n  int lo = w[0], hi = 0;\n  for (int i = 0; i < n; i++) { if (w[i] > lo) lo = w[i]; hi += w[i]; }\n  while (lo < hi) {\n    int mid = lo + (hi - lo) / 2, days = 1, cur = 0;\n    for (int i = 0; i < n; i++) { if (cur + w[i] > mid) { days++; cur = 0; } cur += w[i]; }\n    if (days <= D) hi = mid; else lo = mid + 1;\n  }\n  return lo;\n}`,
-        cppCode: `int minCapacity(const vector<int>& w, int D) {\n  if (w.empty() || D <= 0) return 0;\n  int lo = *max_element(w.begin(), w.end());\n  int hi = accumulate(w.begin(), w.end(), 0);\n  while (lo < hi) {\n    int mid = lo + (hi - lo) / 2, days = 1, cur = 0;\n    for (int x : w) { if (cur + x > mid) { ++days; cur = 0; } cur += x; }\n    if (days <= D) hi = mid; else lo = mid + 1;\n  }\n  return lo;\n}`
+        cCode: `#include <stdio.h>\n\nint minCapacity(const int* w, int n, int D) {\n  if (n <= 0 || D <= 0) return 0;\n  int lo = w[0], hi = 0;\n  for (int i = 0; i < n; i++) { if (w[i] > lo) lo = w[i]; hi += w[i]; }\n  while (lo < hi) {\n    int mid = lo + (hi - lo) / 2, days = 1, cur = 0;\n    for (int i = 0; i < n; i++) { if (cur + w[i] > mid) { days++; cur = 0; } cur += w[i]; }\n    if (days <= D) hi = mid; else lo = mid + 1;\n  }\n  return lo;\n}\n\nint main(void) {\n  int w[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};\n  printf("Min Capacity = %d\\n", minCapacity(w, 10, 5));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <numeric>\nusing namespace std;\n\nint minCapacity(const vector<int>& w, int D) {\n  if (w.empty() || D <= 0) return 0;\n  int lo = *max_element(w.begin(), w.end());\n  int hi = accumulate(w.begin(), w.end(), 0);\n  while (lo < hi) {\n    int mid = lo + (hi - lo) / 2, days = 1, cur = 0;\n    for (int x : w) { if (cur + x > mid) { ++days; cur = 0; } cur += x; }\n    if (days <= D) hi = mid; else lo = mid + 1;\n  }\n  return lo;\n}\n\nint main() {\n  cout << "Min Capacity = " << minCapacity({1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 5) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "Linked List · Pointers",
-        title: "Floyd Cycle Entry & In-Place Reverse",
+        title: "Floyd Cycle Entry Detection",
         desc: `Detect a cycle in a singly linked list and return the cycle entry node in <code>O(1)</code> space.`,
         examples: [{ in: "3 -> 2 -> 0 -> -4 -> (back to 2)", out: "Node 2" }],
         constraints: ["O(n) time, O(1) space"],
         theory: `When <code>slow</code> (1x) and <code>fast</code> (2x) collide inside a cycle, resetting <code>slow = head</code> and advancing both 1x meets at the cycle entry node.`,
-        tip: `Know the 1-line proof: <code>L1 + L2 = k * C</code> implies the remaining distance to cycle entry equals <code>L1</code>.`,
-        cCode: `struct Node { int val; struct Node* next; };\nstruct Node* detectCycle(struct Node* head) {\n  struct Node *slow = head, *fast = head;\n  while (fast && fast->next) {\n    slow = slow->next; fast = fast->next->next;\n    if (slow == fast) {\n      slow = head;\n      while (slow != fast) { slow = slow->next; fast = fast->next; }\n      return slow;\n    }\n  }\n  return NULL;\n}`,
-        cppCode: `struct ListNode { int val; ListNode* next; };\nListNode* detectCycle(ListNode* head) {\n  ListNode *slow = head, *fast = head;\n  while (fast && fast->next) {\n    slow = slow->next; fast = fast->next->next;\n    if (slow == fast) {\n      slow = head;\n      while (slow != fast) { slow = slow->next; fast = fast->next; }\n      return slow;\n    }\n  }\n  return nullptr;\n}`
+        tip: `Know the 1-line proof: <code>L1 + L2 = k * C</code> implies remaining distance to cycle entry equals <code>L1</code>.`,
+        cCode: `#include <stdio.h>\n\nstruct Node { int val; struct Node* next; };\n\nstruct Node* detectCycle(struct Node* head) {\n  struct Node *slow = head, *fast = head;\n  while (fast && fast->next) {\n    slow = slow->next; fast = fast->next->next;\n    if (slow == fast) {\n      slow = head;\n      while (slow != fast) { slow = slow->next; fast = fast->next; }\n      return slow;\n    }\n  }\n  return NULL;\n}\n\nint main(void) {\n  struct Node n4 = {-4, NULL}, n3 = {0, &n4}, n2 = {2, &n3}, n1 = {3, &n2};\n  n4.next = &n2;\n  struct Node* entry = detectCycle(&n1);\n  printf("Cycle entry: %d\\n", entry ? entry->val : -1);\n  return 0;\n}`,
+        cppCode: `#include <iostream>\nusing namespace std;\n\nstruct ListNode { int val; ListNode* next; };\n\nListNode* detectCycle(ListNode* head) {\n  ListNode *slow = head, *fast = head;\n  while (fast && fast->next) {\n    slow = slow->next; fast = fast->next->next;\n    if (slow == fast) {\n      slow = head;\n      while (slow != fast) { slow = slow->next; fast = fast->next; }\n      return slow;\n    }\n  }\n  return nullptr;\n}\n\nint main() {\n  ListNode n4{-4, nullptr}, n3{0, &n4}, n2{2, &n3}, n1{3, &n2};\n  n4.next = &n2;\n  ListNode* entry = detectCycle(&n1);\n  cout << "Cycle entry: " << (entry ? entry->val : -1) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "Cache Architecture · O(1)",
         title: "O(1) LRU Cache (Hash + Doubly Linked List)",
         desc: `Design an LRU Cache supporting <code>get(key)</code> and <code>put(key, val)</code> with capacity eviction.`,
         examples: [{ in: "cap=2: put(1,1), put(2,2), get(1), put(3,3) evicts 2", out: "get(2) -> -1" }],
-        constraints: ["O(1) get and put"],
+        constraints: ["Capacity >= 1"],
         theory: `Hash map gives <code>O(1)</code> lookup; Doubly Linked List gives <code>O(1)</code> move-to-front and <code>O(1)</code> tail eviction.`,
-        tip: `In C, using an index-backed pool <code>nodes[cap]</code> keeps all cache metadata in one contiguous array with zero <code>malloc</code> per <code>put</code>.`,
-        cCode: `typedef struct { int key, val, prev, next; } LRUNode;\ntypedef struct { int cap, size, head, tail; LRUNode* p; } LRUCache;\nstatic void unlinkNode(LRUCache* c, int i) {\n  int pr = c->p[i].prev, nx = c->p[i].next;\n  if (pr != -1) c->p[pr].next = nx; else c->head = nx;\n  if (nx != -1) c->p[nx].prev = pr; else c->tail = pr;\n}\nstatic void pushFront(LRUCache* c, int i) {\n  c->p[i].prev = -1; c->p[i].next = c->head;\n  if (c->head != -1) c->p[c->head].prev = i;\n  c->head = i; if (c->tail == -1) c->tail = i;\n}\nint lruGet(LRUCache* c, int key) {\n  for (int i = c->head; i != -1; i = c->p[i].next) {\n    if (c->p[i].key == key) { unlinkNode(c, i); pushFront(c, i); return c->p[i].val; }\n  }\n  return -1;\n}\nvoid lruPut(LRUCache* c, int key, int val) {\n  for (int i = c->head; i != -1; i = c->p[i].next) {\n    if (c->p[i].key == key) { c->p[i].val = val; unlinkNode(c, i); pushFront(c, i); return; }\n  }\n  int slot = (c->size < c->cap) ? c->size++ : c->tail;\n  if (slot == c->tail && c->size == c->cap && c->tail != -1) unlinkNode(c, slot);\n  c->p[slot].key = key; c->p[slot].val = val; pushFront(c, slot);\n}`,
-        cppCode: `class LRUCache {\n  int cap;\n  list<pair<int, int>> dll;\n  unordered_map<int, list<pair<int, int>>::iterator> mp;\npublic:\n  explicit LRUCache(int c) : cap(c) {}\n  int get(int k) {\n    auto it = mp.find(k);\n    if (it == mp.end()) return -1;\n    dll.splice(dll.begin(), dll, it->second);\n    return it->second->second;\n  }\n  void put(int k, int v) {\n    if (auto it = mp.find(k); it != mp.end()) {\n      it->second->second = v;\n      dll.splice(dll.begin(), dll, it->second); return;\n    }\n    if ((int)dll.size() == cap) { mp.erase(dll.back().first); dll.pop_back(); }\n    dll.emplace_front(k, v); mp[k] = dll.begin();\n  }\n};`
+        tip: `In C, using an index-backed node pool <code>nodes[cap]</code> avoids calling <code>malloc</code>/<code>free</code> on every cache hit or eviction.`,
+        cCode: `#include <stdio.h>\n#include <stdbool.h>\n\ntypedef struct { int key, val, prev, next; } LRUNode;\ntypedef struct { int cap, size, head, tail; LRUNode* p; } LRUCache;\n\nstatic void unlinkNode(LRUCache* c, int i) {\n  int pr = c->p[i].prev, nx = c->p[i].next;\n  if (pr != -1) c->p[pr].next = nx; else c->head = nx;\n  if (nx != -1) c->p[nx].prev = pr; else c->tail = pr;\n}\nstatic void pushFront(LRUCache* c, int i) {\n  c->p[i].prev = -1; c->p[i].next = c->head;\n  if (c->head != -1) c->p[c->head].prev = i;\n  c->head = i; if (c->tail == -1) c->tail = i;\n}\nint lruGet(LRUCache* c, int key) {\n  for (int i = c->head; i != -1; i = c->p[i].next) {\n    if (c->p[i].key == key) { unlinkNode(c, i); pushFront(c, i); return c->p[i].val; }\n  }\n  return -1;\n}\nvoid lruPut(LRUCache* c, int key, int val) {\n  if (c->cap <= 0) return;\n  for (int i = c->head; i != -1; i = c->p[i].next) {\n    if (c->p[i].key == key) { c->p[i].val = val; unlinkNode(c, i); pushFront(c, i); return; }\n  }\n  bool evict = (c->size == c->cap);\n  int slot = evict ? c->tail : c->size++;\n  if (evict) unlinkNode(c, slot);\n  c->p[slot].key = key; c->p[slot].val = val;\n  pushFront(c, slot);\n}\n\nint main(void) {\n  LRUNode pool[2];\n  LRUCache cache = {2, 0, -1, -1, pool};\n  lruPut(&cache, 1, 10); lruPut(&cache, 2, 20);\n  printf("get(1) = %d\\n", lruGet(&cache, 1));\n  lruPut(&cache, 3, 30);\n  printf("get(2) = %d\\n", lruGet(&cache, 2));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <list>\n#include <unordered_map>\nusing namespace std;\n\nclass LRUCache {\n  int cap;\n  list<pair<int, int>> dll;\n  unordered_map<int, list<pair<int, int>>::iterator> mp;\npublic:\n  explicit LRUCache(int c) : cap(c) {}\n  int get(int k) {\n    auto it = mp.find(k);\n    if (it == mp.end()) return -1;\n    dll.splice(dll.begin(), dll, it->second);\n    return it->second->second;\n  }\n  void put(int k, int v) {\n    if (auto it = mp.find(k); it != mp.end()) {\n      it->second->second = v;\n      dll.splice(dll.begin(), dll, it->second); return;\n    }\n    if ((int)dll.size() == cap) { mp.erase(dll.back().first); dll.pop_back(); }\n    dll.emplace_front(k, v); mp[k] = dll.begin();\n  }\n};\n\nint main() {\n  LRUCache cache(2);\n  cache.put(1, 10); cache.put(2, 20);\n  cout << "get(1) = " << cache.get(1) << "\\n";\n  cache.put(3, 30);\n  cout << "get(2) = " << cache.get(2) << "\\n";\n  return 0;\n}`
       },
-
-      // --- TREES, TRIES & HEAPS ---
       {
         difficulty: "medium", topic: "Binary Search Tree",
         title: "Validate Binary Search Tree",
@@ -916,8 +956,8 @@
         constraints: ["Node values span full 32-bit int range"],
         theory: `Propagate strict ancestor bounds <code>(lo, hi)</code> down the recursion. Every node must satisfy <code>lo &lt; val &lt; hi</code>.`,
         tip: `Use <code>LLONG_MIN..LLONG_MAX</code> so legitimate <code>INT_MIN</code>/<code>INT_MAX</code> node values never fail boundary checks.`,
-        cCode: `struct TreeNode { int val; struct TreeNode *left, *right; };\nbool validBST(struct TreeNode* r, long long lo, long long hi) {\n  if (!r) return true;\n  if (r->val <= lo || r->val >= hi) return false;\n  return validBST(r->left, lo, r->val) && validBST(r->right, r->val, hi);\n}`,
-        cppCode: `struct TreeNode { int val; TreeNode *left, *right; };\nbool isValidBST(TreeNode* r, long long lo = LLONG_MIN, long long hi = LLONG_MAX) {\n  if (!r) return true;\n  if (r->val <= lo || r->val >= hi) return false;\n  return isValidBST(r->left, lo, r->val) && isValidBST(r->right, r->val, hi);\n}`
+        cCode: `#include <stdio.h>\n#include <stdbool.h>\n#include <limits.h>\n\nstruct TreeNode { int val; struct TreeNode *left, *right; };\n\nbool validBST(struct TreeNode* r, long long lo, long long hi) {\n  if (!r) return true;\n  if (r->val <= lo || r->val >= hi) return false;\n  return validBST(r->left, lo, r->val) && validBST(r->right, r->val, hi);\n}\n\nint main(void) {\n  struct TreeNode n3 = {3, NULL, NULL}, n6 = {6, NULL, NULL};\n  struct TreeNode n1 = {1, NULL, NULL}, n4 = {4, &n3, &n6};\n  struct TreeNode root = {5, &n1, &n4};\n  printf("isValidBST = %s\\n", validBST(&root, LLONG_MIN, LLONG_MAX) ? "true" : "false");\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <climits>\nusing namespace std;\n\nstruct TreeNode { int val; TreeNode *left, *right; };\n\nbool isValidBST(TreeNode* r, long long lo = LLONG_MIN, long long hi = LLONG_MAX) {\n  if (!r) return true;\n  if (r->val <= lo || r->val >= hi) return false;\n  return isValidBST(r->left, lo, r->val) && isValidBST(r->right, r->val, hi);\n}\n\nint main() {\n  TreeNode n3{3, nullptr, nullptr}, n6{6, nullptr, nullptr};\n  TreeNode n1{1, nullptr, nullptr}, n4{4, &n3, &n6}, root{5, &n1, &n4};\n  cout << boolalpha << "isValidBST = " << isValidBST(&root) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "Binary Trees · Postorder",
@@ -927,19 +967,19 @@
         constraints: ["O(n) time"],
         theory: `Postorder DFS returns whichever target exists in each subtree; the deepest node receiving non-null from both sides is the LCA.`,
         tip: `In a BST, LCA simplifies to an iterative <code>O(h)</code> time, <code>O(1)</code> space walk comparing values against root.`,
-        cCode: `struct TreeNode* lca(struct TreeNode* r, struct TreeNode* p, struct TreeNode* q) {\n  if (!r || r == p || r == q) return r;\n  struct TreeNode* L = lca(r->left, p, q);\n  struct TreeNode* R = lca(r->right, p, q);\n  return (L && R) ? r : (L ? L : R);\n}`,
-        cppCode: `TreeNode* lowestCommonAncestor(TreeNode* r, TreeNode* p, TreeNode* q) {\n  if (!r || r == p || r == q) return r;\n  TreeNode* L = lowestCommonAncestor(r->left, p, q);\n  TreeNode* R = lowestCommonAncestor(r->right, p, q);\n  return (L && R) ? r : (L ? L : R);\n}`
+        cCode: `#include <stdio.h>\n\nstruct TreeNode { int val; struct TreeNode *left, *right; };\n\nstruct TreeNode* lca(struct TreeNode* r, struct TreeNode* p, struct TreeNode* q) {\n  if (!r || r == p || r == q) return r;\n  struct TreeNode* L = lca(r->left, p, q);\n  struct TreeNode* R = lca(r->right, p, q);\n  return (L && R) ? r : (L ? L : R);\n}\n\nint main(void) {\n  struct TreeNode n5 = {5, NULL, NULL}, n1 = {1, NULL, NULL}, n3 = {3, &n5, &n1};\n  struct TreeNode* ans = lca(&n3, &n5, &n1);\n  printf("LCA = %d\\n", ans ? ans->val : -1);\n  return 0;\n}`,
+        cppCode: `#include <iostream>\nusing namespace std;\n\nstruct TreeNode { int val; TreeNode *left, *right; };\n\nTreeNode* lowestCommonAncestor(TreeNode* r, TreeNode* p, TreeNode* q) {\n  if (!r || r == p || r == q) return r;\n  TreeNode* L = lowestCommonAncestor(r->left, p, q);\n  TreeNode* R = lowestCommonAncestor(r->right, p, q);\n  return (L && R) ? r : (L ? L : R);\n}\n\nint main() {\n  TreeNode n5{5, nullptr, nullptr}, n1{1, nullptr, nullptr}, n3{3, &n5, &n1};\n  TreeNode* ans = lowestCommonAncestor(&n3, &n5, &n1);\n  cout << "LCA = " << (ans ? ans->val : -1) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "Trie · Prefix Routing",
         title: "Prefix Trie Command Router",
-        desc: `Implement a Prefix Trie supporting <code>insert</code>, <code>search</code>, and <code>startsWith</code> in <code>O(L)</code> time.`,
-        examples: [{ in: 'insert("dma_read"), startsWith("dma_")', out: "true" }],
-        constraints: ["O(L) per query"],
+        desc: `Implement a Prefix Trie supporting <code>insert</code>, <code>search</code>, and <code>startsWith</code> in <code>O(L)</code> time for lowercase letters <code>a..z</code>.`,
+        examples: [{ in: 'insert("dmaread"), startsWith("dma")', out: "true" }],
+        constraints: ["Lowercase a..z", "O(L) per query"],
         theory: `Shared prefixes share edges from root; an <code>end</code> flag distinguishes full tokens from prefixes.`,
-        tip: `Always use <code>calloc(1, sizeof(TrieNode))</code> in C so all 26 child pointers start as <code>NULL</code>.`,
-        cCode: `typedef struct TrieNode { struct TrieNode* ch[26]; bool end; } TrieNode;\nTrieNode* trieNew(void) { return (TrieNode*)calloc(1, sizeof(TrieNode)); }\nvoid trieInsert(TrieNode* r, const char* w) {\n  for (int i = 0; w[i]; i++) {\n    int idx = w[i] - 'a';\n    if (!r->ch[idx]) r->ch[idx] = trieNew();\n    r = r->ch[idx];\n  }\n  r->end = true;\n}\nbool trieFind(const TrieNode* r, const char* s, bool exact) {\n  for (int i = 0; s[i]; i++) {\n    r = r->ch[s[i] - 'a'];\n    if (!r) return false;\n  }\n  return exact ? r->end : true;\n}`,
-        cppCode: `class Trie {\n  struct Node { Node* ch[26]{}; bool end = false; };\n  Node* root = new Node();\npublic:\n  void insert(const string& w) {\n    Node* cur = root;\n    for (char c : w) { int i = c - 'a'; if (!cur->ch[i]) cur->ch[i] = new Node(); cur = cur->ch[i]; }\n    cur->end = true;\n  }\n  bool query(const string& s, bool exact = true) const {\n    Node* cur = root;\n    for (char c : s) { cur = cur->ch[c - 'a']; if (!cur) return false; }\n    return exact ? cur->end : true;\n  }\n};`
+        tip: `Always use <code>calloc(1, sizeof(TrieNode))</code> in C so all 26 child pointers start as <code>NULL</code>, and validate <code>'a'..'z'</code> bounds.`,
+        cCode: `#include <stdio.h>\n#include <stdlib.h>\n#include <stdbool.h>\n\ntypedef struct TrieNode { struct TrieNode* ch[26]; bool end; } TrieNode;\n\nTrieNode* trieNew(void) { return (TrieNode*)calloc(1, sizeof(TrieNode)); }\nvoid trieInsert(TrieNode* r, const char* w) {\n  for (int i = 0; w[i]; i++) {\n    int idx = w[i] - 'a';\n    if (idx < 0 || idx >= 26) continue;\n    if (!r->ch[idx]) r->ch[idx] = trieNew();\n    r = r->ch[idx];\n  }\n  r->end = true;\n}\nbool trieFind(const TrieNode* r, const char* s, bool exact) {\n  for (int i = 0; s[i]; i++) {\n    int idx = s[i] - 'a';\n    if (idx < 0 || idx >= 26) return false;\n    r = r->ch[idx];\n    if (!r) return false;\n  }\n  return exact ? r->end : true;\n}\nvoid trieFree(TrieNode* r) {\n  if (!r) return;\n  for (int i = 0; i < 26; i++) trieFree(r->ch[i]);\n  free(r);\n}\n\nint main(void) {\n  TrieNode* root = trieNew();\n  trieInsert(root, "dmaread");\n  printf("startsWith(dma): %s\\n", trieFind(root, "dma", false) ? "true" : "false");\n  printf("search(dma): %s\\n", trieFind(root, "dma", true) ? "true" : "false");\n  trieFree(root);\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <string>\nusing namespace std;\n\nclass Trie {\n  struct Node { Node* ch[26]{}; bool end = false; };\n  Node* root = new Node();\n  void destroy(Node* n) { if (!n) return; for (auto* p : n->ch) destroy(p); delete n; }\npublic:\n  ~Trie() { destroy(root); }\n  void insert(const string& w) {\n    Node* cur = root;\n    for (char c : w) { int i = c - 'a'; if (!cur->ch[i]) cur->ch[i] = new Node(); cur = cur->ch[i]; }\n    cur->end = true;\n  }\n  bool query(const string& s, bool exact = true) const {\n    Node* cur = root;\n    for (char c : s) { cur = cur->ch[c - 'a']; if (!cur) return false; }\n    return exact ? cur->end : true;\n  }\n};\n\nint main() {\n  Trie t;\n  t.insert("dmaread");\n  cout << boolalpha << "startsWith(dma): " << t.query("dma", false) << "\\n";\n  cout << "search(dma): " << t.query("dma", true) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "hard", topic: "Heap / Divide & Conquer",
@@ -949,11 +989,9 @@
         constraints: ["O(N log k) time"],
         theory: `Pairwise Divide & Conquer merges lists bottom-up in <code>log k</code> rounds with zero auxiliary heap allocations; C++ can also use a size-<code>k</code> Min-Heap.`,
         tip: `Pairwise merging achieves identical <code>O(N log k)</code> complexity as a heap with <code>O(1)</code> extra memory.`,
-        cCode: `struct ListNode { int val; struct ListNode* next; };\nstatic struct ListNode* merge2(struct ListNode* a, struct ListNode* b) {\n  struct ListNode dummy = {0, NULL}, *t = &dummy;\n  while (a && b) {\n    if (a->val <= b->val) { t->next = a; a = a->next; }\n    else { t->next = b; b = b->next; }\n    t = t->next;\n  }\n  t->next = a ? a : b;\n  return dummy.next;\n}\nstruct ListNode* mergeKLists(struct ListNode** lists, int k) {\n  if (k <= 0) return NULL;\n  for (int step = 1; step < k; step *= 2)\n    for (int i = 0; i + step < k; i += step * 2)\n      lists[i] = merge2(lists[i], lists[i + step]);\n  return lists[0];\n}`,
-        cppCode: `struct ListNode { int val; ListNode* next; };\nListNode* mergeKLists(vector<ListNode*>& lists) {\n  auto cmp = [](ListNode* a, ListNode* b) { return a->val > b->val; };\n  priority_queue<ListNode*, vector<ListNode*>, decltype(cmp)> pq(cmp);\n  for (auto* h : lists) if (h) pq.push(h);\n  ListNode dummy{0, nullptr}, *tail = &dummy;\n  while (!pq.empty()) {\n    auto* node = pq.top(); pq.pop();\n    tail = tail->next = node;\n    if (node->next) pq.push(node->next);\n  }\n  return dummy.next;\n}`
+        cCode: `#include <stdio.h>\n\nstruct ListNode { int val; struct ListNode* next; };\n\nstatic struct ListNode* merge2(struct ListNode* a, struct ListNode* b) {\n  struct ListNode dummy = {0, NULL}, *t = &dummy;\n  while (a && b) {\n    if (a->val <= b->val) { t->next = a; a = a->next; }\n    else { t->next = b; b = b->next; }\n    t = t->next;\n  }\n  t->next = a ? a : b;\n  return dummy.next;\n}\nstruct ListNode* mergeKLists(struct ListNode** lists, int k) {\n  if (k <= 0) return NULL;\n  for (int step = 1; step < k; step *= 2)\n    for (int i = 0; i + step < k; i += step * 2)\n      lists[i] = merge2(lists[i], lists[i + step]);\n  return lists[0];\n}\n\nint main(void) {\n  struct ListNode a3 = {5, NULL}, a2 = {4, &a3}, a1 = {1, &a2};\n  struct ListNode b3 = {4, NULL}, b2 = {3, &b3}, b1 = {1, &b2};\n  struct ListNode c2 = {6, NULL}, c1 = {2, &c2};\n  struct ListNode* lists[] = {&a1, &b1, &c1};\n  struct ListNode* res = mergeKLists(lists, 3);\n  while (res) { printf("%d ", res->val); res = res->next; }\n  printf("\\n");\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <queue>\nusing namespace std;\n\nstruct ListNode { int val; ListNode* next; };\n\nListNode* mergeKLists(vector<ListNode*>& lists) {\n  auto cmp = [](ListNode* a, ListNode* b) { return a->val > b->val; };\n  priority_queue<ListNode*, vector<ListNode*>, decltype(cmp)> pq(cmp);\n  for (auto* h : lists) if (h) pq.push(h);\n  ListNode dummy{0, nullptr}, *tail = &dummy;\n  while (!pq.empty()) {\n    auto* node = pq.top(); pq.pop();\n    tail = tail->next = node;\n    if (node->next) pq.push(node->next);\n  }\n  return dummy.next;\n}\n\nint main() {\n  ListNode a3{5, nullptr}, a2{4, &a3}, a1{1, &a2};\n  ListNode b3{4, nullptr}, b2{3, &b3}, b1{1, &b2};\n  ListNode c2{6, nullptr}, c1{2, &c2};\n  vector<ListNode*> lists = {&a1, &b1, &c1};\n  for (auto* p = mergeKLists(lists); p; p = p->next) cout << p->val << " ";\n  cout << "\\n";\n  return 0;\n}`
       },
-
-      // --- GRAPHS, TOPO SORT, DSU & DIJKSTRA ---
       {
         difficulty: "medium", topic: "Graph · Topological Sort",
         title: "Driver Dependency Cycle Check (Kahn's BFS)",
@@ -962,8 +1000,8 @@
         constraints: ["O(V + E) time"],
         theory: `Repeatedly dequeue nodes with <code>indegree == 0</code> and decrement neighbor indegrees. Acyclic iff <code>visited == n</code>.`,
         tip: `Kahn's iterative BFS avoids recursion stack overflow on deep driver dependency chains.`,
-        cCode: `bool canFinish(int n, const int deps[][2], int m) {\n  int *indeg = (int*)calloc((size_t)n, sizeof(int));\n  int *head = (int*)malloc((size_t)n * sizeof(int));\n  int *to = (int*)malloc((size_t)(m + 1) * sizeof(int));\n  int *nxt = (int*)malloc((size_t)(m + 1) * sizeof(int));\n  for (int i = 0; i < n; i++) head[i] = -1;\n  for (int i = 0; i < m; i++) {\n    int u = deps[i][0], v = deps[i][1];\n    to[i] = u; nxt[i] = head[v]; head[v] = i; indeg[u]++;\n  }\n  int *q = (int*)malloc((size_t)n * sizeof(int)), qh = 0, qt = 0, vis = 0;\n  for (int i = 0; i < n; i++) if (indeg[i] == 0) q[qt++] = i;\n  while (qh < qt) {\n    int u = q[qh++]; vis++;\n    for (int e = head[u]; e != -1; e = nxt[e]) {\n      if (--indeg[to[e]] == 0) q[qt++] = to[e];\n    }\n  }\n  free(indeg); free(head); free(to); free(nxt); free(q);\n  return vis == n;\n}`,
-        cppCode: `bool canFinish(int n, const vector<vector<int>>& deps) {\n  vector<vector<int>> adj(n);\n  vector<int> indeg(n, 0);\n  for (auto& d : deps) { adj[d[1]].push_back(d[0]); ++indeg[d[0]]; }\n  queue<int> q;\n  for (int i = 0; i < n; ++i) if (indeg[i] == 0) q.push(i);\n  int vis = 0;\n  while (!q.empty()) {\n    int u = q.front(); q.pop(); ++vis;\n    for (int v : adj[u]) if (--indeg[v] == 0) q.push(v);\n  }\n  return vis == n;\n}`
+        cCode: `#include <stdio.h>\n#include <stdlib.h>\n#include <stdbool.h>\n\nbool canFinish(int n, const int deps[][2], int m) {\n  int *indeg = (int*)calloc((size_t)n, sizeof(int));\n  int *head = (int*)malloc((size_t)n * sizeof(int));\n  int *to = (int*)malloc((size_t)(m + 1) * sizeof(int));\n  int *nxt = (int*)malloc((size_t)(m + 1) * sizeof(int));\n  for (int i = 0; i < n; i++) head[i] = -1;\n  for (int i = 0; i < m; i++) { int u = deps[i][0], v = deps[i][1]; to[i] = u; nxt[i] = head[v]; head[v] = i; indeg[u]++; }\n  int *q = (int*)malloc((size_t)n * sizeof(int)), qh = 0, qt = 0, vis = 0;\n  for (int i = 0; i < n; i++) if (indeg[i] == 0) q[qt++] = i;\n  while (qh < qt) {\n    int u = q[qh++]; vis++;\n    for (int e = head[u]; e != -1; e = nxt[e]) if (--indeg[to[e]] == 0) q[qt++] = to[e];\n  }\n  free(indeg); free(head); free(to); free(nxt); free(q);\n  return vis == n;\n}\n\nint main(void) {\n  int d1[][2] = {{1, 0}, {0, 1}}, d2[][2] = {{1, 0}, {2, 1}, {3, 2}};\n  printf("Cycle case: %s\\n", canFinish(2, d1, 2) ? "true" : "false");\n  printf("Valid DAG:  %s\\n", canFinish(4, d2, 3) ? "true" : "false");\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <queue>\nusing namespace std;\n\nbool canFinish(int n, const vector<vector<int>>& deps) {\n  vector<vector<int>> adj(n);\n  vector<int> indeg(n, 0);\n  for (auto& d : deps) { adj[d[1]].push_back(d[0]); ++indeg[d[0]]; }\n  queue<int> q;\n  for (int i = 0; i < n; ++i) if (indeg[i] == 0) q.push(i);\n  int vis = 0;\n  while (!q.empty()) {\n    int u = q.front(); q.pop(); ++vis;\n    for (int v : adj[u]) if (--indeg[v] == 0) q.push(v);\n  }\n  return vis == n;\n}\n\nint main() {\n  cout << boolalpha << "Cycle case: " << canFinish(2, {{1, 0}, {0, 1}}) << "\\n";\n  cout << "Valid DAG:  " << canFinish(4, {{1, 0}, {2, 1}, {3, 2}}) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "Graph · Union-Find (DSU)",
@@ -973,8 +1011,8 @@
         constraints: ["O(alpha(n)) per operation"],
         theory: `Path compression flattens parent pointers during <code>find</code>; union by size attaches the smaller component under the larger root.`,
         tip: `DSU is leaner and faster than repeated BFS/DFS on dynamic edge streams.`,
-        cCode: `int dsuFind(int* p, int x) {\n  return (p[x] == x) ? x : (p[x] = dsuFind(p, p[x]));\n}\nbool dsuUnion(int* p, int* sz, int a, int b) {\n  a = dsuFind(p, a); b = dsuFind(p, b);\n  if (a == b) return false;\n  if (sz[a] < sz[b]) { int t = a; a = b; b = t; }\n  p[b] = a; sz[a] += sz[b];\n  return true;\n}`,
-        cppCode: `struct DSU {\n  vector<int> p, sz;\n  explicit DSU(int n) : p(n), sz(n, 1) { iota(p.begin(), p.end(), 0); }\n  int find(int x) { return p[x] == x ? x : p[x] = find(p[x]); }\n  bool unite(int a, int b) {\n    a = find(a); b = find(b);\n    if (a == b) return false;\n    if (sz[a] < sz[b]) swap(a, b);\n    p[b] = a; sz[a] += sz[b]; return true;\n  }\n};`
+        cCode: `#include <stdio.h>\n#include <stdbool.h>\n\nint dsuFind(int* p, int x) { return (p[x] == x) ? x : (p[x] = dsuFind(p, p[x])); }\nbool dsuUnion(int* p, int* sz, int a, int b) {\n  a = dsuFind(p, a); b = dsuFind(p, b);\n  if (a == b) return false;\n  if (sz[a] < sz[b]) { int t = a; a = b; b = t; }\n  p[b] = a; sz[a] += sz[b]; return true;\n}\n\nint main(void) {\n  int p[4] = {0, 1, 2, 3}, sz[4] = {1, 1, 1, 1};\n  printf("unite(0,1): %s\\n", dsuUnion(p, sz, 0, 1) ? "true" : "false");\n  printf("unite(1,2): %s\\n", dsuUnion(p, sz, 1, 2) ? "true" : "false");\n  printf("unite(2,0): %s\\n", dsuUnion(p, sz, 2, 0) ? "true" : "false");\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <numeric>\nusing namespace std;\n\nstruct DSU {\n  vector<int> p, sz;\n  explicit DSU(int n) : p(n), sz(n, 1) { iota(p.begin(), p.end(), 0); }\n  int find(int x) { return p[x] == x ? x : p[x] = find(p[x]); }\n  bool unite(int a, int b) {\n    a = find(a); b = find(b);\n    if (a == b) return false;\n    if (sz[a] < sz[b]) swap(a, b);\n    p[b] = a; sz[a] += sz[b]; return true;\n  }\n};\n\nint main() {\n  DSU dsu(4);\n  cout << boolalpha << dsu.unite(0, 1) << "\\n" << dsu.unite(1, 2) << "\\n" << dsu.unite(2, 0) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "hard", topic: "Graph · Dijkstra",
@@ -984,11 +1022,9 @@
         constraints: ["O((V + E) log V) time"],
         theory: `Min-Heap extracts the closest unfinalized node. Skip stale entries via <code>if (d > dist[u]) continue;</code>.`,
         tip: `Non-negative edge weights are required for greedy finality; negative weights need Bellman-Ford.`,
-        cCode: `typedef struct { int d, u; } HItem;\nstatic void hPush(HItem* h, int* sz, HItem it) {\n  int i = (*sz)++; h[i] = it;\n  while (i > 0 && h[(i - 1) / 2].d > h[i].d) {\n    int p = (i - 1) / 2; HItem t = h[p]; h[p] = h[i]; h[i] = t; i = p;\n  }\n}\nstatic HItem hPop(HItem* h, int* sz) {\n  HItem top = h[0]; h[0] = h[--(*sz)]; int i = 0;\n  while (1) {\n    int s = i, l = 2 * i + 1, r = 2 * i + 2;\n    if (l < *sz && h[l].d < h[s].d) s = l;\n    if (r < *sz && h[r].d < h[s].d) s = r;\n    if (s == i) break;\n    HItem t = h[i]; h[i] = h[s]; h[s] = t; i = s;\n  }\n  return top;\n}\nint shortestPath(int n, const int edges[][3], int m, int src, int dst) {\n  int *head = malloc((size_t)n * sizeof(int)), *dist = malloc((size_t)n * sizeof(int));\n  int *to = malloc((size_t)(m + 1) * sizeof(int)), *wt = malloc((size_t)(m + 1) * sizeof(int)), *nxt = malloc((size_t)(m + 1) * sizeof(int));\n  for (int i = 0; i < n; i++) { head[i] = -1; dist[i] = INT_MAX; }\n  for (int i = 0; i < m; i++) { to[i] = edges[i][1]; wt[i] = edges[i][2]; nxt[i] = head[edges[i][0]]; head[edges[i][0]] = i; }\n  HItem* heap = malloc((size_t)(m + n + 1) * sizeof(HItem)); int hsz = 0;\n  dist[src] = 0; hPush(heap, &hsz, (HItem){0, src});\n  while (hsz > 0) {\n    HItem cur = hPop(heap, &hsz);\n    if (cur.d > dist[cur.u]) continue;\n    if (cur.u == dst) break;\n    for (int e = head[cur.u]; e != -1; e = nxt[e]) {\n      if (cur.d + wt[e] < dist[to[e]]) {\n        dist[to[e]] = cur.d + wt[e]; hPush(heap, &hsz, (HItem){dist[to[e]], to[e]});\n      }\n    }\n  }\n  int ans = (dist[dst] == INT_MAX) ? -1 : dist[dst];\n  free(head); free(dist); free(to); free(wt); free(nxt); free(heap);\n  return ans;\n}`,
-        cppCode: `int shortestPath(int n, const vector<vector<int>>& edges, int src, int dst) {\n  vector<vector<pair<int,int>>> adj(n);\n  for (auto& e : edges) adj[e[0]].push_back({e[1], e[2]});\n  vector<int> dist(n, INT_MAX);\n  using P = pair<int, int>;\n  priority_queue<P, vector<P>, greater<P>> pq;\n  dist[src] = 0; pq.push({0, src});\n  while (!pq.empty()) {\n    auto [d, u] = pq.top(); pq.pop();\n    if (d > dist[u]) continue;\n    if (u == dst) return d;\n    for (auto [v, w] : adj[u]) {\n      if (d + w < dist[v]) { dist[v] = d + w; pq.push({dist[v], v}); }\n    }\n  }\n  return -1;\n}`
+        cCode: `#include <stdio.h>\n#include <stdlib.h>\n#include <limits.h>\n\ntypedef struct { int d, u; } HItem;\nstatic void hPush(HItem* h, int* sz, HItem it) {\n  int i = (*sz)++; h[i] = it;\n  while (i > 0 && h[(i - 1) / 2].d > h[i].d) {\n    int p = (i - 1) / 2; HItem t = h[p]; h[p] = h[i]; h[i] = t; i = p;\n  }\n}\nstatic HItem hPop(HItem* h, int* sz) {\n  HItem top = h[0]; h[0] = h[--(*sz)]; int i = 0;\n  while (1) {\n    int s = i, l = 2 * i + 1, r = 2 * i + 2;\n    if (l < *sz && h[l].d < h[s].d) s = l;\n    if (r < *sz && h[r].d < h[s].d) s = r;\n    if (s == i) break;\n    HItem t = h[i]; h[i] = h[s]; h[s] = t; i = s;\n  }\n  return top;\n}\nint shortestPath(int n, const int edges[][3], int m, int src, int dst) {\n  int *head = (int*)malloc((size_t)n * sizeof(int)), *dist = (int*)malloc((size_t)n * sizeof(int));\n  int *to = (int*)malloc((size_t)(m + 1) * sizeof(int)), *wt = (int*)malloc((size_t)(m + 1) * sizeof(int)), *nxt = (int*)malloc((size_t)(m + 1) * sizeof(int));\n  for (int i = 0; i < n; i++) { head[i] = -1; dist[i] = INT_MAX; }\n  for (int i = 0; i < m; i++) { to[i] = edges[i][1]; wt[i] = edges[i][2]; nxt[i] = head[edges[i][0]]; head[edges[i][0]] = i; }\n  HItem* heap = (HItem*)malloc((size_t)(m + n + 1) * sizeof(HItem)); int hsz = 0;\n  dist[src] = 0; hPush(heap, &hsz, (HItem){0, src});\n  while (hsz > 0) {\n    HItem cur = hPop(heap, &hsz);\n    if (cur.d > dist[cur.u]) continue;\n    if (cur.u == dst) break;\n    for (int e = head[cur.u]; e != -1; e = nxt[e]) {\n      if (cur.d + wt[e] < dist[to[e]]) { dist[to[e]] = cur.d + wt[e]; hPush(heap, &hsz, (HItem){dist[to[e]], to[e]}); }\n    }\n  }\n  int ans = (dist[dst] == INT_MAX) ? -1 : dist[dst];\n  free(head); free(dist); free(to); free(wt); free(nxt); free(heap);\n  return ans;\n}\n\nint main(void) {\n  int edges[][3] = {{0, 1, 4}, {0, 2, 1}, {2, 1, 2}, {1, 3, 1}};\n  printf("Shortest Path = %d\\n", shortestPath(4, edges, 4, 0, 3));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <queue>\n#include <climits>\nusing namespace std;\n\nint shortestPath(int n, const vector<vector<int>>& edges, int src, int dst) {\n  vector<vector<pair<int,int>>> adj(n);\n  for (auto& e : edges) adj[e[0]].push_back({e[1], e[2]});\n  vector<int> dist(n, INT_MAX);\n  using P = pair<int, int>;\n  priority_queue<P, vector<P>, greater<P>> pq;\n  dist[src] = 0; pq.push({0, src});\n  while (!pq.empty()) {\n    auto [d, u] = pq.top(); pq.pop();\n    if (d > dist[u]) continue;\n    if (u == dst) return d;\n    for (auto [v, w] : adj[u]) {\n      if (d + w < dist[v]) { dist[v] = d + w; pq.push({dist[v], v}); }\n    }\n  }\n  return -1;\n}\n\nint main() {\n  cout << "Shortest Path = " << shortestPath(4, {{0,1,4},{0,2,1},{2,1,2},{1,3,1}}, 0, 3) << "\\n";\n  return 0;\n}`
       },
-
-      // --- DYNAMIC PROGRAMMING & BACKTRACKING ---
       {
         difficulty: "medium", topic: "1D Dynamic Programming",
         title: "Coin Change (Minimum Packet Count)",
@@ -997,8 +1033,8 @@
         constraints: ["O(amount * k) time"],
         theory: `<code>dp[a] = min(1 + dp[a - c])</code> over valid coins. Greedy fails on <code>[1, 3, 4]</code> for <code>6</code>.`,
         tip: `Use <code>amount + 1</code> as sentinel infinity so adding <code>+ 1</code> can never overflow signed int.`,
-        cCode: `int coinChange(const int* c, int k, int amt) {\n  if (amt < 0) return -1;\n  int inf = amt + 1;\n  int* dp = (int*)malloc((size_t)(amt + 1) * sizeof(int));\n  for (int i = 0; i <= amt; i++) dp[i] = inf;\n  dp[0] = 0;\n  for (int a = 1; a <= amt; a++)\n    for (int j = 0; j < k; j++)\n      if (a >= c[j] && dp[a - c[j]] + 1 < dp[a]) dp[a] = dp[a - c[j]] + 1;\n  int ans = (dp[amt] > amt) ? -1 : dp[amt];\n  free(dp);\n  return ans;\n}`,
-        cppCode: `int coinChange(const vector<int>& coins, int amt) {\n  if (amt < 0) return -1;\n  vector<int> dp(amt + 1, amt + 1);\n  dp[0] = 0;\n  for (int a = 1; a <= amt; ++a)\n    for (int c : coins)\n      if (a >= c) dp[a] = min(dp[a], dp[a - c] + 1);\n  return (dp[amt] > amt) ? -1 : dp[amt];\n}`
+        cCode: `#include <stdio.h>\n#include <stdlib.h>\n\nint coinChange(const int* c, int k, int amt) {\n  if (amt < 0) return -1;\n  int inf = amt + 1;\n  int* dp = (int*)malloc((size_t)(amt + 1) * sizeof(int));\n  for (int i = 0; i <= amt; i++) dp[i] = inf;\n  dp[0] = 0;\n  for (int a = 1; a <= amt; a++)\n    for (int j = 0; j < k; j++)\n      if (a >= c[j] && dp[a - c[j]] + 1 < dp[a]) dp[a] = dp[a - c[j]] + 1;\n  int ans = (dp[amt] > amt) ? -1 : dp[amt];\n  free(dp); return ans;\n}\n\nint main(void) {\n  int coins[] = {1, 3, 4};\n  printf("Min Coins = %d\\n", coinChange(coins, 3, 6));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint coinChange(const vector<int>& coins, int amt) {\n  if (amt < 0) return -1;\n  vector<int> dp(amt + 1, amt + 1);\n  dp[0] = 0;\n  for (int a = 1; a <= amt; ++a)\n    for (int c : coins) if (a >= c) dp[a] = min(dp[a], dp[a - c] + 1);\n  return (dp[amt] > amt) ? -1 : dp[amt];\n}\n\nint main() {\n  cout << "Min Coins = " << coinChange({1, 3, 4}, 6) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "O(1)-Space DP",
@@ -1008,8 +1044,8 @@
         constraints: ["O(n) time, O(1) space"],
         theory: `<code>dp[i] = max(dp[i-1], dp[i-2] + nums[i])</code> compressed into two scalar registers <code>p1</code> and <code>p2</code>.`,
         tip: `Whenever 1D DP reads only <code>i-1</code> and <code>i-2</code>, drop RAM from <code>O(n)</code> to <code>O(1)</code>.`,
-        cCode: `int maxNonAdj(const int* a, int n) {\n  int p2 = 0, p1 = 0;\n  for (int i = 0; i < n; i++) {\n    int take = p2 + a[i];\n    int cur = (take > p1) ? take : p1;\n    p2 = p1; p1 = cur;\n  }\n  return p1;\n}`,
-        cppCode: `int maxNonAdj(const vector<int>& a) {\n  int p2 = 0, p1 = 0;\n  for (int x : a) {\n    int cur = max(p1, p2 + x);\n    p2 = p1; p1 = cur;\n  }\n  return p1;\n}`
+        cCode: `#include <stdio.h>\n\nint maxNonAdj(const int* a, int n) {\n  int p2 = 0, p1 = 0;\n  for (int i = 0; i < n; i++) { int cur = (p2 + a[i] > p1) ? p2 + a[i] : p1; p2 = p1; p1 = cur; }\n  return p1;\n}\n\nint main(void) {\n  int a[] = {2, 7, 9, 3, 1};\n  printf("Max Sum = %d\\n", maxNonAdj(a, 5));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint maxNonAdj(const vector<int>& a) {\n  int p2 = 0, p1 = 0;\n  for (int x : a) { int cur = max(p1, p2 + x); p2 = p1; p1 = cur; }\n  return p1;\n}\n\nint main() {\n  cout << "Max Sum = " << maxNonAdj({2, 7, 9, 3, 1}) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "DP + Binary Search",
@@ -1019,8 +1055,8 @@
         constraints: ["O(n log n) time"],
         theory: `<code>tails[len]</code> stores the smallest possible ending value of an increasing subsequence of length <code>len + 1</code>. Binary search to replace or append.`,
         tip: `Knowing the <code>O(n log n)</code> patience-sorting method distinguishes top-tier candidates from standard <code>O(n^2)</code> DP answers.`,
-        cCode: `int lengthOfLIS(const int* a, int n) {\n  if (n <= 0) return 0;\n  int* tails = (int*)malloc((size_t)n * sizeof(int)), len = 0;\n  for (int i = 0; i < n; i++) {\n    int l = 0, r = len;\n    while (l < r) { int m = l + (r - l) / 2; if (tails[m] < a[i]) l = m + 1; else r = m; }\n    tails[l] = a[i];\n    if (l == len) len++;\n  }\n  free(tails); return len;\n}`,
-        cppCode: `int lengthOfLIS(const vector<int>& a) {\n  vector<int> tails;\n  for (int x : a) {\n    auto it = lower_bound(tails.begin(), tails.end(), x);\n    if (it == tails.end()) tails.push_back(x);\n    else *it = x;\n  }\n  return (int)tails.size();\n}`
+        cCode: `#include <stdio.h>\n#include <stdlib.h>\n\nint lengthOfLIS(const int* a, int n) {\n  if (n <= 0) return 0;\n  int* tails = (int*)malloc((size_t)n * sizeof(int)), len = 0;\n  for (int i = 0; i < n; i++) {\n    int l = 0, r = len;\n    while (l < r) { int m = l + (r - l) / 2; if (tails[m] < a[i]) l = m + 1; else r = m; }\n    tails[l] = a[i]; if (l == len) len++;\n  }\n  free(tails); return len;\n}\n\nint main(void) {\n  int a[] = {10, 9, 2, 5, 3, 7, 101, 18};\n  printf("LIS Length = %d\\n", lengthOfLIS(a, 8));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint lengthOfLIS(const vector<int>& a) {\n  vector<int> tails;\n  for (int x : a) {\n    auto it = lower_bound(tails.begin(), tails.end(), x);\n    if (it == tails.end()) tails.push_back(x); else *it = x;\n  }\n  return (int)tails.size();\n}\n\nint main() {\n  cout << "LIS Length = " << lengthOfLIS({10, 9, 2, 5, 3, 7, 101, 18}) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "medium", topic: "1D-Compressed Knapsack",
@@ -1028,10 +1064,10 @@
         desc: `Given weights <code>w[]</code>, values <code>v[]</code>, and capacity <code>W</code>, maximize value using each item at most once.`,
         examples: [{ in: "w=[1,3,4], v=[15,20,30], W=4", out: "35" }],
         constraints: ["O(n * W) time, O(W) space"],
-        theory: `Sweep capacity <strong>backwards</strong> from <code>W</code> down to <code>w[i]</code> so each item updates only states from prior items (never reusing itself).`,
+        theory: `Sweep capacity <strong>backwards</strong> from <code>W</code> down to <code>w[i]</code> so each item updates only states from prior items.`,
         tip: `Forward sweep = Unbounded Knapsack; Backward sweep = 0/1 Knapsack.`,
-        cCode: `int knapsack01(const int* w, const int* v, int n, int W) {\n  int* dp = (int*)calloc((size_t)(W + 1), sizeof(int));\n  for (int i = 0; i < n; i++) {\n    for (int c = W; c >= w[i]; c--) {\n      int cand = dp[c - w[i]] + v[i];\n      if (cand > dp[c]) dp[c] = cand;\n    }\n  }\n  int ans = dp[W]; free(dp); return ans;\n}`,
-        cppCode: `int knapsack01(const vector<int>& w, const vector<int>& v, int W) {\n  vector<int> dp(W + 1, 0);\n  for (size_t i = 0; i < w.size(); ++i)\n    for (int c = W; c >= w[i]; --c)\n      dp[c] = max(dp[c], dp[c - w[i]] + v[i]);\n  return dp[W];\n}`
+        cCode: `#include <stdio.h>\n#include <stdlib.h>\n\nint knapsack01(const int* w, const int* v, int n, int W) {\n  int* dp = (int*)calloc((size_t)(W + 1), sizeof(int));\n  for (int i = 0; i < n; i++)\n    for (int c = W; c >= w[i]; c--)\n      if (dp[c - w[i]] + v[i] > dp[c]) dp[c] = dp[c - w[i]] + v[i];\n  int ans = dp[W]; free(dp); return ans;\n}\n\nint main(void) {\n  int w[] = {1, 3, 4}, v[] = {15, 20, 30};\n  printf("Max Value = %d\\n", knapsack01(w, v, 3, 4));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint knapsack01(const vector<int>& w, const vector<int>& v, int W) {\n  vector<int> dp(W + 1, 0);\n  for (size_t i = 0; i < w.size(); ++i)\n    for (int c = W; c >= w[i]; --c) dp[c] = max(dp[c], dp[c - w[i]] + v[i]);\n  return dp[W];\n}\n\nint main() {\n  cout << "Max Value = " << knapsack01({1, 3, 4}, {15, 20, 30}, 4) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "hard", topic: "Space-Compressed 2D DP",
@@ -1041,8 +1077,8 @@
         constraints: ["O(m*n) time, O(n) space"],
         theory: `Save <code>dp[i-1][j-1]</code> in scalar <code>prevDiag</code> before overwriting <code>dp[j]</code>, compressing the 2D table into a single 1D row.`,
         tip: `Handles empty strings cleanly: if <code>w1</code> or <code>w2</code> is empty, returns the other's length.`,
-        cCode: `int editDist(const char* w1, const char* w2) {\n  int m = (int)strlen(w1), n = (int)strlen(w2);\n  int* dp = (int*)malloc((size_t)(n + 1) * sizeof(int));\n  for (int j = 0; j <= n; j++) dp[j] = j;\n  for (int i = 1; i <= m; i++) {\n    int prevDiag = dp[0]; dp[0] = i;\n    for (int j = 1; j <= n; j++) {\n      int tmp = dp[j];\n      if (w1[i - 1] == w2[j - 1]) dp[j] = prevDiag;\n      else { int mn = dp[j] < dp[j - 1] ? dp[j] : dp[j - 1]; dp[j] = 1 + (prevDiag < mn ? prevDiag : mn); }\n      prevDiag = tmp;\n    }\n  }\n  int ans = dp[n]; free(dp); return ans;\n}`,
-        cppCode: `int editDist(const string& w1, const string& w2) {\n  int m = (int)w1.size(), n = (int)w2.size();\n  vector<int> dp(n + 1); iota(dp.begin(), dp.end(), 0);\n  for (int i = 1; i <= m; ++i) {\n    int prevDiag = dp[0]; dp[0] = i;\n    for (int j = 1; j <= n; ++j) {\n      int tmp = dp[j];\n      if (w1[i - 1] == w2[j - 1]) dp[j] = prevDiag;\n      else dp[j] = 1 + min({dp[j], dp[j - 1], prevDiag});\n      prevDiag = tmp;\n    }\n  }\n  return dp[n];\n}`
+        cCode: `#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint editDist(const char* w1, const char* w2) {\n  int m = (int)strlen(w1), n = (int)strlen(w2);\n  int* dp = (int*)malloc((size_t)(n + 1) * sizeof(int));\n  for (int j = 0; j <= n; j++) dp[j] = j;\n  for (int i = 1; i <= m; i++) {\n    int prevDiag = dp[0]; dp[0] = i;\n    for (int j = 1; j <= n; j++) {\n      int tmp = dp[j];\n      if (w1[i - 1] == w2[j - 1]) dp[j] = prevDiag;\n      else { int mn = dp[j] < dp[j - 1] ? dp[j] : dp[j - 1]; dp[j] = 1 + (prevDiag < mn ? prevDiag : mn); }\n      prevDiag = tmp;\n    }\n  }\n  int ans = dp[n]; free(dp); return ans;\n}\n\nint main(void) {\n  printf("Edit Distance = %d\\n", editDist("horse", "ros"));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <string>\n#include <vector>\n#include <numeric>\n#include <algorithm>\nusing namespace std;\n\nint editDist(const string& w1, const string& w2) {\n  int m = (int)w1.size(), n = (int)w2.size();\n  vector<int> dp(n + 1); iota(dp.begin(), dp.end(), 0);\n  for (int i = 1; i <= m; ++i) {\n    int prevDiag = dp[0]; dp[0] = i;\n    for (int j = 1; j <= n; ++j) {\n      int tmp = dp[j];\n      if (w1[i - 1] == w2[j - 1]) dp[j] = prevDiag;\n      else dp[j] = 1 + min({dp[j], dp[j - 1], prevDiag});\n      prevDiag = tmp;\n    }\n  }\n  return dp[n];\n}\n\nint main() {\n  cout << "Edit Distance = " << editDist("horse", "ros") << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "hard", topic: "Bitmask Backtracking",
@@ -1052,8 +1088,8 @@
         constraints: ["1 <= n <= 15", "Zero heap memory"],
         theory: `Valid slots on current row: <code>avail = all & ~(cols | d1 | d2)</code>. Extract lowest valid bit via <code>avail & (~avail + 1u)</code> and shift diagonals per row.`,
         tip: `Using a clean helper function in both C and C++ keeps recursion crystal clear without template lambda noise.`,
-        cCode: `static int dfsQ(uint32_t c, uint32_t d1, uint32_t d2, uint32_t all) {\n  if (c == all) return 1;\n  int cnt = 0; uint32_t av = all & ~(c | d1 | d2);\n  while (av) {\n    uint32_t b = av & (~av + 1u); av -= b;\n    cnt += dfsQ(c | b, (d1 | b) << 1, (d2 | b) >> 1, all);\n  }\n  return cnt;\n}\nint totalNQueens(int n) { return dfsQ(0u, 0u, 0u, (1u << n) - 1u); }`,
-        cppCode: `int dfsQ(uint32_t c, uint32_t d1, uint32_t d2, uint32_t all) {\n  if (c == all) return 1;\n  int cnt = 0; uint32_t av = all & ~(c | d1 | d2);\n  while (av) {\n    uint32_t b = av & (~av + 1u); av -= b;\n    cnt += dfsQ(c | b, (d1 | b) << 1, (d2 | b) >> 1, all);\n  }\n  return cnt;\n}\nint totalNQueens(int n) { return dfsQ(0u, 0u, 0u, (1u << n) - 1u); }`
+        cCode: `#include <stdio.h>\n#include <stdint.h>\n\nstatic int dfsQ(uint32_t c, uint32_t d1, uint32_t d2, uint32_t all) {\n  if (c == all) return 1;\n  int cnt = 0; uint32_t av = all & ~(c | d1 | d2);\n  while (av) {\n    uint32_t b = av & (~av + 1u); av -= b;\n    cnt += dfsQ(c | b, (d1 | b) << 1, (d2 | b) >> 1, all);\n  }\n  return cnt;\n}\nint totalNQueens(int n) { return dfsQ(0u, 0u, 0u, (1u << n) - 1u); }\n\nint main(void) {\n  printf("4-Queens = %d\\n8-Queens = %d\\n", totalNQueens(4), totalNQueens(8));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <cstdint>\nusing namespace std;\n\nint dfsQ(uint32_t c, uint32_t d1, uint32_t d2, uint32_t all) {\n  if (c == all) return 1;\n  int cnt = 0; uint32_t av = all & ~(c | d1 | d2);\n  while (av) {\n    uint32_t b = av & (~av + 1u); av -= b;\n    cnt += dfsQ(c | b, (d1 | b) << 1, (d2 | b) >> 1, all);\n  }\n  return cnt;\n}\nint totalNQueens(int n) { return dfsQ(0u, 0u, 0u, (1u << n) - 1u); }\n\nint main() {\n  cout << "4-Queens = " << totalNQueens(4) << "\\n8-Queens = " << totalNQueens(8) << "\\n";\n  return 0;\n}`
       },
       {
         difficulty: "hard", topic: "Binary Search Partition",
@@ -1063,8 +1099,8 @@
         constraints: ["m + n >= 1", "O(log(min(m, n)))"],
         theory: `Binary search partition cut <code>i</code> in the shorter array so left-half max <= right-half min across both arrays.`,
         tip: `Guard empty combined input (<code>m + n == 0</code>), swap if <code>m > n</code>, and use <code>INT_MIN</code>/<code>INT_MAX</code> sentinels.`,
-        cCode: `double findMedian(const int* a, int m, const int* b, int n) {\n  if (m + n == 0) return 0.0;\n  if (m > n) return findMedian(b, n, a, m);\n  int lo = 0, hi = m;\n  while (lo <= hi) {\n    int i = lo + (hi - lo) / 2, j = (m + n + 1) / 2 - i;\n    int lA = i ? a[i - 1] : INT_MIN, rA = i < m ? a[i] : INT_MAX;\n    int lB = j ? b[j - 1] : INT_MIN, rB = j < n ? b[j] : INT_MAX;\n    if (lA <= rB && lB <= rA) {\n      int mx = lA > lB ? lA : lB, mn = rA < rB ? rA : rB;\n      return ((m + n) % 2 == 0) ? (mx + mn) * 0.5 : (double)mx;\n    } else if (lA > rB) hi = i - 1; else lo = i + 1;\n  }\n  return 0.0;\n}`,
-        cppCode: `double findMedian(const vector<int>& a, const vector<int>& b) {\n  if (a.empty() && b.empty()) return 0.0;\n  if (a.size() > b.size()) return findMedian(b, a);\n  int m = (int)a.size(), n = (int)b.size(), lo = 0, hi = m;\n  while (lo <= hi) {\n    int i = lo + (hi - lo) / 2, j = (m + n + 1) / 2 - i;\n    int lA = i ? a[i - 1] : INT_MIN, rA = i < m ? a[i] : INT_MAX;\n    int lB = j ? b[j - 1] : INT_MIN, rB = j < n ? b[j] : INT_MAX;\n    if (lA <= rB && lB <= rA) {\n      if ((m + n) % 2 == 0) return (max(lA, lB) + min(rA, rB)) * 0.5;\n      return static_cast<double>(max(lA, lB));\n    } else if (lA > rB) hi = i - 1; else lo = i + 1;\n  }\n  return 0.0;\n}`
+        cCode: `#include <stdio.h>\n#include <limits.h>\n\ndouble findMedian(const int* a, int m, const int* b, int n) {\n  if (m + n == 0) return 0.0;\n  if (m > n) return findMedian(b, n, a, m);\n  int lo = 0, hi = m;\n  while (lo <= hi) {\n    int i = lo + (hi - lo) / 2, j = (m + n + 1) / 2 - i;\n    int lA = i ? a[i - 1] : INT_MIN, rA = i < m ? a[i] : INT_MAX;\n    int lB = j ? b[j - 1] : INT_MIN, rB = j < n ? b[j] : INT_MAX;\n    if (lA <= rB && lB <= rA) {\n      int mx = lA > lB ? lA : lB, mn = rA < rB ? rA : rB;\n      return ((m + n) % 2 == 0) ? (mx + mn) * 0.5 : (double)mx;\n    } else if (lA > rB) hi = i - 1; else lo = i + 1;\n  }\n  return 0.0;\n}\n\nint main(void) {\n  int a[] = {1, 2}, b[] = {3, 4};\n  printf("Median = %.1f\\n", findMedian(a, 2, b, 2));\n  return 0;\n}`,
+        cppCode: `#include <iostream>\n#include <vector>\n#include <climits>\n#include <algorithm>\nusing namespace std;\n\ndouble findMedian(const vector<int>& a, const vector<int>& b) {\n  if (a.empty() && b.empty()) return 0.0;\n  if (a.size() > b.size()) return findMedian(b, a);\n  int m = (int)a.size(), n = (int)b.size(), lo = 0, hi = m;\n  while (lo <= hi) {\n    int i = lo + (hi - lo) / 2, j = (m + n + 1) / 2 - i;\n    int lA = i ? a[i - 1] : INT_MIN, rA = i < m ? a[i] : INT_MAX;\n    int lB = j ? b[j - 1] : INT_MIN, rB = j < n ? b[j] : INT_MAX;\n    if (lA <= rB && lB <= rA) {\n      if ((m + n) % 2 == 0) return (max(lA, lB) + min(rA, rB)) * 0.5;\n      return static_cast<double>(max(lA, lB));\n    } else if (lA > rB) hi = i - 1; else lo = i + 1;\n  }\n  return 0.0;\n}\n\nint main() {\n  cout << "Median = " << findMedian({1, 2}, {3, 4}) << "\\n";\n  return 0;\n}`
       }
     ];
 
@@ -1099,9 +1135,320 @@
     }
 
     // =========================================================
-    // 4. PERSISTENCE & UI STATE
+    // 4. GOOGLE L6 AUDIO HAL & AUTOMOTIVE KNOWLEDGE ENGINE
     // =========================================================
-    const STORE_KEY = "top1_365_dual_v4";
+    const AUDIO_KB = [
+      {
+        id: "audio-hal",
+        label: "Audio HAL (AIDL vs HIDL)",
+        keywords: ["hal", "aidl", "hidl", "audioserver", "binder", "fmq", "treblized", "vendor", "policy", "streamout", "streamin"],
+        title: "Android Audio HAL Architecture (HIDL → AIDL Migration)",
+        summary: `Starting in Android 14 (and mandatory for modern AAOS/Pixel platforms), Google deprecated HIDL <code>android.hardware.audio@7.x</code> in favor of <strong>AIDL Audio HAL</strong> (<code>android.hardware.audio.core</code> + <code>audio.effect</code>). The HAL decouples <code>audioserver</code> (<code>AudioFlinger</code> + <code>AudioPolicyManager</code>) from vendor kernel/DSP implementations across a strict Binder boundary.`,
+        flow: `App (AudioTrack/AAudio)
+  └─> AudioFlinger (FastMixer / NormalMixer, SCHED_FIFO)
+        └─> Binder Control Plane (AIDL IModule / IStreamOut)
+        └─> FastMessageQueue (FMQ) Data Plane (Shared Ring Buffer + EventFlag)
+              └─> Vendor Audio HAL (ModulePrimary / StreamOutPrimary)
+                    └─> TinyALSA / Compress Offload / DSP IPC -> Kernel ALSA`,
+        deepPoints: [
+          "<strong>Control vs Data Plane Split:</strong> Parameter updates, routing (<code>setAudioPatch</code>), and stream lifecycle use Binder IPC; raw PCM audio frames NEVER cross Binder copies—they stream over lock-free <code>EventFlag</code>-synchronized <strong>FMQ (FastMessageQueue)</strong> shared memory.",
+          "<strong>AIDL Improvements over HIDL:</strong> Unified <code>IModule</code> + <code>ModuleConfig</code> replacing XML-only ambiguities, dynamic port/mix-port configuration, cleaner <code>AudioEffects</code> AIDL factory, and out-of-the-box support for vendor extension parcels without ABI breakage.",
+          "<strong>Threading & Real-Time Rule:</strong> Never acquire Binder locks, allocate heap memory (<code>new/malloc</code>), or log verbose strings inside the HAL <code>write()</code> / <code>burst()</code> loop. Pre-allocate DMA/PCM buffers in <code>openOutputStream()</code>."
+        ],
+        interviewQA: `<strong>Q: Why does Audio HAL use FMQ instead of Binder transactions for PCM audio?</strong><br>Binder transactions involve kernel driver copy_from_user/copy_to_user, thread-pool scheduling latency, and mutexes (~50–200 µs jitter). A 2–5 ms low-latency audio period cannot tolerate Binder jitter; FMQ maps a lock-free ring buffer directly into both <code>audioserver</code> and HAL address spaces using futex-backed <code>EventFlag</code> wakeups.`
+      },
+      {
+        id: "aaos",
+        label: "AAOS CarAudioService",
+        keywords: ["aaos", "automotive", "caraudioservice", "car audio", "zone", "ducking", "focus", "oem", "routing", "volume group", "car_audio_configuration"],
+        title: "Android Automotive OS (AAOS) — CarAudioService & Multi-Zone Routing",
+        summary: `Unlike phones (single user, single primary output), AAOS manages <strong>multiple independent Audio Zones</strong> (Driver, Front Passenger, Rear Left/Right RSE), hardware amplifier volume control, and safety-critical audio focus/ducking rules via <code>CarAudioService</code>.`,
+        flow: `CarAudioManager (App / Nav / Media)
+  └─> CarAudioService (Java System Service)
+        ├─> CarAudioZone + VolumeGroup (car_audio_configuration.xml)
+        ├─> CarZonesAudioFocus (OEM Focus / Concurrent Nav + Media)
+        └─> AudioControl HAL (IAudioControl AIDL: setFade, setBalance, onDevicesToDuck)
+              └─> External Amplifier / ADSP Mixer (Fixed-gain PCM buses -> HW Volume)`,
+        deepPoints: [
+          "<strong>Audio Buses vs Dynamic Routing:</strong> AAOS routes audio onto dedicated physical/virtual output buses (e.g., <code>BUS0_MEDIA</code>, <code>BUS1_NAVIGATION</code>, <code>BUS2_VOICE_COMMAND</code>, <code>BUS3_CALL</code>) defined in <code>audio_policy_configuration.xml</code> + <code>car_audio_configuration.xml</code>.",
+          "<strong>External Amplifier Gain Control:</strong> In cars, Android typically outputs 0 dBFS digital PCM per bus, and <code>CarAudioService</code> delegates actual attenuation, ducking, fade, and balance to the external DSP/Amplifier via <code>IAudioControl::setAudioGain()</code> and <code>onDevicesToDuckChange()</code>—preserving full 24-bit SNR!",
+          "<strong>Core Audio Focus Matrix:</strong> Configured via interaction matrices (REJECT, CONCURRENT, EXCLUSIVE) so e.g. Navigation prompts duck Media on the Driver zone without interrupting Rear Seat Entertainment headphones."
+        ],
+        interviewQA: `<strong>Q: Why do automotive systems prefer fixed 0 dBFS PCM buses with external amplifier gain rather than software scaling in AudioFlinger?</strong><br>Software attenuation throws away bits of dynamic range (every -6 dB loses 1 bit of precision) and cannot duck safety chimes mixed on a separate MCU/RTOS domain. Delegating gain to the ADSP/Amplifier preserves full PCM bit depth and unifies Android + non-Android chime mixing.`
+      },
+      {
+        id: "audioflinger",
+        label: "AudioFlinger & AAudio",
+        keywords: ["audioflinger", "fastmixer", "aaudio", "mmap", "oboe", "audiotrack", "mixer", "thread", "latency", "exclusive", "shared"],
+        title: "AudioFlinger FastMixer vs AAudio MMAP Exclusive Path",
+        summary: `Android offers two high-performance audio paths: the standard <code>AudioFlinger</code> MixerThread/FastMixer path and the ultra-low-latency <strong>AAudio MMAP</strong> path (exposed to C++ apps via <strong>Oboe</strong>).`,
+        flow: `Standard Path: App -> AudioTrack -> Shared CBLK FIFO -> FastMixer (SCHED_FIFO) -> HAL -> ALSA
+MMAP Path:     App -> AAudioStream (Shared MMAP Ring Buffer directly from ALSA Driver!)
+                      (AudioService only handles routing/volume control plane)`,
+        deepPoints: [
+          "<strong>FastMixer Design:</strong> Runs on a <code>SCHED_FIFO</code> real-time thread, mixes up to ~7 fast tracks using simple fixed-point/float SIMD, and never blocks on <code>NormalMixer</code> (if NormalMixer stalls, FastMixer drops that mix frame and keeps hardware DMA fed!).",
+          "<strong>AAudio MMAP Exclusive Mode:</strong> Maps the kernel ALSA DMA ring buffer directly into the application's memory space via HAL <code>createMmapBuffer()</code>. Zero Binder, zero AudioFlinger mixing—achieving <strong>&lt; 5–10 ms</strong> round-trip latency.",
+          "<strong>AAudio Shared Mode:</strong> When multiple apps request MMAP on the same endpoint, <code>AAudioService</code> runs an in-process lightweight mixer inside <code>audioserver</code> sharing the single hardware MMAP buffer."
+        ],
+        interviewQA: `<strong>Q: How does FastMixer prevent NormalMixer (which runs heavy AudioEffects) from causing audio glitches?</strong><br>FastMixer communicates with NormalMixer via a lock-free state queue (NBAIO / StateQueue). FastMixer never waits on NormalMixer's mutex; if NormalMixer's output pipe isn't ready, FastMixer simply skips reading from NormalMixer for that burst while continuing to serve low-latency tracks.`
+      },
+      {
+        id: "alsa-asoc",
+        label: "Linux ALSA & ASoC",
+        keywords: ["alsa", "asoc", "tinyalsa", "dapm", "dai", "codec", "platform", "machine", "pcm", "snd_pcm", "compress"],
+        title: "Linux ALSA, TinyALSA & Kernel ASoC Framework",
+        summary: `Android uses <strong>TinyALSA</strong> (lightweight userspace wrapper over kernel <code>/dev/snd/pcmC*D*</code> ioctls, avoiding GPL/heavy <code>alsa-lib</code>) talking to the Linux Kernel <strong>ASoC (ALSA System on Chip)</strong> subsystem.`,
+        flow: `TinyALSA (pcm_open / pcm_write / mixer_ctl_set_value)
+  └─> Kernel ALSA Core (/dev/snd/pcmC0D0p, controlC0)
+        └─> ASoC Machine Driver (Links CPU DAI <-> Codec DAI + DAPM Widgets)
+              ├─> Platform / CPU DAI Driver (DMA Engine + I2S/TDM Controller)
+              └─> Codec / DSP Driver (DAC/ADC registers over I2C/SPI + DAPM Power)`,
+        deepPoints: [
+          "<strong>3 ASoC Pillars:</strong> (1) <em>Platform/CPU DAI</em> (SoC I2S/TDM + DMA), (2) <em>Codec Driver</em> (platform-independent DAC/Amp driver), (3) <em>Machine Driver</em> (Device-Tree board glue binding CPU DAI to Codec DAI + jack/routing).",
+          "<strong>DAPM (Dynamic Audio Power Management):</strong> Reference-counted power graph of audio widgets (PGA, Mixer, DAC, Speaker). Automatically powers down analog blocks in pop-free sequence when no active stream routes through them.",
+          "<strong>Compress Offload (<code>tinycompress</code>):</strong> Bypasses PCM decoding on the CPU by sending compressed MP3/AAC/FLAC frames directly to an on-chip ADSP, saving battery/CPU during screen-off playback."
+        ],
+        interviewQA: `<strong>Q: What happens inside kernel ALSA during an audio period interrupt?</strong><br>The DMA controller completes transferring <code>period_size</code> frames, fires an IRQ, and the Platform driver calls <code>snd_pcm_period_elapsed()</code>, updating the hardware pointer (<code>hw_ptr</code>) and waking any userspace thread blocked in <code>poll()</code>/<code>SNDRV_PCM_IOCTL_SYNC_PTR</code>.`
+      },
+      {
+        id: "i2s-tdm-a2b",
+        label: "I2S, TDM, A2B & AVB",
+        keywords: ["i2s", "tdm", "a2b", "avb", "tsn", "most", "pdm", "bclk", "lrclk", "fsync", "mclk", "slot", "daisy"],
+        title: "Digital Audio Buses: I2S, TDM, Automotive A²B & Ethernet AVB",
+        summary: `Automotive ECUs rely on synchronous serial buses (I2S/TDM) on-board and deterministic daisy-chain/packet buses (<strong>ADI A²B</strong>, <strong>Ethernet AVB/TSN</strong>) across the vehicle cabin.`,
+        flow: `I2S: BCLK + LRCLK (50% duty, Left=0/Right=1) + SDATA (1-tick I2S delay) -> 2 ch
+TDM: BCLK + FSYNC (1-bit pulse) + SDATA -> 8/16/32 time-multiplexed slots!
+A²B: Single Unshielded Twisted Pair (UTP) -> Up to 32 ch + I2C control + phantom power (<50 µs latency)`,
+        deepPoints: [
+          "<strong>Clock Math (Must Know Cold):</strong> <code>BCLK = SampleRate × Channels(Slots) × BitWidth</code>. Example: 48 kHz, TDM-8, 32-bit slots → <code>48000 × 8 × 32 = 12.288 MHz</code> BCLK.",
+          "<strong>Master vs Slave Clocking:</strong> Exactly ONE node drives BCLK/FSYNC (Clock Producer/Master); all others are Clock Consumers/Slaves. Two clock masters on one bus = catastrophic bit slips/clicks.",
+          "<strong>Why Automotive Uses A²B (Automotive Audio Bus):</strong> Replaces heavy multi-wire analog harnesses with a single twisted pair daisy-chaining up to 11 microphone/amp nodes with deterministic sub-50 µs latency (essential for Road Noise Cancellation / ANC!).",
+          "<strong>Ethernet AVB / IEEE 802.1AS (gPTP):</strong> Time-synchronized audio over Automotive Ethernet using gPTP clock sync + Credit-Based Shaper (802.1Qav) for guaranteed bandwidth."
+        ],
+        interviewQA: `<strong>Q: Why can't you run Active Road Noise Cancellation (RNC) over standard Bluetooth or un-synchronized IP packets?</strong><br>RNC requires phase-coherent cancellation up to ~1–2 kHz: even 500 µs of transport latency or jitter shifts phase by 180° at 1 kHz, turning noise cancellation into noise amplification! A²B guarantees &lt; 50 µs fixed deterministic latency.`
+      },
+      {
+        id: "asrc-clock-drift",
+        label: "ASRC & Clock Drift",
+        keywords: ["asrc", "clock", "drift", "jitter", "pll", "resampler", "ppm", "slip", "sync", "sample rate"],
+        title: "Clock Drift, PLLs & Asynchronous Sample Rate Conversion (ASRC)",
+        summary: `Whenever two audio endpoints run off independent crystal oscillators (e.g., SoC 48 kHz quartz vs Bluetooth HCI clock or external A2B tuner), their clocks drift by <strong>±20 to ±100 ppm</strong>, eventually overflowing or underrunning buffers unless compensated.`,
+        flow: `Domain A (48,000.0 Hz) -> [Ring Buffer / Drift Estimator] -> ASRC (Polyphase FIR + Fractional Delay) -> Domain B (48,001.4 Hz)
+Wait math: 50 ppm drift @ 48 kHz = 2.4 samples/sec = 1 full 10ms frame lost every ~200 seconds!`,
+        deepPoints: [
+          "<strong>Why Buffer Sizing Alone Fails:</strong> Increasing buffer size only delays the inevitable underrun/overflow when two crystals have different frequencies.",
+          "<strong>Three Fixes in Production:</strong> (1) <em>Hardware PLL / Fractional-N tuning</em> (pull VCXO/fractional PLL frequency via control loop), (2) <em>ASRC (Polyphase Sinc Resampler)</em> dynamically adjusting fractional resampling ratio from buffer fill-level PI controller, (3) <em>Zero-crossing sample drop/insert</em> (only acceptable for voice/comms, audible glitches in Hi-Fi media).",
+          "<strong>PI Controller Loop:</strong> Measure smoothed ring-buffer occupancy error <code>e(t) = fill - targetFill</code>; feed into a slow Proportional-Integral filter updating ASRC ratio <code>r = 1.0 + Kp*e + Ki*∫e</code> without audible pitch wobble."
+        ],
+        interviewQA: `<strong>Q: Two 48 kHz streams drift by 100 ppm. How fast does a 256-sample buffer fail without ASRC?</strong><br>100 ppm of 48,000 Hz = 4.8 samples/second. Starting half-full (128 samples headroom), the buffer overflows or underruns in <code>128 / 4.8 ≈ 26.7 seconds</code>.`
+      },
+      {
+        id: "aec-anc-dsp",
+        label: "AEC, ANC & Fixed-Point DSP",
+        keywords: ["aec", "anc", "dsp", "echo", "biquad", "iir", "fir", "q15", "q31", "fixed point", "nlms", "beamforming", "limiter", "drc"],
+        title: "Automotive DSP: AEC, ANC, Biquads & Q15/Q31 Fixed-Point Math",
+        summary: `In-cabin voice assistants, hands-free calling (HFP), and ANC rely on real-time linear/adaptive filters running on fixed-point or SIMD DSPs (Hexagon, Cadence HiFi, SHARC).`,
+        flow: `Far-end Reference (Tx Speaker) ─> [Adaptive NLMS Filter ĥ(n)] ─┐
+                                                                  ├─> (-) ─> Residual Echo ─> NLP / NS ─> Clean Mic Up-link
+Near-end Mic (Speech + Echo) ─────────────────────────────────────┘`,
+        deepPoints: [
+          "<strong>AEC (Acoustic Echo Cancellation) Fatal Flaw:</strong> AEC requires a <strong>time-aligned far-end reference signal</strong> (ideally loopback from the actual power-amplifier/DAC bus, NOT pre-effect software audio). Any uncalibrated delay > filter tail length or non-linear speaker clipping destroys ERLE!",
+          "<strong>Double-Talk Detection (DTD):</strong> Freeze adaptive filter weights <code>w(n)</code> whenever the near-end driver speaks simultaneously with far-end playback, otherwise the adaptive filter diverges and cancels the driver's voice.",
+          "<strong>Fixed-Point Q15/Q31 & Biquad Stability:</strong> On fixed-point DSPs, multiply two Q15s into a <code>int32_t</code> Q30 accumulator, add rounding <code>(1 &lt;&lt; 14)</code>, shift right 15, and saturate to <code>[-32768, 32767]</code>. Direct Form I Biquads avoid intermediate overflow better than Direct Form II in fixed-point."
+        ],
+        interviewQA: `<strong>Q: Why must the AEC reference signal be captured post-amplifier/post-limiter rather than right after the decoder?</strong><br>Android AudioEffects (EQ, DRC/Limiter, Volume, Mixer) and HAL delays alter phase, amplitude, and non-linearities. Capturing the loopback reference as close to the DAC/Amp as possible ensures the adaptive filter models a linear, time-invariant cabin impulse response.`
+      },
+      {
+        id: "early-audio-hypervisor",
+        label: "Early Audio & Hypervisor",
+        keywords: ["early", "chime", "boot", "hypervisor", "qnx", "virtio", "virtio-snd", "safety", "asil", "cluster", "rvc"],
+        title: "Automotive Early Audio (<1s Boot Chimes) & Hypervisor Audio (virtio-snd)",
+        summary: `Automotive OEMs mandate safety chimes (seatbelt, turn-signal ticks, ADAS warnings, PDC beeps) within <strong>&lt; 500–1000 ms</strong> of ignition—long before Android takes 15–25s to boot.`,
+        flow: `MCU / Safety Island (RTOS, boots <100ms) ──> Hardware Mixer / ADSP <── Guest OS 1: QNX Cluster
+                                                                     <── Guest OS 2: AAOS Infotainment (virtio-snd)`,
+        deepPoints: [
+          "<strong>Early Audio Handover Architecture:</strong> Before Android boots, a lightweight Safety RTOS / MCU owns the ADSP/Amplifier and plays pre-flashed WAV chimes. Once AAOS <code>audioserver</code> initializes, an IPC handshake transitions ownership or keeps safety chimes on an isolated hardware mixer bus (ASIL-B).",
+          "<strong>Virtualization (<code>virtio-snd</code> / QNX Audio Sharing):</strong> When AAOS runs as a Guest VM over a Type-1 Hypervisor (QNX Hypervisor, ACRN, Xen), AAOS talks to a <code>virtio-snd</code> ALSA frontend driver, which forwards PCM rings via shared hypervisor memory to the Host Audio Backend owning the physical TDM/A²B hardware.",
+          "<strong>Zero-Copy Shared Memory:</strong> Just like FMQ, <code>virtio-snd</code> uses virtqueues + shared guest/host DMA pages to avoid double-buffering across VM boundaries."
+        ],
+        interviewQA: `<strong>Q: If Android crashes or reboots while driving, why must turn-signal and ADAS warning chimes still play uninterrupted?</strong><br>Safety-critical warnings (ASIL-rated) cannot depend on a non-safety-certified HLOS like Android. They must execute on an isolated safety core/MCU or Host RTOS and mix into the amplifier/ADSP independently of AAOS's audio bus.`
+      },
+      {
+        id: "ble-audio-lc3",
+        label: "Bluetooth A2DP & LE Audio (LC3)",
+        keywords: ["bluetooth", "bt", "a2dp", "hfp", "le audio", "lc3", "sco", "esco", "auracast", "offload", "sbc", "aac", "aptx", "ldac"],
+        title: "Bluetooth Classic (A2DP/HFP) vs LE Audio (LC3 & Isochronous Channels)",
+        summary: `Modern audio stacks are transitioning from Bluetooth Classic (A2DP media + HFP mono voice) to <strong>Bluetooth LE Audio</strong> powered by the mandatory <strong>LC3</strong> codec and Isochronous Channels (CIS/BIS).`,
+        flow: `A2DP Offload: AudioFlinger -> Audio HAL (AIDL BluetoothA2dp) -> Host Stack encodes OR DSP Offload -> HCI -> BT Controller
+LE Audio:     Unified 16–48 kHz bi-directional CIS (Voice + Stereo Media simultaneously!) using LC3 (7.5ms / 10ms frames)`,
+        deepPoints: [
+          "<strong>Why HFP Sounded Terrible vs LE Audio:</strong> Classic HFP mSBC capped voice at 16 kHz mono because SCO links couldn't carry stereo media simultaneously. LE Audio uses <strong>CIS (Connected Isochronous Streams)</strong> with LC3 to support 32/48 kHz super-wideband voice + stereo media cleanly.",
+          "<strong>A2DP Hardware Offload vs Software Encoding:</strong> Software encoding sends PCM over Binder/socket to the BT stack (higher CPU wakeups); Hardware Offload routes compressed or raw PCM directly from the ADSP to the BT Controller over Slimbus/I2S/UART HCI, drastically reducing power.",
+          "<strong>Auracast (BIS):</strong> Broadcast Isochronous Streams allow one vehicle infotainment source to broadcast low-latency multi-language audio to unlimited rear-seat BLE headphones."
+        ],
+        interviewQA: `<strong>Q: What makes LC3 superior to SBC at half the bitrate?</strong><br>LC3 uses an MDCT-based transform with Long-Term Postfilter, Temporal Noise Shaping, and arithmetic coding over 7.5/10 ms frames—delivering better perceptual quality at 160 kbps than SBC at 345 kbps, plus built-in Packet Loss Concealment (PLC).`
+      },
+      {
+        id: "xrun-realtime",
+        label: "XRUNs & Lock-Free C++ Audio",
+        keywords: ["xrun", "underrun", "overrun", "lock-free", "mutex", "priority inversion", "sched_fifo", "realtime", "glitch", "pop", "click", "ramp"],
+        title: "Debugging XRUNs, Priority Inversion & Writing Lock-Free Real-Time C++",
+        summary: `An <strong>XRUN</strong> (Underrun on playback, Overrun on capture) means the real-time audio callback missed its hardware deadline. Top 1% Google audio engineers diagnose XRUNs systematically using <code>systrace</code>/<code>Perfetto</code> and write strictly wait-free callbacks.`,
+        flow: `Wait-Free Audio Callback Rules (Hard Real-Time):
+  ✗ NO malloc/free/new/delete     ✗ NO std::mutex / pthread_mutex (blocks!)
+  ✗ NO file/network/Binder I/O   ✗ NO exceptions or unbounded loops
+  ✓ SPSC atomic ring buffer      ✓ Pre-allocated pools & gain ramps`,
+        deepPoints: [
+          "<strong>Priority Inversion & Fixing It:</strong> If a low-priority UI thread holds a mutex needed by the <code>SCHED_FIFO</code> audio thread, the audio thread stalls until preempted medium-priority threads finish! Fix: remove the mutex completely (use SPSC atomics or double-buffering) or use Priority Inheritance (<code>PTHREAD_PRIO_INHERIT</code>).",
+          "<strong>Click/Pop Elimination:</strong> Instantaneous gain jumps or stream start/stop create a step discontinuity (broadband harmonics = audible 'pop'). Always apply a linear or raised-cosine <strong>gain ramp</strong> (e.g. 5–15 ms fade-in/out) across zero-crossings.",
+          "<strong>Perfetto / ftrace Triage:</strong> Inspect CPU frequency scaling (DVFS ramp-up lag), thermal throttling, page faults (always <code>mlockall</code> or touch pages before real-time!), and long IRQ-disabled critical sections in unrelated drivers."
+        ],
+        code: `// Minimal C++20 Lock-Free SPSC Ring Buffer (Acquire/Release)\ntemplate<typename T, size_t N>\nstruct SPSCRing { // N must be power of 2\n  T buf[N];\n  alignas(64) std::atomic<size_t> head{0}; // consumer cache line\n  alignas(64) std::atomic<size_t> tail{0}; // producer cache line\n  bool push(const T& v) {\n    size_t t = tail.load(std::memory_order_relaxed);\n    size_t next = (t + 1) & (N - 1);\n    if (next == head.load(std::memory_order_acquire)) return false;\n    buf[t] = v;\n    tail.store(next, std::memory_order_release);\n    return true;\n  }\n  bool pop(T& out) {\n    size_t h = head.load(std::memory_order_relaxed);\n    if (h == tail.load(std::memory_order_acquire)) return false;\n    out = buf[h];\n    head.store((h + 1) & (N - 1), std::memory_order_release);\n    return true;\n  }\n};`,
+        interviewQA: `<strong>Q: Why did we put <code>alignas(64)</code> on <code>head</code> and <code>tail</code> in the SPSC ring buffer?</strong><br>To eliminate <strong>false sharing</strong>! Without 64-byte cache-line padding, producer updates to <code>tail</code> invalidate the consumer's L1 cache line containing <code>head</code> across CPU cores, hurting throughput and determinism.`
+      }
+    ];
+
+    const audioChipsEl = document.getElementById("audio-chips");
+    const audioAnswerEl = document.getElementById("audio-answer-area");
+    const audioSearchEl = document.getElementById("audio-search-input");
+
+    function renderAudioChips(activeId) {
+      audioChipsEl.innerHTML = "";
+      AUDIO_KB.forEach(item => {
+        const b = document.createElement("button");
+        b.className = `topic-chip ${item.id === activeId ? "active" : ""}`;
+        b.textContent = item.label;
+        b.onclick = () => {
+          audioSearchEl.value = item.label;
+          runAudioMentor(item.id, true);
+        };
+        audioChipsEl.appendChild(b);
+      });
+    }
+
+    function findBestAudioTopic(query) {
+      const q = query.toLowerCase();
+      let best = null, bestScore = 0;
+      AUDIO_KB.forEach(item => {
+        let score = 0;
+        if (item.label.toLowerCase().includes(q) || item.title.toLowerCase().includes(q)) score += 5;
+        item.keywords.forEach(kw => {
+          if (q.includes(kw)) score += kw.length > 4 ? 4 : 2;
+        });
+        if (score > bestScore) { bestScore = score; best = item; }
+      });
+      return bestScore > 0 ? best : null;
+    }
+
+    function stripHtml(html) {
+      const tmp = document.createElement("div");
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || "";
+    }
+
+    async function fetchLiveAudioContext(query, containerId) {
+      const box = document.getElementById(containerId);
+      if (!box) return;
+      const cleanQ = encodeURIComponent(query + " audio");
+      const soQ = encodeURIComponent(query);
+      try {
+        const [wikiRes, soRes] = await Promise.allSettled([
+          fetch(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${cleanQ}&srlimit=3&format=json&origin=*`).then(r => r.json()),
+          fetch(`https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=relevance&pagesize=3&site=stackoverflow&q=${soQ}`).then(r => r.json())
+        ]);
+
+        let html = "";
+        if (wikiRes.status === "fulfilled" && wikiRes.value?.query?.search?.length) {
+          html += `<div style="margin-bottom:10px;"><strong>Wikipedia Technical References:</strong><ul>` +
+            wikiRes.value.query.search.map(w => `
+              <li>
+                <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(w.title.replace(/ /g, "_"))}" target="_blank" rel="noopener noreferrer" style="color:var(--blue); font-weight:600; text-decoration:none;">${esc(w.title)} ↗</a>
+                — ${esc(stripHtml(w.snippet))}…
+              </li>
+            `).join("") + `</ul></div>`;
+        }
+        if (soRes.status === "fulfilled" && soRes.value?.items?.length) {
+          html += `<div><strong>Live Engineering Discussions (StackOverflow):</strong><ul>` +
+            soRes.value.items.map(s => `
+              <li>
+                <a href="${esc(s.link)}" target="_blank" rel="noopener noreferrer" style="color:var(--blue); font-weight:600; text-decoration:none;">${esc(stripHtml(s.title))} ↗</a>
+                <span style="color:var(--text-2); font-size:0.8rem;"> (Score: ${s.score}, ${s.answer_count} answers)</span>
+              </li>
+            `).join("") + `</ul></div>`;
+        }
+        box.innerHTML = html || `<span style="color:var(--text-2);">No additional external articles matched; rely on the Staff architecture breakdown above.</span>`;
+      } catch {
+        box.innerHTML = `<span style="color:var(--text-2);">Live internet lookup unavailable (offline mode). Curated Staff breakdown remains fully active.</span>`;
+      }
+    }
+
+    function runAudioMentor(queryOrId, isExactId = false) {
+      const raw = (queryOrId || "").trim();
+      if (!raw) return;
+
+      const matched = isExactId
+        ? AUDIO_KB.find(x => x.id === raw)
+        : findBestAudioTopic(raw);
+
+      renderAudioChips(matched ? matched.id : "");
+
+      const liveBoxId = "audio-live-box-" + Date.now();
+      let html = "";
+
+      if (matched) {
+        html += `
+          <div class="audio-section">
+            <h3>Google L6 Architecture Breakdown · ${esc(matched.title)}</h3>
+            <p>${matched.summary}</p>
+            <div class="audio-flow">${esc(matched.flow)}</div>
+          </div>
+          <div class="audio-section">
+            <h3>Deep Internals, Clocking &amp; Real-Time Rules</h3>
+            <ul>${matched.deepPoints.map(pt => `<li>${pt}</li>`).join("")}</ul>
+          </div>
+          ${matched.code ? `
+            <div class="code-shell" style="margin-bottom:12px;">
+              <div class="code-shell-top"><span><span class="lang-pill-cpp">C++20</span> Real-Time Reference</span></div>
+              <pre>${esc(matched.code)}</pre>
+            </div>
+          ` : ""}
+          <div class="audio-section" style="background:linear-gradient(145deg,#f0f6ff 0%,#f9fbff 100%); border-color:rgba(0,113,227,0.2);">
+            <h3 style="color:var(--blue);">Top 1% Google Interview Question &amp; Answer</h3>
+            <p>${matched.interviewQA}</p>
+          </div>
+        `;
+      } else {
+        // General Top-1% Google Staff Audio Framework for ANY arbitrary query
+        html += `
+          <div class="audio-section">
+            <h3>Google L6 Framework for: "${esc(raw)}"</h3>
+            <p>When a Top 1% Staff Audio Engineer analyzes <strong>${esc(raw)}</strong>, break your answer down across these 5 production dimensions:</p>
+            <ul>
+              <li><strong>1. Control Plane vs Data Plane:</strong> Separate configuration/routing (Binder/AIDL/I2C/SPI) from real-time sample transport (FMQ/DMA/MMAP/virtio rings). Data plane must be 100% lock-free.</li>
+              <li><strong>2. Latency &amp; Buffering Budget:</strong> Calculate <code>latency = period_size × period_count / sample_rate</code>. Ask whether the bottleneck is ALSA periods, BT codec framing (7.5/10 ms LC3), or DSP lookahead.</li>
+              <li><strong>3. Clock Domain &amp; Drift:</strong> Identify all oscillators involved. If two independent crystals bridge this path, specify whether PLL locking or polyphase ASRC handles ±50–100 ppm drift.</li>
+              <li><strong>4. Real-Time Thread Safety:</strong> Confirm zero <code>malloc</code>, zero mutexes, zero page faults (<code>mlock</code>), and <code>SCHED_FIFO</code> priority isolation without priority inversion.</li>
+              <li><strong>5. Automotive &amp; Audio HAL Boundary:</strong> Explain how <code>CarAudioService</code> buses, external amplifier gain (0 dBFS PCM), and safety-critical &lt;1s early-boot chimes interact with this component.</li>
+            </ul>
+          </div>
+        `;
+      }
+
+      html += `
+        <div class="audio-section">
+          <h3>Live Internet References (Wikipedia &amp; StackOverflow)</h3>
+          <div id="${liveBoxId}"><span style="color:var(--text-2);">Searching live engineering sources…</span></div>
+        </div>
+      `;
+
+      audioAnswerEl.innerHTML = html;
+      fetchLiveAudioContext(matched ? matched.label : raw, liveBoxId);
+    }
+
+    // =========================================================
+    // 5. MAIN 365-DAY APP STATE & PERSISTENCE
+    // =========================================================
+    const STORE_KEY = "top1_365_dual_v5";
     let state = { activeDay: 1, solView: "both", solvedDays: [], solveDates: [], notes: {} };
     try {
       const raw = localStorage.getItem(STORE_KEY);
@@ -1249,14 +1596,14 @@
         <div class="solution-section">
           <div class="solution-bar">
             <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-              <strong style="font-size:0.9rem;">C17 &amp; C++20 Solutions</strong>
+              <strong style="font-size:0.9rem;">Runnable C17 &amp; C++20 Programs (with main)</strong>
               <div class="seg-ctrl" style="width:205px;">
                 <button class="seg-btn ${solView === "both" ? "active" : ""}" data-sview="both">Both</button>
                 <button class="seg-btn ${solView === "c" ? "active" : ""}" data-sview="c">C Only</button>
                 <button class="seg-btn ${solView === "cpp" ? "active" : ""}" data-sview="cpp">C++ Only</button>
               </div>
             </div>
-            <button class="btn-blue" id="reveal-btn">${solutionOpen ? "Hide Solutions" : "Reveal C & C++ Solutions"}</button>
+            <button class="btn-blue" id="reveal-btn">${solutionOpen ? "Hide Solutions" : "Reveal C & C++ Programs"}</button>
           </div>
 
           <div class="solution-body ${solutionOpen ? "open" : ""}" id="solution-body">
@@ -1264,7 +1611,7 @@
               ${showC ? `
                 <div class="code-shell">
                   <div class="code-shell-top">
-                    <span><span class="lang-pill-c">C17</span> solution.c</span>
+                    <span><span class="lang-pill-c">C17</span> main.c</span>
                     <button class="btn-copy" id="copy-c-btn">Copy C</button>
                   </div>
                   <pre>${esc(c.cCode)}</pre>
@@ -1273,7 +1620,7 @@
               ${showCpp ? `
                 <div class="code-shell">
                   <div class="code-shell-top">
-                    <span><span class="lang-pill-cpp">C++20</span> solution.cpp</span>
+                    <span><span class="lang-pill-cpp">C++20</span> main.cpp</span>
                     <button class="btn-copy" id="copy-cpp-btn">Copy C++</button>
                   </div>
                   <pre>${esc(c.cppCode)}</pre>
@@ -1345,7 +1692,7 @@
       renderList();
     }
 
-    // Live Internet Feed (Codeforces API)
+    // Live Codeforces Feed
     document.getElementById("cf-fetch-btn").onclick = async () => {
       const box = document.getElementById("cf-results");
       const tag = document.getElementById("cf-tag").value;
@@ -1398,6 +1745,20 @@
       if (!isNaN(v)) { loadDay(v); closeDrawer(); }
     };
 
+    // Audio Hub Modal Wiring
+    const audioModal = document.getElementById("audio-modal");
+    document.getElementById("audio-hub-btn").onclick = () => {
+      audioModal.classList.add("open");
+      if (!audioAnswerEl.innerHTML) runAudioMentor("audio-hal", true);
+    };
+    document.getElementById("close-audio-btn").onclick = () => audioModal.classList.remove("open");
+    audioModal.onclick = (e) => { if (e.target === audioModal) audioModal.classList.remove("open"); };
+    document.getElementById("audio-ask-btn").onclick = () => runAudioMentor(audioSearchEl.value, false);
+    audioSearchEl.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") { e.preventDefault(); runAudioMentor(audioSearchEl.value, false); }
+    });
+
+    // Mentor & Live Modals
     const mentorModal = document.getElementById("mentor-modal");
     document.getElementById("mentor-btn").onclick = () => mentorModal.classList.add("open");
     document.getElementById("close-mentor-btn").onclick = () => mentorModal.classList.remove("open");
@@ -1405,6 +1766,7 @@
 
     const liveModal = document.getElementById("live-modal");
     document.getElementById("live-feed-btn").onclick = () => liveModal.classList.add("open");
+    document.getElementById("m-live-btn").onclick = () => { mentorModal.classList.remove("open"); liveModal.classList.add("open"); };
     document.getElementById("close-live-btn").onclick = () => liveModal.classList.remove("open");
     liveModal.onclick = (e) => { if (e.target === liveModal) liveModal.classList.remove("open"); };
 
@@ -1437,6 +1799,7 @@
     };
 
     // Init
+    renderAudioChips("audio-hal");
     loadDay(state.activeDay || 1);
   </script>
 </body>
